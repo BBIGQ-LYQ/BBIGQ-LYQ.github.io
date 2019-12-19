@@ -4,12 +4,12 @@
 
 # Site
 title: BBIGQ PERSONAL BLOG
-subtitle: ''
-description: ''
+subtitle: 'STEP BY STEP'
+description: '大大棋的学习历程'
 keywords:
 author: LYQ
-language: en
-timezone: ''
+language: Chinese
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
