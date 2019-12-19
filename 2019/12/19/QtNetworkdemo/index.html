@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
 <meta property="og:description" content="网络编程">
 <meta property="article:published_time" content="2019-12-19T05:15:16.000Z">
-<meta property="article:modified_time" content="2019-12-19T05:56:53.109Z">
+<meta property="article:modified_time" content="2019-12-19T06:14:39.032Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
@@ -196,13 +196,13 @@
 
 <hr>
 <h2 id="Linux网络编程"><a href="#Linux网络编程" class="headerlink" title="Linux网络编程"></a>Linux网络编程</h2><p><strong>网络的分层模型： 4层</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">应用层： 用户自定义的应用协议，HTTP，TFTP，SSH，FTP...</span><br><span class="line">传输层： TCP&#x2F;UDP   TCP：可靠的传输协议  UDP：不可靠的传输协议</span><br><span class="line">网络层： IPV4,IPV6,3G，4G</span><br><span class="line">物理层： 网卡，路由器，网线，基站...</span><br></pre></td></tr></table></figure>
-
+<p>应用层： 用户自定义的应用协议，HTTP，TFTP，SSH，FTP…<br>传输层： TCP/UDP   TCP：可靠的传输协议  UDP：不可靠的传输协议<br>网络层： IPV4,IPV6,3G，4G<br>物理层： 网卡，路由器，网线，基站…</p>
 <p><strong>TCP搭建流程：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">服务器端：</span><br><span class="line">1：创建网络通信tcp socket</span><br><span class="line">2：绑定服务器的IP地址信息</span><br><span class="line">3：监听客户端的连接请求</span><br><span class="line">4：等待客户机的连接</span><br><span class="line">5：进行通信</span><br><span class="line">6：关闭通信</span><br><span class="line">                </span><br><span class="line">客户端：</span><br><span class="line">1：创建网络通信 tcp socket</span><br><span class="line">2：连接服务器</span><br><span class="line">3：进行通信</span><br><span class="line">4：关闭通信</span><br></pre></td></tr></table></figure>
-
+<p>服务器端：<br>1：创建网络通信tcp socket<br>2：绑定服务器的IP地址信息<br>3：监听客户端的连接请求<br>4：等待客户机的连接<br>5：进行通信<br>6：关闭通信</p>
+<p>客户端：<br>1：创建网络通信 tcp socket<br>2：连接服务器<br>3：进行通信<br>4：关闭通信</p>
 <p><strong>UDP的通信流程</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">接受端：</span><br><span class="line">1：创建UDP通信socket</span><br><span class="line">2：绑定UDP通信socket</span><br><span class="line">3：接受数据</span><br><span class="line">4：关闭通信</span><br><span class="line">              </span><br><span class="line">发送端：</span><br><span class="line">1：创建UDP通信socket</span><br><span class="line">2：往绑定的IP地址中发送数据</span><br><span class="line">3：关闭通信</span><br></pre></td></tr></table></figure>
+<p>接受端：<br>1：创建UDP通信socket<br>2：绑定UDP通信socket<br>3：接受数据<br>4：关闭通信</p>
+<p>发送端：<br>1：创建UDP通信socket<br>2：往绑定的IP地址中发送数据<br>3：关闭通信</p>
 <p>通信方式：单播、组播、广播</p>
 <hr>
 <h2 id="QT网络编程demo"><a href="#QT网络编程demo" class="headerlink" title="QT网络编程demo"></a>QT网络编程demo</h2><!--more-->
@@ -241,7 +241,6 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QHostAddress&gt; addrs &#x3D; QNetworkInterface::allAddresses();</span><br></pre></td></tr></table></figure>
 
-<hr>
 <hr>
 <table>
 <thead>
