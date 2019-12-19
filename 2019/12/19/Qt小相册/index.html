@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | BBIGQ PERSONAL BLOG</title>
+  <title>Qt小相册 | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="BBIGQ PERSONAL BLOG">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;index.html">
+  <meta name="description" content="Qt demo: 小相册QT自带的窗体使用   相关类 静态函数 函数说明    QMessageBox QMessageBox::question question 消息框   QMessageBox QMessageBox::information information 消息框   QMessageBox QMessageBox::warning warning 消息框   QMessage">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qt小相册">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;Qt%E5%B0%8F%E7%9B%B8%E5%86%8C&#x2F;index.html">
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="Qt demo: 小相册QT自带的窗体使用   相关类 静态函数 函数说明    QMessageBox QMessageBox::question question 消息框   QMessageBox QMessageBox::information information 消息框   QMessageBox QMessageBox::warning warning 消息框   QMessage">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-12-19T01:00:43.771Z">
+<meta property="article:modified_time" content="2019-12-19T01:00:43.771Z">
 <meta property="article:author" content="LYQ">
 <meta name="twitter:card" content="summary">
   
@@ -150,76 +154,286 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Qt小相册" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Qt小相册
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
+
+        
+        <a href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
   	<time datetime="2019-12-19T01:00:43.771Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">Qt小相册</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Qt-demo-小相册"><a href="#Qt-demo-小相册" class="headerlink" title="Qt demo: 小相册"></a>Qt demo: 小相册</h1><h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2><table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::question</td>
+<td>question 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::information</td>
+<td>information 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::warning</td>
+<td>warning 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::critical</td>
+<td>critical 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::about</td>
+<td>about 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::abouutQt</td>
+<td>abouut Qt 消息框</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QMessageBox::warning</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int ret &#x3D; QMessageBox::warning(this, tr(&quot;请看题&quot;),   &#x2F;&#x2F;标题</span><br><span class="line">                                    tr(&quot;吃饭不?&quot;),         &#x2F;&#x2F;提示内容</span><br><span class="line">                                    QMessageBox::Yes | QMessageBox::No &#x2F;&#x2F;选择内容</span><br><span class="line">                                    | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
 
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QFileDialog</td>
+<td align="center">getOpenFileName()</td>
+<td>获得用户选择的文件名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getSaveFileName()</td>
+<td>获得用户保存的文件名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getExistingDirectory()</td>
+<td>获得用户选择的已存在的目录名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getOpenFileNames()</td>
+<td>获得用户选择的文件名列表</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getOpenFileNames</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName &#x3D; QFileDialog::getOpenFileName(this,                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        tr(&quot;Open File&quot;),                        &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&quot;,                          &#x2F;&#x2F;打开默认路径</span><br><span class="line">                        tr(&quot;Images (*.png *.xpm *.jpeg *.bmp)&quot;) &#x2F;&#x2F;文件过滤器 这里只能打开*.png *.xpm *.jpg</span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>getOpenFileNames()                 //获得用户选择的文件名列表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">QStringList temp &#x3D; QFileDialog::getOpenFileNames(</span><br><span class="line">                        this,                                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        &quot;Select one or more files to open&quot;,     &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&#x2F;workspace&#x2F;QT&quot;,             &#x2F;&#x2F;获取的路径</span><br><span class="line">                        &quot;Anyfile (*)&quot;);                         &#x2F;&#x2F;获取所有文件</span><br></pre></td></tr></table></figure>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QColorDialog</td>
+<td align="center">getColor()</td>
+<td>获得用户选择的颜色值</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getColor()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color &#x3D; QColorDialog::getColor();                    &#x2F;&#x2F;获取颜色</span><br><span class="line"></span><br><span class="line">QString choise_color &#x3D; QString(&quot;color: %1;&quot;).arg(color.name()); &#x2F;&#x2F;拼接颜色信息，将颜色信息填入choise_color中</span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         &#x2F;&#x2F;设置字体颜色</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QFontDialog</td>
+<td align="center">getFont()</td>
+<td>获得用户选择的字体</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getFont()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font &#x3D; QFontDialog::getFont();                    &#x2F;&#x2F;获取字体</span><br></pre></td></tr></table></figure>
+
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/18/hello-world/" class="archive-article-date">
-  	<time datetime="2019-12-18T08:41:02.027Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/18/hello-world/">Hello World</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -242,8 +456,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

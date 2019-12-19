@@ -152,6 +152,199 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Qt小相册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">Qt小相册</a>
+    </h1>
+  
+
+        
+        <a href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
+  	<time datetime="2019-12-19T01:00:43.771Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Qt-demo-小相册"><a href="#Qt-demo-小相册" class="headerlink" title="Qt demo: 小相册"></a>Qt demo: 小相册</h1><h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2><table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::question</td>
+<td>question 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::information</td>
+<td>information 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::warning</td>
+<td>warning 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::critical</td>
+<td>critical 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::about</td>
+<td>about 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::abouutQt</td>
+<td>abouut Qt 消息框</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QMessageBox::warning</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int ret &#x3D; QMessageBox::warning(this, tr(&quot;请看题&quot;),   &#x2F;&#x2F;标题</span><br><span class="line">                                    tr(&quot;吃饭不?&quot;),         &#x2F;&#x2F;提示内容</span><br><span class="line">                                    QMessageBox::Yes | QMessageBox::No &#x2F;&#x2F;选择内容</span><br><span class="line">                                    | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QFileDialog</td>
+<td align="center">getOpenFileName()</td>
+<td>获得用户选择的文件名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getSaveFileName()</td>
+<td>获得用户保存的文件名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getExistingDirectory()</td>
+<td>获得用户选择的已存在的目录名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getOpenFileNames()</td>
+<td>获得用户选择的文件名列表</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getOpenFileNames</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName &#x3D; QFileDialog::getOpenFileName(this,                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        tr(&quot;Open File&quot;),                        &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&quot;,                          &#x2F;&#x2F;打开默认路径</span><br><span class="line">                        tr(&quot;Images (*.png *.xpm *.jpeg *.bmp)&quot;) &#x2F;&#x2F;文件过滤器 这里只能打开*.png *.xpm *.jpg</span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>getOpenFileNames()                 //获得用户选择的文件名列表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">QStringList temp &#x3D; QFileDialog::getOpenFileNames(</span><br><span class="line">                        this,                                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        &quot;Select one or more files to open&quot;,     &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&#x2F;workspace&#x2F;QT&quot;,             &#x2F;&#x2F;获取的路径</span><br><span class="line">                        &quot;Anyfile (*)&quot;);                         &#x2F;&#x2F;获取所有文件</span><br></pre></td></tr></table></figure>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QColorDialog</td>
+<td align="center">getColor()</td>
+<td>获得用户选择的颜色值</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getColor()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color &#x3D; QColorDialog::getColor();                    &#x2F;&#x2F;获取颜色</span><br><span class="line"></span><br><span class="line">QString choise_color &#x3D; QString(&quot;color: %1;&quot;).arg(color.name()); &#x2F;&#x2F;拼接颜色信息，将颜色信息填入choise_color中</span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         &#x2F;&#x2F;设置字体颜色</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QFontDialog</td>
+<td align="center">getFont()</td>
+<td>获得用户选择的字体</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getFont()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font &#x3D; QFontDialog::getFont();                    &#x2F;&#x2F;获取字体</span><br></pre></td></tr></table></figure>
+
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
