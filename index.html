@@ -160,158 +160,30 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Qt小相册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">Qt小相册</a>
+      <a class="article-title" href="/2019/12/19/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
-  	<time datetime="2019-12-19T01:00:43.771Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+        <a href="/2019/12/19/hello-world/" class="archive-article-date">
+  	<time datetime="2019-12-19T01:39:01.046Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Qt-demo-小相册"><a href="#Qt-demo-小相册" class="headerlink" title="Qt demo: 小相册"></a>Qt demo: 小相册</h1><h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2><table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::question</td>
-<td>question 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::information</td>
-<td>information 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::warning</td>
-<td>warning 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::critical</td>
-<td>critical 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::about</td>
-<td>about 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::abouutQt</td>
-<td>abouut Qt 消息框</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong></p>
-<blockquote>
-<p>QMessageBox::warning</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int ret &#x3D; QMessageBox::warning(this, tr(&quot;请看题&quot;),   &#x2F;&#x2F;标题</span><br><span class="line">                                    tr(&quot;吃饭不?&quot;),         &#x2F;&#x2F;提示内容</span><br><span class="line">                                    QMessageBox::Yes | QMessageBox::No &#x2F;&#x2F;选择内容</span><br><span class="line">                                    | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
-
-
-<hr>
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QFileDialog</td>
-<td align="center">getOpenFileName()</td>
-<td>获得用户选择的文件名</td>
-</tr>
-<tr>
-<td>QFileDialog</td>
-<td align="center">getSaveFileName()</td>
-<td>获得用户保存的文件名</td>
-</tr>
-<tr>
-<td>QFileDialog</td>
-<td align="center">getExistingDirectory()</td>
-<td>获得用户选择的已存在的目录名</td>
-</tr>
-<tr>
-<td>QFileDialog</td>
-<td align="center">getOpenFileNames()</td>
-<td>获得用户选择的文件名列表</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong>    </p>
-<blockquote>
-<p>getOpenFileNames</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName &#x3D; QFileDialog::getOpenFileName(this,                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        tr(&quot;Open File&quot;),                        &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&quot;,                          &#x2F;&#x2F;打开默认路径</span><br><span class="line">                        tr(&quot;Images (*.png *.xpm *.jpeg *.bmp)&quot;) &#x2F;&#x2F;文件过滤器 这里只能打开*.png *.xpm *.jpg</span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>getOpenFileNames()                 //获得用户选择的文件名列表</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">QStringList temp &#x3D; QFileDialog::getOpenFileNames(</span><br><span class="line">                        this,                                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        &quot;Select one or more files to open&quot;,     &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&#x2F;workspace&#x2F;QT&quot;,             &#x2F;&#x2F;获取的路径</span><br><span class="line">                        &quot;Anyfile (*)&quot;);                         &#x2F;&#x2F;获取所有文件</span><br></pre></td></tr></table></figure>
-
-<hr>
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QColorDialog</td>
-<td align="center">getColor()</td>
-<td>获得用户选择的颜色值</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong>    </p>
-<blockquote>
-<p>getColor()</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color &#x3D; QColorDialog::getColor();                    &#x2F;&#x2F;获取颜色</span><br><span class="line"></span><br><span class="line">QString choise_color &#x3D; QString(&quot;color: %1;&quot;).arg(color.name()); &#x2F;&#x2F;拼接颜色信息，将颜色信息填入choise_color中</span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         &#x2F;&#x2F;设置字体颜色</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QFontDialog</td>
-<td align="center">getFont()</td>
-<td>获得用户选择的字体</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong>    </p>
-<blockquote>
-<p>getFont()</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font &#x3D; QFontDialog::getFont();                    &#x2F;&#x2F;获取字体</span><br></pre></td></tr></table></figure>
-
-
-
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+        
+          <a class="article-more-a" href="/2019/12/19/hello-world/#more">more >></a>
+        
       
 
       
@@ -323,7 +195,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/hello-world/">展开全文 >></a>
         </p>
       
 
@@ -353,40 +225,30 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Qt小相册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/18/hello-world/">Hello World</a>
+      <a class="article-title" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">Qt小相册</a>
     </h1>
   
 
         
-        <a href="/2019/12/18/hello-world/" class="archive-article-date">
-  	<time datetime="2019-12-18T08:41:02.027Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
+        <a href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
+  	<time datetime="2019-12-19T01:38:02.922Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+        <h1 id="Qt-demo-小相册"><a href="#Qt-demo-小相册" class="headerlink" title="Qt demo: 小相册"></a>Qt demo: 小相册</h1><h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2>
+        
+          <a class="article-more-a" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/#more">more >></a>
+        
       
 
       
@@ -398,7 +260,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/18/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/12/19/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">展开全文 >></a>
         </p>
       
 
