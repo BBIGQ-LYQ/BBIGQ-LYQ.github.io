@@ -1,6 +1,11 @@
-# Qt demo: 小相册
+---
+title: Qt demo小相册
+tags: study
+---
 
 ## QT自带的窗体使用
+
+tags: 随笔
 
 <!--more-->
 
