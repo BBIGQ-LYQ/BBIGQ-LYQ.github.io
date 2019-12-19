@@ -6,15 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: study | BBIGQ PERSONAL BLOG</title>
+  <title>QtNetworkdemo | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="大大棋的学习历程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BBIGQ PERSONAL BLOG">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;study&#x2F;index.html">
+  <meta name="description" content="网络编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QtNetworkdemo">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;QtNetworkdemo&#x2F;index.html">
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
-<meta property="og:description" content="大大棋的学习历程">
+<meta property="og:description" content="网络编程">
+<meta property="article:published_time" content="2019-12-19T05:15:16.000Z">
+<meta property="article:modified_time" content="2019-12-19T05:56:53.109Z">
 <meta property="article:author" content="LYQ">
+<meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
@@ -169,36 +172,144 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-QtNetworkdemo" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      QtNetworkdemo
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/19/QtNetworkdemo/" class="archive-article-date">
+
+        
+        <a href="/2019/12/19/QtNetworkdemo/" class="archive-article-date">
   	<time datetime="2019-12-19T05:15:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/19/QtNetworkdemo/">QtNetworkdemo</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h1><a id="more"></a>
 
-        <div class="article-info info-on-right">
-          
+<hr>
+<h2 id="Linux网络编程"><a href="#Linux网络编程" class="headerlink" title="Linux网络编程"></a>Linux网络编程</h2><p><strong>网络的分层模型： 4层</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">应用层： 用户自定义的应用协议，HTTP，TFTP，SSH，FTP...</span><br><span class="line">传输层： TCP&#x2F;UDP   TCP：可靠的传输协议  UDP：不可靠的传输协议</span><br><span class="line">网络层： IPV4,IPV6,3G，4G</span><br><span class="line">物理层： 网卡，路由器，网线，基站...</span><br></pre></td></tr></table></figure>
+
+<p><strong>TCP搭建流程：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">服务器端：</span><br><span class="line">1：创建网络通信tcp socket</span><br><span class="line">2：绑定服务器的IP地址信息</span><br><span class="line">3：监听客户端的连接请求</span><br><span class="line">4：等待客户机的连接</span><br><span class="line">5：进行通信</span><br><span class="line">6：关闭通信</span><br><span class="line">                </span><br><span class="line">客户端：</span><br><span class="line">1：创建网络通信 tcp socket</span><br><span class="line">2：连接服务器</span><br><span class="line">3：进行通信</span><br><span class="line">4：关闭通信</span><br></pre></td></tr></table></figure>
+
+<p><strong>UDP的通信流程</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">接受端：</span><br><span class="line">1：创建UDP通信socket</span><br><span class="line">2：绑定UDP通信socket</span><br><span class="line">3：接受数据</span><br><span class="line">4：关闭通信</span><br><span class="line">              </span><br><span class="line">发送端：</span><br><span class="line">1：创建UDP通信socket</span><br><span class="line">2：往绑定的IP地址中发送数据</span><br><span class="line">3：关闭通信</span><br></pre></td></tr></table></figure>
+<p>通信方式：单播、组播、广播</p>
+<hr>
+<h2 id="QT网络编程demo"><a href="#QT网络编程demo" class="headerlink" title="QT网络编程demo"></a>QT网络编程demo</h2><!--more-->
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QNetworkInterface</td>
+<td align="center">QNetworkInterface::allAddresses()</td>
+<td>获得所有的IP地址</td>
+</tr>
+<tr>
+<td>QNetworkInterface</td>
+<td align="center">QNetworkInterface::allInterface()</td>
+<td>获得所有的网卡信息</td>
+</tr>
+<tr>
+<td>QNetworkInterface</td>
+<td align="center">QNetworkInterface::hardwateAddress()</td>
+<td>warning 消息框</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>更多接口详见<br>Header:#include <QNetworkInterface><br>qmake:QT += network</p>
+</blockquote>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QNetworkInterface::allAddresses()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QHostAddress&gt; addrs &#x3D; QNetworkInterface::allAddresses();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QTcpSocket</td>
+<td align="center">QTcpSocket()</td>
+<td>创建QTCP通信socket</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QTcpSocket()</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clien &#x3D; new QTcpSocket(this);</span><br><span class="line">&#x2F;&#x2F;设置服务端IP</span><br><span class="line">QHostAddress MYip(&quot;192.168.95.99&quot;);</span><br><span class="line">&#x2F;&#x2F;设置端口</span><br><span class="line">unsigned short PORT &#x3D; 9046;</span><br><span class="line">&#x2F;&#x2F;连接服务器</span><br><span class="line">clien-&gt;connectToHost(MYip, PORT);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关联有数据可读信号<br>connect(clien, SIGNAL(readyRead()), this, SLOT(readData()));  //readData()为用户编写的槽函数</p>
+</blockquote>
+<blockquote>
+<p>数据的发送，发送数据，注意数据类型的转化<br>sclien-&gt;write(msg.toUtf8());       //注意发送的类型为char *</p>
+</blockquote>
+<blockquote>
+<p>关闭通信<br>clien-&gt;close()</p>
+</blockquote>
+<blockquote>
+<p>更多接口详见<br>QTcpSocket<br>QHostAddress</p>
+</blockquote>
+<hr>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -210,57 +321,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/QtNetworkdemo/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
-  	<time datetime="2019-12-18T12:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/">Qt demo小相册</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -283,9 +443,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
