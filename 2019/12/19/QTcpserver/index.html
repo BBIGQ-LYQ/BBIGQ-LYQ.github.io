@@ -6,16 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Qt常用窗体 | BBIGQ PERSONAL BLOG</title>
+  <title>QTcpserver | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="QT自带的窗体使用">
+  <meta name="description" content="QTcpserver demo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Qt常用窗体">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;18&#x2F;Qt%E5%B0%8F%E7%9B%B8%E5%86%8C&#x2F;index.html">
+<meta property="og:title" content="QTcpserver">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;19&#x2F;QTcpserver&#x2F;index.html">
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
-<meta property="og:description" content="QT自带的窗体使用">
-<meta property="article:published_time" content="2019-12-18T12:20:00.000Z">
-<meta property="article:modified_time" content="2019-12-19T06:15:05.757Z">
+<meta property="og:description" content="QTcpserver demo">
+<meta property="article:published_time" content="2019-12-19T06:30:42.000Z">
+<meta property="article:modified_time" content="2019-12-19T07:09:51.471Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
@@ -172,159 +172,58 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Qt小相册" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-QTcpserver" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Qt常用窗体
+      QTcpserver
     </h1>
   
 
         
-        <a href="/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
-  	<time datetime="2019-12-18T12:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
+        <a href="/2019/12/19/QTcpserver/" class="archive-article-date">
+  	<time datetime="2019-12-19T06:30:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2><a id="more"></a>
-
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::question</td>
-<td>question 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::information</td>
-<td>information 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::warning</td>
-<td>warning 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::critical</td>
-<td>critical 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::about</td>
-<td>about 消息框</td>
-</tr>
-<tr>
-<td>QMessageBox</td>
-<td align="center">QMessageBox::abouutQt</td>
-<td>abouut Qt 消息框</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong></p>
-<blockquote>
-<p>QMessageBox::warning</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int ret &#x3D; QMessageBox::warning(this, tr(&quot;请看题&quot;),   &#x2F;&#x2F;标题</span><br><span class="line">                                    tr(&quot;吃饭不?&quot;),         &#x2F;&#x2F;提示内容</span><br><span class="line">                                    QMessageBox::Yes | QMessageBox::No &#x2F;&#x2F;选择内容</span><br><span class="line">                                    | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
-
+        <h1 id="QTcpserver-demo"><a href="#QTcpserver-demo" class="headerlink" title="QTcpserver demo"></a>QTcpserver demo</h1><a id="more"></a>
 
 <hr>
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QFileDialog</td>
-<td align="center">getOpenFileName()</td>
-<td>获得用户选择的文件名</td>
-</tr>
-<tr>
-<td>QFileDialog</td>
-<td align="center">getSaveFileName()</td>
-<td>获得用户保存的文件名</td>
-</tr>
-<tr>
-<td>QFileDialog</td>
-<td align="center">getExistingDirectory()</td>
-<td>获得用户选择的已存在的目录名</td>
-</tr>
-<tr>
-<td>QFileDialog</td>
-<td align="center">getOpenFileNames()</td>
-<td>获得用户选择的文件名列表</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong>    </p>
-<blockquote>
-<p>getOpenFileNames</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName &#x3D; QFileDialog::getOpenFileName(this,                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        tr(&quot;Open File&quot;),                        &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&quot;,                          &#x2F;&#x2F;打开默认路径</span><br><span class="line">                        tr(&quot;Images (*.png *.xpm *.jpeg *.bmp)&quot;) &#x2F;&#x2F;文件过滤器 这里只能打开*.png *.xpm *.jpg</span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>getOpenFileNames()                 //获得用户选择的文件名列表</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">QStringList temp &#x3D; QFileDialog::getOpenFileNames(</span><br><span class="line">                        this,                                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        &quot;Select one or more files to open&quot;,     &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&#x2F;workspace&#x2F;QT&quot;,             &#x2F;&#x2F;获取的路径</span><br><span class="line">                        &quot;Anyfile (*)&quot;);                         &#x2F;&#x2F;获取所有文件</span><br></pre></td></tr></table></figure>
-
+<p>Header:#include <QTcpServer><br>qmake:QT += network</p>
 <hr>
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QColorDialog</td>
-<td align="center">getColor()</td>
-<td>获得用户选择的颜色值</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong>    </p>
-<blockquote>
-<p>getColor()</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color &#x3D; QColorDialog::getColor();                    &#x2F;&#x2F;获取颜色</span><br><span class="line"></span><br><span class="line">QString choise_color &#x3D; QString(&quot;color: %1;&quot;).arg(color.name()); &#x2F;&#x2F;拼接颜色信息，将颜色信息填入choise_color中</span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         &#x2F;&#x2F;设置字体颜色</span><br></pre></td></tr></table></figure>
+<h2 id="创建服务器socket"><a href="#创建服务器socket" class="headerlink" title="创建服务器socket"></a>创建服务器socket</h2><pre><code>QTcpServer *ser;                //定义服务器对象
+ser = new QTcpServer(this);     //创建服务器socket</code></pre><h2 id="绑定和监听"><a href="#绑定和监听" class="headerlink" title="绑定和监听"></a>绑定和监听</h2><pre><code>ser-&gt;listen(QHostAddress::Any, PORT); //设置为监听模式   这里的Any代表默认获取本地的IP，如果需要指定IP：ser-&gt;listen(QHostAddress(&quot;IP&quot;), PORT);</code></pre><h2 id="获取服务端的IP和PORT"><a href="#获取服务端的IP和PORT" class="headerlink" title="获取服务端的IP和PORT"></a>获取服务端的IP和PORT</h2><pre><code>QString serIP = ser-&gt;serverAddress().toString();
+QString serPORT = QString::number(ser-&gt;serverPort());
 
-<table>
-<thead>
-<tr>
-<th>相关类</th>
-<th align="center">静态函数</th>
-<th>函数说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>QFontDialog</td>
-<td align="center">getFont()</td>
-<td>获得用户选择的字体</td>
-</tr>
-</tbody></table>
-<p><strong>用例</strong>    </p>
-<blockquote>
-<p>getFont()</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font &#x3D; QFontDialog::getFont();                    &#x2F;&#x2F;获取字体</span><br></pre></td></tr></table></figure>
+ui-&gt;label-&gt;setText(&quot;IP: &quot; + serIP);
+ui-&gt;label_2-&gt;setText(&quot;PORT: &quot; + serPORT);</code></pre><h2 id="监听这里可以判断一下是否成功监听"><a href="#监听这里可以判断一下是否成功监听" class="headerlink" title="监听这里可以判断一下是否成功监听"></a>监听这里可以判断一下是否成功监听</h2><pre><code>if(ser-&gt;listen(QHostAddress::Any, PORT))
+{
+        qDebug() &lt;&lt; &quot;listen ok&quot;;
+}
+else
+        qDebug() &lt;&lt; &quot;listen false&quot;;</code></pre><h2 id="监听到有新的连接成功之后会受到一个newConnection-信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect"><a href="#监听到有新的连接成功之后会受到一个newConnection-信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect" class="headerlink" title="监听到有新的连接成功之后会受到一个newConnection()信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect()"></a>监听到有新的连接成功之后会受到一个newConnection()信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect()</h2><pre><code>connect(ser, SIGNAL(newConnection()), this, SLOT(newConnect()));//关联连接请求信号  newConnection() 新的连接请求信号   newConnect() 用户编写的槽函数</code></pre><hr>
+<h2 id="槽函数的编写"><a href="#槽函数的编写" class="headerlink" title="槽函数的编写"></a>槽函数的编写</h2><pre><code>//处理客户断的连接请求
+void MainWindow::newConnect()
+{
+    //服务器之负责接受连接请求，不负责通信
+    //产生新的通信对象
 
+    QTcpSocket *new_clien = ser-&gt;nextPendingConnection();
+    //打印连接者的主机名、端口、IP
+    QString name = new_clien-&gt;peerName();
+    QString port = QString::number(new_clien-&gt;peerPort());
+    QString ip   = new_clien-&gt;peerAddress().toString();
 
+    ui-&gt;textBrowser-&gt;append(name);
+    ui-&gt;textBrowser-&gt;append(port);
+    ui-&gt;textBrowser-&gt;append(ip);
+}</code></pre><hr>
 
       
 
@@ -425,7 +324,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/QTcpserver/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -439,15 +338,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/19/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
   
+    <a href="/2019/12/19/QtNetworkdemo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">QtNetworkdemo</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
