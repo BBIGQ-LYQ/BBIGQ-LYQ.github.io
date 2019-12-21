@@ -1,6 +1,11 @@
 ---
-title: Qt demo小相册
-tags: study
+title: Qt常用窗体
+date: 2019-12-18 20:20:00
+tags: 
+      - study
+      - QT
+      
+top: 1
 ---
 
 ## QT自带的窗体使用

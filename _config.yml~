@@ -121,3 +121,8 @@ jsonContent:
       excerpt: false
       categories: false
       tags: true
+      
+server:
+  port: 4001
+  compress: true
+  header: true
