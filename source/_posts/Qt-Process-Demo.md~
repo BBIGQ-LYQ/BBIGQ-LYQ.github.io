@@ -57,3 +57,5 @@ QProcess *myPro = new QProcess(this);
 //用该进程去执行任务
 myPro->start("对应的任务");
 ```
+----
+[我的GITHUB](https://github.com/BBIGQ-LYQ)
