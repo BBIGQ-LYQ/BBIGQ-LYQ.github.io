@@ -128,7 +128,7 @@ NULL|空
 > select  *  from  student   where   id  between 100  and 200;  //查找id在100到200之间的数据
 
 **例子2**
-> select  * from  student  where   name  like  “小%”    //查找名字带有小的所有数据
+> select * from  student  where   name  like  “小%”    //查找名字带有小的所有数据
 > select * from car  where  carid   like  “%A%”;        //查出车牌号 为粤a 的车，车牌带A 的都显示出来
 
 
