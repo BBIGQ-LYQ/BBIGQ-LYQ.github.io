@@ -91,6 +91,7 @@ TEXT|字符串
 BLOB|二进制
 NULL|空
 
+----
 #### sqlite用法
 
         Create  table   表名(
@@ -110,7 +111,7 @@ NULL|空
 修改数据：
 > update  表名  set  字段1=新的值，字段2=新的值 .... where  表达式;
 > update  student  set  name=”小花”, id=198,sex=”女”  where  name=”小陈”;   //把小陈的信息改成小花的
-
+ 
 查找数据：
 > select  [*|字段名]   from   表名;
 > Select  * from  表名;  //查找表格中的所有数据
