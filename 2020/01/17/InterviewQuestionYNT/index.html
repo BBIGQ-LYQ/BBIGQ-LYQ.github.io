@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>QT ADD Third-party libraries | BBIGQ PERSONAL BLOG</title>
+  <title>InterviewQuestionYNT | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="QT上使用第三方库的教程，附带demo">
+  <meta name="description" content="Summary of minor interview problems">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QT ADD Third-party libraries">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;21&#x2F;QT-ADD-Third-party-libraries&#x2F;index.html">
+<meta property="og:title" content="InterviewQuestionYNT">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;17&#x2F;InterviewQuestionYNT&#x2F;index.html">
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
-<meta property="og:description" content="QT上使用第三方库的教程，附带demo">
-<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;carDemo.png">
-<meta property="article:published_time" content="2019-12-21T07:22:08.000Z">
-<meta property="article:modified_time" content="2019-12-21T08:05:08.457Z">
+<meta property="og:description" content="Summary of minor interview problems">
+<meta property="article:published_time" content="2020-01-17T10:41:00.000Z">
+<meta property="article:modified_time" content="2020-01-22T09:02:41.385Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
-<meta property="article:tag" content="QT">
+<meta property="article:tag" content="interview">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;carDemo.png">
   
     <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
   
@@ -175,50 +173,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-QT-ADD-Third-party-libraries" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-InterviewQuestionYNT" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      QT ADD Third-party libraries
+      InterviewQuestionYNT
     </h1>
   
 
         
-        <a href="/2019/12/21/QT-ADD-Third-party-libraries/" class="archive-article-date">
-  	<time datetime="2019-12-21T07:22:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
+        <a href="/2020/01/17/InterviewQuestionYNT/" class="archive-article-date">
+  	<time datetime="2020-01-17T10:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="QT上使用第三方库的教程，附带demo"><a href="#QT上使用第三方库的教程，附带demo" class="headerlink" title="QT上使用第三方库的教程，附带demo"></a>QT上使用第三方库的教程，附带demo</h2><a id="more"></a>
+        <h1 id="Summary-of-minor-interview-problems"><a href="#Summary-of-minor-interview-problems" class="headerlink" title="Summary of minor interview problems"></a>Summary of minor interview problems</h1><a id="more"></a>
 
-<h3 id="第一步："><a href="#第一步：" class="headerlink" title="第一步："></a>第一步：</h3><blockquote>
-<p>在新建的工程中的xxx.pro文件</p>
+<h2 id="First-blood"><a href="#First-blood" class="headerlink" title="First blood"></a>First blood</h2><blockquote>
+<p><strong>printf</strong></p>
 </blockquote>
-<h3 id="第二步："><a href="#第二步：" class="headerlink" title="第二步："></a>第二步：</h3><blockquote>
-<p>使用BAT API的demo为例子<br><a href="https://bbigq-lyq.github.io/2019/12/21/BAT-API-DEMO/" target="_blank" rel="noopener">BAT API DEMO</a></p>
+<p> C中的printf计算参数时，是从右到左压栈的！！！并不是单纯的从左到右去分析，示例如下：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int arr[] &#x3D; &#123;6, 7, 8, 9&#125;;</span><br><span class="line">   int  *ptr &#x3D; arr;</span><br><span class="line">   *(ptr++) +&#x3D; 123;</span><br><span class="line"></span><br><span class="line">   printf(&quot;%d,%d \n&quot;, *ptr, *(++ptr));</span><br></pre></td></tr></table></figure>
+<p>这里输出的结果是：<strong>8,8</strong></p>
+<hr>
+<h2 id="Second-blood"><a href="#Second-blood" class="headerlink" title="Second blood"></a>Second blood</h2><blockquote>
+<p><strong>if</strong></p>
 </blockquote>
-<blockquote>
-<p>添加头文件</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">INCLUDEPATH+&#x3D;&#x2F;home&#x2F;bbigq&#x2F;baiduAPI&#x2F;image&#x2F;aip-cpp-sdk-0.8.5</span><br></pre></td></tr></table></figure>
-
-<h3 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h3><blockquote>
-<p>添加库文件</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">LIBS+&#x3D; -lcurl -lcrypto -ljsoncpp</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>源码</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">#include &quot;mainwindow.h&quot;</span><br><span class="line">#include &quot;ui_mainwindow.h&quot;</span><br><span class="line">&#x2F;&#x2F;使用QFileDialog打开一张图</span><br><span class="line">#include &lt;QFileDialog&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;JSON相关头文件</span><br><span class="line">#include &lt;QJsonDocument&gt;</span><br><span class="line">#include &lt;QJsonObject&gt;</span><br><span class="line">#include &lt;QJsonParseError&gt;</span><br><span class="line">#include &lt;QJsonValue&gt;</span><br><span class="line">#include &lt;QJsonArray&gt;</span><br><span class="line">&#x2F;&#x2F;debug</span><br><span class="line">#include &lt;QDebug&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;添加第三方头文件</span><br><span class="line">#include &quot;ocr.h&quot;</span><br><span class="line">#include &quot;image_classify.h&quot;</span><br><span class="line"></span><br><span class="line">MainWindow::MainWindow(QWidget *parent)</span><br><span class="line">    : QMainWindow(parent)</span><br><span class="line">    , ui(new Ui::MainWindow)</span><br><span class="line">&#123;</span><br><span class="line">    ui-&gt;setupUi(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MainWindow::~MainWindow()</span><br><span class="line">&#123;</span><br><span class="line">    delete ui;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void MainWindow::on_pushButton_clicked()</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;&#x2F;获得文件的名字</span><br><span class="line">    QString fileName &#x3D; QFileDialog::getOpenFileName(this,</span><br><span class="line">          tr(&quot;Open Image&quot;), &quot;&#x2F;home&#x2F;bbigq&quot;, tr(&quot;*&quot;));</span><br><span class="line">    &#x2F;&#x2F;打开一张图片</span><br><span class="line">    QPixmap pic(fileName);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置大小</span><br><span class="line">    pic.scaled(ui-&gt;show-&gt;width(), ui-&gt;show-&gt;height());</span><br><span class="line">    &#x2F;&#x2F;显示图片</span><br><span class="line">    ui-&gt;show-&gt;setPixmap(pic);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 设置APPID&#x2F;AK&#x2F;SK</span><br><span class="line">    std::string app_id &#x3D; &quot;18078217&quot;;</span><br><span class="line">    std::string api_key &#x3D; &quot;rtYVoXqqeR7278NI0qGh99q9&quot;;</span><br><span class="line">    std::string secret_key &#x3D; &quot;u9FauW1mwvCfg9zdkwo58WzkYNKh6QNp&quot;;</span><br><span class="line"></span><br><span class="line">    aip::Imageclassify client(app_id, api_key, secret_key);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Json::Value result;</span><br><span class="line"></span><br><span class="line">    std::string image;</span><br><span class="line">    aip::get_file_content(fileName.toUtf8().data(), &amp;image);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 调用车型识别</span><br><span class="line">    result &#x3D; client.car_detect(image, aip::null);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 如果有可选参数</span><br><span class="line">    std::map&lt;std::string, std::string&gt; options;</span><br><span class="line">    options[&quot;top_num&quot;] &#x3D; &quot;3&quot;;</span><br><span class="line">    options[&quot;baike_num&quot;] &#x3D; &quot;5&quot;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 带参数调用车型识别</span><br><span class="line">    result &#x3D; client.car_detect(image, options);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;每次操作JSON时都先判断该字符串是否为JSON格式的</span><br><span class="line">    QJsonParseError err;</span><br><span class="line">    QJsonDocument json &#x3D; QJsonDocument::fromJson(result.toStyledString().data(), &amp;err);</span><br><span class="line">    if(err.error &#x3D;&#x3D; QJsonParseError::NoError)</span><br><span class="line">        qDebug() &lt;&lt; &quot;DATA IS OK&quot;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;判断完之后，转换成对象</span><br><span class="line">    QJsonObject obj &#x3D; json.object();</span><br><span class="line">    QJsonValue msg &#x3D; obj.take(&quot;result&quot;);</span><br><span class="line">    &#x2F;&#x2F;这里匹配到的result是数组对象，需要转</span><br><span class="line">    QJsonArray msgArray &#x3D; msg.toArray();</span><br><span class="line">    &#x2F;&#x2F;将包含所需名字的信息的数组对象成员提取出来转成单独的对象</span><br><span class="line">    QJsonObject aim &#x3D; msgArray.at(msgArray.size() - 1).toObject();</span><br><span class="line">    &#x2F;&#x2F;匹配对应信息</span><br><span class="line">    QJsonValue name &#x3D; aim.take(&quot;name&quot;);</span><br><span class="line">    qDebug() &lt;&lt; name;</span><br><span class="line">    ui-&gt;textBrowser-&gt;setText(name.toString());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blogmat/carDemo.png" alt="结果"></p>
-<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+<p>初学者一般使用if等判断语句的时候，都会直接使用比如以下的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(a &#x3D;&#x3D; 123)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;*</span><br><span class="line">    ***</span><br><span class="line">    *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是以下这种写法会比较好</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(123 &#x3D;&#x3D; a)</span><br><span class="line">&#123;</span><br><span class="line">    &#x2F;*</span><br><span class="line">    ***</span><br><span class="line">    *&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原因是:如果一个工程较大的时候，当错误的将 ‘==’ 写成 ‘=’ 的时候，第一种写法会直接判断通过，并且修改了a的值，会给后续Debug带来极大的障碍；<br>而第二种就可以避免了，常量无法被赋值，会直接编译不通过或者报错，可以快速的定位到出错的地方；</p>
 
       
 
@@ -272,7 +263,7 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QT</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">interview</a>
         		</li>
       		
 		</ul>
@@ -328,7 +319,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/21/QT-ADD-Third-party-libraries/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/17/InterviewQuestionYNT/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -342,18 +333,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/12/21/QtThreadDemo/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/01/22/WebAPI-User/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          QtThreadDemo
+          WebAPI-User
         
       </div>
     </a>
   
   
-    <a href="/2019/12/21/BAT-API-DEMO/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">BAT API DEMO</div>
+    <a href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">串口编程Demo</div>
       <i class="icon-circle-right"></i>
     </a>
   
