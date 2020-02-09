@@ -173,38 +173,175 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
+            <article id="post-Qt小相册" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    <% if (post.link || post.title){ %>
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <!--显示阅读次数-->
-        <% if (!index && post.comments){ %>
-          <br/>
-          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-          <span class="icon-sort"></span>
-          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
-                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
-          </span>
-          </a>
-        <% } %>
-        <!--显示阅读次数完毕-->
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Qt常用窗体
+    </h1>
+  
 
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
+        <!--显示阅读次数-->
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+        
+        <a href="/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
+  	<time datetime="2019-12-18T12:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2><hr>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::question</td>
+<td>question 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::information</td>
+<td>information 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::warning</td>
+<td>warning 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::critical</td>
+<td>critical 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::about</td>
+<td>about 消息框</td>
+</tr>
+<tr>
+<td>QMessageBox</td>
+<td align="center">QMessageBox::abouutQt</td>
+<td>abouut Qt 消息框</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QMessageBox::warning</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ret = QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"请看题"</span>),   <span class="comment">//标题</span></span><br><span class="line">                                        tr(<span class="string">"吃饭不?"</span>),         <span class="comment">//提示内容</span></span><br><span class="line">                                        QMessageBox::Yes | QMessageBox::No <span class="comment">//选择内容</span></span><br><span class="line">                                        | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QFileDialog</td>
+<td align="center">getOpenFileName()</td>
+<td>获得用户选择的文件名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getSaveFileName()</td>
+<td>获得用户保存的文件名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getExistingDirectory()</td>
+<td>获得用户选择的已存在的目录名</td>
+</tr>
+<tr>
+<td>QFileDialog</td>
+<td align="center">getOpenFileNames()</td>
+<td>获得用户选择的文件名列表</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getOpenFileNames</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName = QFileDialog::getOpenFileName(<span class="keyword">this</span>,                   <span class="comment">//父类的指针</span></span><br><span class="line">                        tr(<span class="string">"Open File"</span>),                        <span class="comment">//打开窗口的标题</span></span><br><span class="line">                        <span class="string">"/home/bbigq"</span>,                          <span class="comment">//打开默认路径</span></span><br><span class="line">                        tr(<span class="string">"Images (*.png *.xpm *.jpeg *.bmp)"</span>) <span class="comment">//文件过滤器 这里只能打开*.png *.xpm *.jpg</span></span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>getOpenFileNames()                 //获得用户选择的文件名列表</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        </span><br><span class="line">QStringList temp = QFileDialog::getOpenFileNames(</span><br><span class="line">                        <span class="keyword">this</span>,                                   <span class="comment">//父类的指针</span></span><br><span class="line">                        <span class="string">"Select one or more files to open"</span>,     <span class="comment">//打开窗口的标题</span></span><br><span class="line">                        <span class="string">"/home/bbigq/workspace/QT"</span>,             <span class="comment">//获取的路径</span></span><br><span class="line">                        <span class="string">"Anyfile (*)"</span>);                         <span class="comment">//获取所有文件</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QColorDialog</td>
+<td align="center">getColor()</td>
+<td>获得用户选择的颜色值</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getColor()</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color = QColorDialog::getColor();                    <span class="comment">//获取颜色</span></span><br><span class="line"></span><br><span class="line">QString choise_color = QString(<span class="string">"color: %1;"</span>).arg(color.name()); <span class="comment">//拼接颜色信息，将颜色信息填入choise_color中</span></span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         <span class="comment">//设置字体颜色</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QFontDialog</td>
+<td align="center">getFont()</td>
+<td>获得用户选择的字体</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong>    </p>
+<blockquote>
+<p>getFont()</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font = QFontDialog::getFont();<span class="comment">//获取字体</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+
+      
+
+      
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -214,20 +351,20 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
-                    <% if(theme.alipay) {%>
+                    
                     <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
+                      <img class="reward-img" src="/assets/aliyun.png">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
+                    
+                    
                     <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
+                      <img class="reward-img" src="/assets/weixin.png">
                       <span class="reward-type">微信</span>
                     </div>
-                    <% } %>
+                    
                   </div>
                 </span>
               </span>
@@ -235,87 +372,136 @@
           </div>
           </a>
         </div>
-      <% } %>
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QT</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
   
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
+<nav id="article-nav">
+  
+    <a href="/2019/12/19/QtNetworkdemo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          QtNetworkdemo
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
 
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
 
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
+
+  
+  
+  
+
+  
+
+  
+
+  
+
 
           </div>
         </div>

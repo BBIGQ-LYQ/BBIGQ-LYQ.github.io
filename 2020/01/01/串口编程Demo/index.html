@@ -173,38 +173,89 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
+            <article id="post-串口编程Demo" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    <% if (post.link || post.title){ %>
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <!--显示阅读次数-->
-        <% if (!index && post.comments){ %>
-          <br/>
-          <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-          <span class="icon-sort"></span>
-          <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
-                    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
-          </span>
-          </a>
-        <% } %>
-        <!--显示阅读次数完毕-->
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+        
+  
+    <h1 class="article-title" itemprop="name">
+      串口编程Demo
+    </h1>
+  
 
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
+        <!--显示阅读次数-->
+
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+            阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+
+<!--显示阅读次数完毕-->
+        
+        <a href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/" class="archive-article-date">
+  	<time datetime="2020-01-01T08:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="在Linux上学习串口编程"><a href="#在Linux上学习串口编程" class="headerlink" title="在Linux上学习串口编程"></a>在Linux上学习串口编程</h2><hr>
+<a id="more"></a>
+<hr>
+<h3 id="认识串口"><a href="#认识串口" class="headerlink" title="认识串口"></a>认识串口</h3><blockquote>
+<p>串口通信：硬件与硬件之间的一种通信方式，也是我们在项目中最简单的通信方式。<br>除了串口的这种通信方式以外还有：USB、I2C、SPI、CAN、LIN等。<br>串口是双向通信的。</p>
+</blockquote>
+<hr>
+<h3 id="打开串口"><a href="#打开串口" class="headerlink" title="打开串口"></a>打开串口</h3><p>直接通过open来打开串口驱动文件</p>
+<blockquote>
+<p>int uartFd=open(“/dev/ttySAC1”,O_RDWR|O_NOCTTY);</p>
+</blockquote>
+<p>通过<strong>uartFd</strong>的值判断是否成功打开串口</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> uartFd=<span class="built_in">open</span>(<span class="string">"/dev/ttySAC1"</span>,O_RDWR|O_NOCTTY);</span><br><span class="line"><span class="keyword">if</span>(uartFd &lt; <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	perror(<span class="string">"open fail:"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//打开串口成功!!</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"open uart ok\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置串口"><a href="#配置串口" class="headerlink" title="配置串口"></a>配置串口</h3><blockquote>
+<p>串口的唯一难点就是配置串口属性<br>这里需要添加一个头文件<strong>#include &lt;termios.h&gt;</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">set_serial_uart</span><span class="params">(<span class="keyword">int</span> ser_fd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">termios</span> <span class="title">new_cfg</span>,<span class="title">old_cfg</span>;</span>                                 <span class="comment">//串口配置结构体</span></span><br><span class="line">		</span><br><span class="line">	<span class="comment">/*保存并测试现有串口参数设置，在这里如果串口号等出错，会有相关的出错信息*/</span> </span><br><span class="line">	<span class="keyword">if</span>	(tcgetattr(ser_fd, &amp;old_cfg) != <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		perror(<span class="string">"tcgetattr"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	bzero( &amp;new_cfg, <span class="keyword">sizeof</span>(new_cfg));</span><br><span class="line">	<span class="comment">/*原始模式*/</span></span><br><span class="line">	<span class="comment">/* 设置字符大小*/</span></span><br><span class="line">	</span><br><span class="line">	new_cfg = old_cfg;  <span class="comment">//结构体变量赋值</span></span><br><span class="line">	</span><br><span class="line">	cfmakeraw(&amp;new_cfg); <span class="comment">/* 配置为原始模式 */</span> </span><br><span class="line"></span><br><span class="line">	<span class="comment">/*波特率为115200*/</span></span><br><span class="line">	cfsetispeed(&amp;new_cfg, B115200); </span><br><span class="line">	cfsetospeed(&amp;new_cfg, B115200);</span><br><span class="line">	</span><br><span class="line">	new_cfg.c_cflag |= CLOCAL | CREAD;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*8位数据位*/</span></span><br><span class="line">	new_cfg.c_cflag &amp;= ~CSIZE;</span><br><span class="line">	new_cfg.c_cflag |= CS8;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*无奇偶校验位*/</span></span><br><span class="line">	new_cfg.c_cflag &amp;= ~PARENB;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*1位停止位*/</span></span><br><span class="line">	new_cfg.c_cflag &amp;= ~CSTOPB;</span><br><span class="line">	<span class="comment">/*清除串口缓冲区*/</span></span><br><span class="line">	tcflush(ser_fd,TCIOFLUSH);</span><br><span class="line">	new_cfg.c_cc[VTIME] = <span class="number">0</span>;</span><br><span class="line">	new_cfg.c_cc[VMIN] = <span class="number">1</span>;</span><br><span class="line">	tcflush ( ser_fd, TCIOFLUSH);</span><br><span class="line">	<span class="comment">/*串口设置使能*/</span></span><br><span class="line">	tcsetattr( ser_fd ,TCSANOW,&amp;new_cfg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>struct termios结构体原型：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">termios</span> &#123;</span></span><br><span class="line"><span class="keyword">tcflag_t</span> c_iflag;      <span class="comment">/* input modes  输入模式 */</span></span><br><span class="line"><span class="keyword">tcflag_t</span> c_oflag;      <span class="comment">/* output modes 输出模式 */</span></span><br><span class="line"><span class="keyword">tcflag_t</span> c_cflag;      <span class="comment">/* control modes 控制模式*/</span></span><br><span class="line"><span class="keyword">tcflag_t</span> c_lflag;      <span class="comment">/* local modes   本地模式*/</span></span><br><span class="line"><span class="keyword">cc_t</span>   c_cc[NCCS];     <span class="comment">/* special characters 控制字符 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="使用串口"><a href="#使用串口" class="headerlink" title="使用串口"></a>使用串口</h3><blockquote>
+<p>对于串口的读写，使用read()、write()函数即可</p>
+</blockquote>
+<hr>
+<h3 id="额外的接口"><a href="#额外的接口" class="headerlink" title="额外的接口"></a>额外的接口</h3><p>1.获取串口的原始状态<br>int tcgetattr(int fd, struct termios *termios_p);<br>参数一：需要获取的串口设备描述符<br>参数二：获取状态后保存的地址。<br>返回值：0 成功<br>       -1 失败 </p>
+<p>2.把新的串口配置为原始模式<br>void cfmakeraw(struct termios *termios_p);<br>参数一：需要配置的串口 </p>
+<p>3.设置新串口的属性<br>设置速率：<br>speed_t cfgetispeed(const struct termios *termios_p);<br>speed_t cfgetospeed(const struct termios *termios_p);</p>
+<p>数据位，奇偶校验，停止位的设置具体看文档。  </p>
+<p>//刷新串口<br>int tcflush(int fd, int queue_selector);<br>例子：<br>tcflush(ser_fd,TCIOFLUSH);</p>
+<hr>
+<h2 id="使用QT提供的接口下使用串口"><a href="#使用QT提供的接口下使用串口" class="headerlink" title="使用QT提供的接口下使用串口"></a>使用QT提供的接口下使用串口</h2><p>库文件/头文件</p>
+<blockquote>
+<p>Header: #include <QSerialPort><br>qmake: QT += serialport</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置需要初始化的串口</span></span><br><span class="line">QSerialPort *myPort = <span class="keyword">new</span> QSerialPort(<span class="string">"/dev/ttySAC3"</span>);</span><br><span class="line"><span class="comment">//打开串口设备</span></span><br><span class="line">myPort-&gt;<span class="built_in">open</span>(QIODevice::ReadWrite);                             <span class="comment">//设置打开权限</span></span><br><span class="line"><span class="comment">//设置串口属性</span></span><br><span class="line">myPort-&gt;setBaudRate(QSerialPort::Baud9600);                     <span class="comment">//设置波特率  9600</span></span><br><span class="line">myPort-&gt;setDataBits(QSerialPort::Data8);                        <span class="comment">//设置数据位  8位</span></span><br><span class="line">myPort-&gt;setStopBits(QSerialPort::OneStop);                      <span class="comment">//设置停止位  1位停止位</span></span><br><span class="line">myPort-&gt;setParity(QSerialPort::NoParity);                       <span class="comment">//设置奇偶校验 无奇偶校验 </span></span><br><span class="line">myPort-&gt;setFlowControl(QSerialPort::NoFlowControl);             <span class="comment">//设置控制流  无控制流</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//关联可读信号</span></span><br><span class="line"><span class="built_in">connect</span>(myPort, SIGNAL(readyRead()), <span class="keyword">this</span>, SLOT(readAllData()));<span class="comment">//关联串口可读信号</span></span><br></pre></td></tr></table></figure>
+
+<p>QT中使用接口对串口的读写操作也是直接使用write和read<br><strong>用例</strong>  </p>
+<blockquote>
+<p>myPort-&gt;readAll();<br>myPort-&gt;write(BUFF, BUFF.size());</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+</blockquote>
+
+      
+
+      
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -214,20 +265,20 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
-                    <% if(theme.alipay) {%>
+                    
                     <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
+                      <img class="reward-img" src="/assets/aliyun.png">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
+                    
+                    
                     <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
+                      <img class="reward-img" src="/assets/weixin.png">
                       <span class="reward-type">微信</span>
                     </div>
-                    <% } %>
+                    
                   </div>
                 </span>
               </span>
@@ -235,87 +286,141 @@
           </div>
           </a>
         </div>
-      <% } %>
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UART</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
   
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
+<nav id="article-nav">
+  
+    <a href="/2020/01/17/InterviewQuestionYNT/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          InterviewQuestionYNT
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SQL初探</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
 
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
 
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
+
+  
+  
+  
+
+  
+
+  
+
+  
+
 
           </div>
         </div>
