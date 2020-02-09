@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
 <meta property="og:description" content="网络编程">
 <meta property="article:published_time" content="2019-12-19T05:15:16.000Z">
-<meta property="article:modified_time" content="2019-12-19T08:34:09.512Z">
+<meta property="article:modified_time" content="2020-02-09T07:11:57.754Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta property="article:tag" content="QT">
@@ -193,7 +193,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><a id="more"></a>
+        <h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><hr>
+<a id="more"></a>
 
 <hr>
 <h2 id="Linux网络编程"><a href="#Linux网络编程" class="headerlink" title="Linux网络编程"></a>Linux网络编程</h2><p><strong>网络的分层模型： 4层</strong></p>
@@ -238,7 +239,7 @@
 <blockquote>
 <p>QNetworkInterface::allAddresses()</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QHostAddress&gt; addrs &#x3D; QNetworkInterface::allAddresses();</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QHostAddress&gt; addrs = QNetworkInterface::allAddresses();</span><br></pre></td></tr></table></figure>
 
 <hr>
 <table>
@@ -259,7 +260,7 @@
 <blockquote>
 <p>QTcpSocket()</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clien &#x3D; new QTcpSocket(this);</span><br><span class="line">&#x2F;&#x2F;设置服务端IP</span><br><span class="line">QHostAddress MYip(&quot;192.168.95.99&quot;);</span><br><span class="line">&#x2F;&#x2F;设置端口</span><br><span class="line">unsigned short PORT &#x3D; 9046;</span><br><span class="line">&#x2F;&#x2F;连接服务器</span><br><span class="line">clien-&gt;connectToHost(MYip, PORT);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clien = <span class="keyword">new</span> QTcpSocket(<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">//设置服务端IP</span></span><br><span class="line"><span class="function">QHostAddress <span class="title">MYip</span><span class="params">(<span class="string">"192.168.95.99"</span>)</span></span>;</span><br><span class="line"><span class="comment">//设置端口</span></span><br><span class="line"><span class="keyword">unsigned</span> short PORT = <span class="number">9046</span>;</span><br><span class="line"><span class="comment">//连接服务器</span></span><br><span class="line">clien-&gt;connectToHost(MYip, PORT);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>关联有数据可读信号<br>connect(clien, SIGNAL(readyRead()), this, SLOT(readData()));  //readData()为用户编写的槽函数</p>
@@ -274,6 +275,7 @@
 <p>更多接口详见<br>QTcpSocket<br>QHostAddress</p>
 </blockquote>
 <hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
 
       
 
@@ -559,6 +561,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
             
             <div class="clearfix"></div>

@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
 <meta property="og:description" content="基于 QTcpserver 的 demo">
 <meta property="article:published_time" content="2019-12-19T06:30:42.000Z">
-<meta property="article:modified_time" content="2019-12-19T08:33:58.604Z">
+<meta property="article:modified_time" content="2020-02-09T07:11:54.382Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta property="article:tag" content="QT">
@@ -193,46 +193,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="基于-QTcpserver-的-demo"><a href="#基于-QTcpserver-的-demo" class="headerlink" title="基于 QTcpserver 的 demo"></a>基于 QTcpserver 的 demo</h2><a id="more"></a>
+        <h2 id="基于-QTcpserver-的-demo"><a href="#基于-QTcpserver-的-demo" class="headerlink" title="基于 QTcpserver 的 demo"></a>基于 QTcpserver 的 demo</h2><hr>
+<a id="more"></a>
 
 <hr>
 <p>Header:#include <QTcpServer><br>qmake:QT += network</p>
 <hr>
-<h3 id="创建服务器socket"><a href="#创建服务器socket" class="headerlink" title="创建服务器socket"></a>创建服务器socket</h3><pre><code>QTcpServer *ser;                //定义服务器对象
-ser = new QTcpServer(this);     //创建服务器socket</code></pre><h3 id="绑定和监听"><a href="#绑定和监听" class="headerlink" title="绑定和监听"></a>绑定和监听</h3><pre><code>ser-&gt;listen(QHostAddress::Any, PORT); //设置为监听模式   这里的Any代表默认获取本地的IP，如果需要指定IP：ser-&gt;listen(QHostAddress(&quot;IP&quot;), PORT);</code></pre><h3 id="获取服务端的IP和PORT"><a href="#获取服务端的IP和PORT" class="headerlink" title="获取服务端的IP和PORT"></a>获取服务端的IP和PORT</h3><pre><code>QString serIP = ser-&gt;serverAddress().toString();
-QString serPORT = QString::number(ser-&gt;serverPort());
-
-ui-&gt;label-&gt;setText(&quot;IP: &quot; + serIP);
-ui-&gt;label_2-&gt;setText(&quot;PORT: &quot; + serPORT);</code></pre><h3 id="监听这里可以判断一下是否成功监听"><a href="#监听这里可以判断一下是否成功监听" class="headerlink" title="监听这里可以判断一下是否成功监听"></a>监听这里可以判断一下是否成功监听</h3><pre><code>if(ser-&gt;listen(QHostAddress::Any, PORT))
+<h3 id="创建服务器socket"><a href="#创建服务器socket" class="headerlink" title="创建服务器socket"></a>创建服务器socket</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">QTcpServer *ser;                <span class="comment">//定义服务器对象</span></span><br><span class="line">ser = <span class="keyword">new</span> QTcpServer(<span class="keyword">this</span>);     <span class="comment">//创建服务器socket</span></span><br><span class="line">```      </span><br><span class="line">### 绑定和监听</span><br><span class="line">```c++</span><br><span class="line">ser-&gt;<span class="built_in">listen</span>(QHostAddress::Any, PORT); <span class="comment">//设置为监听模式   这里的Any代表默认获取本地的IP，如果需要指定IP：ser-&gt;listen(QHostAddress("IP"), PORT);</span></span><br><span class="line">```       </span><br><span class="line">### 获取服务端的IP和PORT</span><br><span class="line">```c++</span><br><span class="line">QString serIP = ser-&gt;serverAddress().toString();</span><br><span class="line">QString serPORT = QString::number(ser-&gt;serverPort());</span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setText(<span class="string">"IP: "</span> + serIP);</span><br><span class="line">ui-&gt;label_2-&gt;setText(<span class="string">"PORT: "</span> + serPORT);</span><br><span class="line">```        </span><br><span class="line">### 监听这里可以判断一下是否成功监听</span><br><span class="line">```c++</span><br><span class="line"><span class="keyword">if</span>(ser-&gt;<span class="built_in">listen</span>(QHostAddress::Any, PORT))</span><br><span class="line">&#123;</span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"listen ok"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"listen false"</span>;</span><br><span class="line">```              </span><br><span class="line">### 监听到有新的连接成功之后会受到一个newConnection()信号，这个时候需要通过<span class="built_in">connect</span>去关联成功连接信号，同时写一个回调的槽函数newConnect()</span><br><span class="line">```c++</span><br><span class="line"><span class="built_in">connect</span>(ser, SIGNAL(newConnection()), <span class="keyword">this</span>, SLOT(newConnect()));<span class="comment">//关联连接请求信号  newConnection() 新的连接请求信号   newConnect() 用户编写的槽函数</span></span><br><span class="line">```        </span><br><span class="line">----  </span><br><span class="line"></span><br><span class="line">### 关联新连接的槽函数的编写</span><br><span class="line">```c++</span><br><span class="line"><span class="comment">//处理客户断的连接请求</span></span><br><span class="line"><span class="keyword">void</span> MainWindow::newConnect()</span><br><span class="line">&#123;</span><br><span class="line">        <span class="comment">//服务器之负责接受连接请求，不负责通信</span></span><br><span class="line">        <span class="comment">//产生新的通信对象</span></span><br><span class="line"></span><br><span class="line">        QTcpSocket *new_clien = ser-&gt;nextPendingConnection();</span><br><span class="line">        <span class="comment">//打印连接者的主机名、端口、IP</span></span><br><span class="line">        QString name = new_clien-&gt;peerName();</span><br><span class="line">        QString port = QString::number(new_clien-&gt;peerPort());</span><br><span class="line">        QString ip   = new_clien-&gt;peerAddress().toString();</span><br><span class="line"></span><br><span class="line">        ui-&gt;textBrowser-&gt;append(name);</span><br><span class="line">        ui-&gt;textBrowser-&gt;append(port);</span><br><span class="line">        ui-&gt;textBrowser-&gt;append(ip);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//当需要实现服务端能接收信息   （必须写在 new_clien 创建/接收成功后）</span></span><br><span class="line">        <span class="built_in">connect</span>(new_clien, SIGNAL(readyRead()), <span class="keyword">this</span>, SLOT(readData())); <span class="comment">//关联可读信息信号  readyRead() 可读信息信号    readData() 用户编写的读数据槽函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="接收可读信号的槽函数"><a href="#接收可读信号的槽函数" class="headerlink" title="接收可读信号的槽函数"></a>接收可读信号的槽函数</h3><pre><code class="c++"><span class="keyword">void</span> MainWindow::readData()
 {
-        qDebug() &lt;&lt; &quot;listen ok&quot;;
-}
-else
-        qDebug() &lt;&lt; &quot;listen false&quot;;</code></pre><h3 id="监听到有新的连接成功之后会受到一个newConnection-信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect"><a href="#监听到有新的连接成功之后会受到一个newConnection-信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect" class="headerlink" title="监听到有新的连接成功之后会受到一个newConnection()信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect()"></a>监听到有新的连接成功之后会受到一个newConnection()信号，这个时候需要通过connect去关联成功连接信号，同时写一个回调的槽函数newConnect()</h3><pre><code>connect(ser, SIGNAL(newConnection()), this, SLOT(newConnect()));//关联连接请求信号  newConnection() 新的连接请求信号   newConnect() 用户编写的槽函数</code></pre><hr>
-<h3 id="关联新连接的槽函数的编写"><a href="#关联新连接的槽函数的编写" class="headerlink" title="关联新连接的槽函数的编写"></a>关联新连接的槽函数的编写</h3><pre><code>//处理客户断的连接请求
-void MainWindow::newConnect()
-{
-    //服务器之负责接受连接请求，不负责通信
-    //产生新的通信对象
+        QString msg = new_clien-&gt;readAll();
 
-    QTcpSocket *new_clien = ser-&gt;nextPendingConnection();
-    //打印连接者的主机名、端口、IP
-    QString name = new_clien-&gt;peerName();
-    QString port = QString::number(new_clien-&gt;peerPort());
-    QString ip   = new_clien-&gt;peerAddress().toString();
-
-    ui-&gt;textBrowser-&gt;append(name);
-    ui-&gt;textBrowser-&gt;append(port);
-    ui-&gt;textBrowser-&gt;append(ip);
-
-    //当需要实现服务端能接收信息   （必须写在 new_clien 创建/接收成功后）
-    connect(new_clien, SIGNAL(readyRead()), this, SLOT(readData())); //关联可读信息信号  readyRead() 可读信息信号    readData() 用户编写的读数据槽函数
-}</code></pre><h3 id="接收可读信号的槽函数"><a href="#接收可读信号的槽函数" class="headerlink" title="接收可读信号的槽函数"></a>接收可读信号的槽函数</h3><pre><code>void MainWindow::readData()
-{
-    QString msg = new_clien-&gt;readAll();
-
-    ui-&gt;msg_browser-&gt;append(msg);
-}</code></pre><hr>
+        ui-&gt;msg_browser-&gt;append(msg);
+}</code></pre>
+<hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
 
       
 
@@ -518,6 +493,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
             
             <div class="clearfix"></div>

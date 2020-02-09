@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
 <meta property="og:description" content="QT自带的窗体使用">
 <meta property="article:published_time" content="2019-12-18T12:20:00.000Z">
-<meta property="article:modified_time" content="2020-01-22T08:09:44.453Z">
+<meta property="article:modified_time" content="2020-02-09T07:11:50.986Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta property="article:tag" content="QT">
@@ -239,7 +239,7 @@
 <blockquote>
 <p>QMessageBox::warning</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int ret &#x3D; QMessageBox::warning(this, tr(&quot;请看题&quot;),   &#x2F;&#x2F;标题</span><br><span class="line">                                    tr(&quot;吃饭不?&quot;),         &#x2F;&#x2F;提示内容</span><br><span class="line">                                    QMessageBox::Yes | QMessageBox::No &#x2F;&#x2F;选择内容</span><br><span class="line">                                    | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ret = QMessageBox::warning(<span class="keyword">this</span>, tr(<span class="string">"请看题"</span>),   <span class="comment">//标题</span></span><br><span class="line">                                        tr(<span class="string">"吃饭不?"</span>),         <span class="comment">//提示内容</span></span><br><span class="line">                                        QMessageBox::Yes | QMessageBox::No <span class="comment">//选择内容</span></span><br><span class="line">                                        | QMessageBox::Cancel);</span><br></pre></td></tr></table></figure>
 
 
 <hr>
@@ -276,14 +276,14 @@
 <blockquote>
 <p>getOpenFileNames</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName &#x3D; QFileDialog::getOpenFileName(this,                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        tr(&quot;Open File&quot;),                        &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&quot;,                          &#x2F;&#x2F;打开默认路径</span><br><span class="line">                        tr(&quot;Images (*.png *.xpm *.jpeg *.bmp)&quot;) &#x2F;&#x2F;文件过滤器 这里只能打开*.png *.xpm *.jpg</span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QString fileName = QFileDialog::getOpenFileName(<span class="keyword">this</span>,                   <span class="comment">//父类的指针</span></span><br><span class="line">                        tr(<span class="string">"Open File"</span>),                        <span class="comment">//打开窗口的标题</span></span><br><span class="line">                        <span class="string">"/home/bbigq"</span>,                          <span class="comment">//打开默认路径</span></span><br><span class="line">                        tr(<span class="string">"Images (*.png *.xpm *.jpeg *.bmp)"</span>) <span class="comment">//文件过滤器 这里只能打开*.png *.xpm *.jpg</span></span><br><span class="line">                        );</span><br></pre></td></tr></table></figure>
 
 
 
 <blockquote>
 <p>getOpenFileNames()                 //获得用户选择的文件名列表</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">QStringList temp &#x3D; QFileDialog::getOpenFileNames(</span><br><span class="line">                        this,                                   &#x2F;&#x2F;父类的指针</span><br><span class="line">                        &quot;Select one or more files to open&quot;,     &#x2F;&#x2F;打开窗口的标题</span><br><span class="line">                        &quot;&#x2F;home&#x2F;bbigq&#x2F;workspace&#x2F;QT&quot;,             &#x2F;&#x2F;获取的路径</span><br><span class="line">                        &quot;Anyfile (*)&quot;);                         &#x2F;&#x2F;获取所有文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">        </span><br><span class="line">QStringList temp = QFileDialog::getOpenFileNames(</span><br><span class="line">                        <span class="keyword">this</span>,                                   <span class="comment">//父类的指针</span></span><br><span class="line">                        <span class="string">"Select one or more files to open"</span>,     <span class="comment">//打开窗口的标题</span></span><br><span class="line">                        <span class="string">"/home/bbigq/workspace/QT"</span>,             <span class="comment">//获取的路径</span></span><br><span class="line">                        <span class="string">"Anyfile (*)"</span>);                         <span class="comment">//获取所有文件</span></span><br></pre></td></tr></table></figure>
 
 <hr>
 <table>
@@ -304,7 +304,7 @@
 <blockquote>
 <p>getColor()</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color &#x3D; QColorDialog::getColor();                    &#x2F;&#x2F;获取颜色</span><br><span class="line"></span><br><span class="line">QString choise_color &#x3D; QString(&quot;color: %1;&quot;).arg(color.name()); &#x2F;&#x2F;拼接颜色信息，将颜色信息填入choise_color中</span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         &#x2F;&#x2F;设置字体颜色</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QColor color = QColorDialog::getColor();                    <span class="comment">//获取颜色</span></span><br><span class="line"></span><br><span class="line">QString choise_color = QString(<span class="string">"color: %1;"</span>).arg(color.name()); <span class="comment">//拼接颜色信息，将颜色信息填入choise_color中</span></span><br><span class="line"></span><br><span class="line">ui-&gt;label-&gt;setStyleSheet(choise_color);                         <span class="comment">//设置字体颜色</span></span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
@@ -324,9 +324,9 @@
 <blockquote>
 <p>getFont()</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font &#x3D; QFontDialog::getFont();                    &#x2F;&#x2F;获取字体</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QFont font = QFontDialog::getFont();<span class="comment">//获取字体</span></span><br></pre></td></tr></table></figure>
 
-
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
 
       
 
@@ -607,6 +607,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
             
             <div class="clearfix"></div>

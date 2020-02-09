@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
 <meta property="og:description" content="Qt 中的JSON 运用与解析">
 <meta property="article:published_time" content="2019-12-19T09:09:15.000Z">
-<meta property="article:modified_time" content="2019-12-21T08:12:08.714Z">
+<meta property="article:modified_time" content="2020-02-09T07:11:37.725Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta property="article:tag" content="QT">
@@ -193,7 +193,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Qt-中的JSON-运用与解析"><a href="#Qt-中的JSON-运用与解析" class="headerlink" title="Qt 中的JSON 运用与解析"></a>Qt 中的JSON 运用与解析</h2><a id="more"></a>
+        <h2 id="Qt-中的JSON-运用与解析"><a href="#Qt-中的JSON-运用与解析" class="headerlink" title="Qt 中的JSON 运用与解析"></a>Qt 中的JSON 运用与解析</h2><hr>
+<a id="more"></a>
 
 <hr>
 <blockquote>
@@ -211,19 +212,16 @@
 <hr>
 <p><strong>用例</strong></p>
 <p>定义一个JSON数据的一串字符</p>
-<pre><code>QString json_data = &quot;{\&quot;name\&quot;:\&quot;john\&quot;, \&quot;age\&quot;:18}&quot;;</code></pre><p>判断json_data是不是JSON格式数据</p>
-<pre><code>QJsonParseError err;
-QJsonDocument json = QJsonDocument::fromJson(json_data.toUtf8(), &amp;err);</code></pre><p>判断是不是JSON数据</p>
-<pre><code>if(err.error == QJsonParseError::NoError)
-        qDebug() &lt;&lt; &quot;RIGHT&quot;;
-else
-        qDebug() &lt;&lt; &quot;ERROR&quot;;</code></pre><p>转化成一个CJSON对象</p>
-<pre><code>QJsonObject root = json.object();</code></pre><p>通过键获取值</p>
-<pre><code>QJsonValue value = root.take(&quot;name&quot;);
-qDebug() &lt;&lt; value.toString();
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QString json_data = <span class="string">"&#123;\"name\":\"john\", \"age\":18&#125;"</span>;</span><br></pre></td></tr></table></figure>
+<p>判断json_data是不是JSON格式数据</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">QJsonParseError err;</span><br><span class="line">QJsonDocument json = QJsonDocument::fromJson(json_data.toUtf8(), &amp;err);</span><br><span class="line">```        </span><br><span class="line">判断是不是JSON数据</span><br><span class="line">```c++</span><br><span class="line"><span class="keyword">if</span>(err.error == QJsonParseError::NoError)</span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"RIGHT"</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        qDebug() &lt;&lt; <span class="string">"ERROR"</span>;</span><br></pre></td></tr></table></figure>
+<p>转化成一个CJSON对象</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QJsonObject root = json.object();</span><br></pre></td></tr></table></figure>
+<p>通过键获取值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QJsonValue value = root.take(<span class="string">"name"</span>);</span><br><span class="line">qDebug() &lt;&lt; value.toString();</span><br><span class="line"></span><br><span class="line">value = root.take(<span class="string">"age"</span>);</span><br><span class="line">qDebug() &lt;&lt; value.toInt();</span><br></pre></td></tr></table></figure>
 
-value = root.take(&quot;age&quot;);
-qDebug() &lt;&lt; value.toInt();       </code></pre><p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+<hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
 
       
 
@@ -509,6 +507,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
             
             <div class="clearfix"></div>
