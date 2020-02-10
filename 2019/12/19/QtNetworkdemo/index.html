@@ -43,42 +43,64 @@
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      <% var defaultBg = '#4d4d4d'; %>
-<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
+      
+<div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="<%=theme.root%>" class="profilepic">
-			<img src="<%=theme.avatar%>" class="js-avatar">
+		<a href="/" class="profilepic">
+			<img src="/assets/head.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
+		  <h1 class="header-author"><a href="/">LYQ</a></h1>
 		</hgroup>
-		<% if (theme.subtitle){ %>
-		<p class="header-subtitle"><%=theme.subtitle%></p>
-		<%}%>
+		
+		<p class="header-subtitle">STEP BY STEP</p>
+		
 
 		<nav class="header-menu">
 			<ul>
-			<% for (var i in theme.menu){ %>
-				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
-	        <%}%>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+	        
+				<li><a href="/tags/study/">STUDY</a></li>
+	        
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 <%=site.posts.length%>
+                    总文章数 20
                 </nav>
 		<nav class="header-smart-menu">
-    		<% for (var i in theme.smart_menu){ %>
-    			<% if(theme.smart_menu[i]){ %>
-    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
-    			<% } %>
-            <%}%>
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
-				<% for (var i in theme.subnav){ %>
-					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
-		        <%}%>
+				
+					<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
+		        
 			</div>
 		</nav>
 	</header>		
@@ -154,27 +176,120 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
+            <article id="post-QtNetworkdemo" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
-    <% if (post.link || post.title){ %>
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+        
+  
+    <h1 class="article-title" itemprop="name">
+      QtNetworkdemo
+    </h1>
+  
 
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2019/12/19/QtNetworkdemo/" class="archive-article-date">
+  	<time datetime="2019-12-19T05:15:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><hr>
+<a id="more"></a>
+
+<hr>
+<h2 id="Linux网络编程"><a href="#Linux网络编程" class="headerlink" title="Linux网络编程"></a>Linux网络编程</h2><p><strong>网络的分层模型： 4层</strong></p>
+<p>应用层： 用户自定义的应用协议，HTTP，TFTP，SSH，FTP…<br>传输层： TCP/UDP   TCP：可靠的传输协议  UDP：不可靠的传输协议<br>网络层： IPV4,IPV6,3G，4G<br>物理层： 网卡，路由器，网线，基站…</p>
+<p><strong>TCP搭建流程：</strong></p>
+<p>服务器端：<br>1：创建网络通信tcp socket<br>2：绑定服务器的IP地址信息<br>3：监听客户端的连接请求<br>4：等待客户机的连接<br>5：进行通信<br>6：关闭通信</p>
+<p>客户端：<br>1：创建网络通信 tcp socket<br>2：连接服务器<br>3：进行通信<br>4：关闭通信</p>
+<p><strong>UDP的通信流程</strong></p>
+<p>接受端：<br>1：创建UDP通信socket<br>2：绑定UDP通信socket<br>3：接受数据<br>4：关闭通信</p>
+<p>发送端：<br>1：创建UDP通信socket<br>2：往绑定的IP地址中发送数据<br>3：关闭通信</p>
+<p>通信方式：单播、组播、广播</p>
+<hr>
+<h2 id="QT网络编程demo"><a href="#QT网络编程demo" class="headerlink" title="QT网络编程demo"></a>QT网络编程demo</h2><hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QNetworkInterface</td>
+<td align="center">QNetworkInterface::allAddresses()</td>
+<td>获得所有的IP地址</td>
+</tr>
+<tr>
+<td>QNetworkInterface</td>
+<td align="center">QNetworkInterface::allInterface()</td>
+<td>获得所有的网卡信息</td>
+</tr>
+<tr>
+<td>QNetworkInterface</td>
+<td align="center">QNetworkInterface::hardwateAddress()</td>
+<td>warning 消息框</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>更多接口详见<br>Header:#include <QNetworkInterface><br>qmake:QT += network</p>
+</blockquote>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QNetworkInterface::allAddresses()</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QList&lt;QHostAddress&gt; addrs = QNetworkInterface::allAddresses();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<table>
+<thead>
+<tr>
+<th>相关类</th>
+<th align="center">静态函数</th>
+<th>函数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>QTcpSocket</td>
+<td align="center">QTcpSocket()</td>
+<td>创建QTCP通信socket</td>
+</tr>
+</tbody></table>
+<p><strong>用例</strong></p>
+<blockquote>
+<p>QTcpSocket()</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">clien = <span class="keyword">new</span> QTcpSocket(<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">//设置服务端IP</span></span><br><span class="line"><span class="function">QHostAddress <span class="title">MYip</span><span class="params">(<span class="string">"192.168.95.99"</span>)</span></span>;</span><br><span class="line"><span class="comment">//设置端口</span></span><br><span class="line"><span class="keyword">unsigned</span> short PORT = <span class="number">9046</span>;</span><br><span class="line"><span class="comment">//连接服务器</span></span><br><span class="line">clien-&gt;connectToHost(MYip, PORT);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关联有数据可读信号<br>connect(clien, SIGNAL(readyRead()), this, SLOT(readData()));  //readData()为用户编写的槽函数</p>
+</blockquote>
+<blockquote>
+<p>数据的发送，发送数据，注意数据类型的转化<br>sclien-&gt;write(msg.toUtf8());       //注意发送的类型为char *</p>
+</blockquote>
+<blockquote>
+<p>关闭通信<br>clien-&gt;close()</p>
+</blockquote>
+<blockquote>
+<p>更多接口详见<br>QTcpSocket<br>QHostAddress</p>
+</blockquote>
+<hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+
+      
+
+      
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -184,20 +299,20 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
-                    <% if(theme.alipay) {%>
+                    
                     <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
+                      <img class="reward-img" src="/assets/aliyun.png">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
+                    
+                    
                     <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
+                      <img class="reward-img" src="/assets/weixin.png">
                       <span class="reward-type">微信</span>
                     </div>
-                    <% } %>
+                    
                   </div>
                 </span>
               </span>
@@ -205,87 +320,141 @@
           </div>
           </a>
         </div>
-      <% } %>
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QT</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/12/19/QtNetworkdemo/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
   
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
+<nav id="article-nav">
+  
+    <a href="/2019/12/19/QTcpserver/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          QTcpserver
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Qt常用窗体</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
 
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
 
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
 
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
+
+  
+  
+  
+
+  
+
+  
+
+  
+
 
           </div>
         </div>
@@ -310,7 +479,7 @@
         <span id="busuanzi_container_site_uv" style='display:none'>
                 本站访客数<span id="busuanzi_value_site_uv"></span>人
         </span>
-        <script async src="/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <script async src="/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 </footer>
 <!--页面点击小红心-->

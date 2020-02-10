@@ -39,42 +39,64 @@
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      <% var defaultBg = '#4d4d4d'; %>
-<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
+      
+<div class="overlay" style="background: #4d4d4d"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="<%=theme.root%>" class="profilepic">
-			<img src="<%=theme.avatar%>" class="js-avatar">
+		<a href="/" class="profilepic">
+			<img src="/assets/head.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
+		  <h1 class="header-author"><a href="/">LYQ</a></h1>
 		</hgroup>
-		<% if (theme.subtitle){ %>
-		<p class="header-subtitle"><%=theme.subtitle%></p>
-		<%}%>
+		
+		<p class="header-subtitle">STEP BY STEP</p>
+		
 
 		<nav class="header-menu">
 			<ul>
-			<% for (var i in theme.menu){ %>
-				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
-	        <%}%>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+	        
+				<li><a href="/tags/study/">STUDY</a></li>
+	        
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 <%=site.posts.length%>
+                    总文章数 20
                 </nav>
 		<nav class="header-smart-menu">
-    		<% for (var i in theme.smart_menu){ %>
-    			<% if(theme.smart_menu[i]){ %>
-    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
-    			<% } %>
-            <%}%>
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
-				<% for (var i in theme.subnav){ %>
-					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
-		        <%}%>
+				
+					<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
+		        
 			</div>
 		</nav>
 	</header>		
@@ -152,1344 +174,870 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
+    <article id="post-字符设备及应用程序配合使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    <% if (post.link || post.title){ %>
+    
       <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/09/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8/">字符设备及应用程序配合使用</a>
+    </h1>
+  
 
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      <% } %>
+        
+        
+<a href="/2020/02/09/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+  	<time datetime="2020-02-09T10:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-09</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux内核——字符设备与应用程序的数据交换"><a href="#Linux内核——字符设备与应用程序的数据交换" class="headerlink" title="Linux内核——字符设备与应用程序的数据交换"></a>Linux内核——字符设备与应用程序的数据交换</h1><hr>
+        
+          <a class="article-more-a" href="/2020/02/09/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/09/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-编写字符设备小Demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/">编写字符设备小Demo</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/" class="archive-article-date">
+  	<time datetime="2020-02-09T07:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-09</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Linux内核——字符设备"><a href="#Linux内核——字符设备" class="headerlink" title="Linux内核——字符设备"></a>Linux内核——字符设备</h1><hr>
+        
+          <a class="article-more-a" href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-编写内核模块小Demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/">编写内核模块小Demo</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/" class="archive-article-date">
+  	<time datetime="2020-02-08T03:15:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="编写Linux内核模块的demo及注意事项"><a href="#编写Linux内核模块的demo及注意事项" class="headerlink" title="编写Linux内核模块的demo及注意事项"></a>编写Linux内核模块的demo及注意事项</h1><hr>
+        
+          <a class="article-more-a" href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Ubuntu-Install-SourceInsight" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/08/Ubuntu-Install-SourceInsight/">Ubuntu-Install-SourceInsight</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/02/08/Ubuntu-Install-SourceInsight/" class="archive-article-date">
+  	<time datetime="2020-02-08T01:34:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ubuntu16-04下安装内核源码阅读神器Source-Insight步骤"><a href="#Ubuntu16-04下安装内核源码阅读神器Source-Insight步骤" class="headerlink" title="Ubuntu16.04下安装内核源码阅读神器Source Insight步骤"></a>Ubuntu16.04下安装内核源码阅读神器Source Insight步骤</h1><hr>
+        
+          <a class="article-more-a" href="/2020/02/08/Ubuntu-Install-SourceInsight/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/02/08/Ubuntu-Install-SourceInsight/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-WebAPI-User" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/22/WebAPI-User/">WebAPI-User</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/01/22/WebAPI-User/" class="archive-article-date">
+  	<time datetime="2020-01-22T05:05:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Web-API-协议"><a href="#Web-API-协议" class="headerlink" title="Web API 协议"></a>Web API 协议</h1><hr>
+        
+          <a class="article-more-a" href="/2020/01/22/WebAPI-User/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">API</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/22/WebAPI-User/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-InterviewQuestionYNT" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/17/InterviewQuestionYNT/">InterviewQuestionYNT</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/01/17/InterviewQuestionYNT/" class="archive-article-date">
+  	<time datetime="2020-01-17T10:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Summary-of-minor-interview-problems"><a href="#Summary-of-minor-interview-problems" class="headerlink" title="Summary of minor interview problems"></a>Summary of minor interview problems</h1><hr>
+        
+          <a class="article-more-a" href="/2020/01/17/InterviewQuestionYNT/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">interview</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/17/InterviewQuestionYNT/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-串口编程Demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/">串口编程Demo</a>
+    </h1>
+  
+
+        
+        
+<a href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/" class="archive-article-date">
+  	<time datetime="2020-01-01T08:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-01</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="在Linux上学习串口编程"><a href="#在Linux上学习串口编程" class="headerlink" title="在Linux上学习串口编程"></a>在Linux上学习串口编程</h2><hr>
+        
+          <a class="article-more-a" href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">UART</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SQL初探" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/">SQL初探</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/" class="archive-article-date">
+  	<time datetime="2019-12-27T06:20:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-27</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="SQLite-初探"><a href="#SQLite-初探" class="headerlink" title="SQLite 初探"></a>SQLite 初探</h2><hr>
+        
+          <a class="article-more-a" href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Qt多媒体播放器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/26/Qt%E5%A4%9A%E5%AA%92%E4%BD%93%E6%92%AD%E6%94%BE%E5%99%A8/">Qt多媒体播放器</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/12/26/Qt%E5%A4%9A%E5%AA%92%E4%BD%93%E6%92%AD%E6%94%BE%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2019-12-26T06:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基于mplayer的多媒体播放器"><a href="#基于mplayer的多媒体播放器" class="headerlink" title="基于mplayer的多媒体播放器"></a>基于mplayer的多媒体播放器</h2><hr>
+        
+          <a class="article-more-a" href="/2019/12/26/Qt%E5%A4%9A%E5%AA%92%E4%BD%93%E6%92%AD%E6%94%BE%E5%99%A8/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QT</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/26/Qt%E5%A4%9A%E5%AA%92%E4%BD%93%E6%92%AD%E6%94%BE%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
 
-
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
-
-  
-    <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    <% if (post.link || post.title){ %>
-      <header class="article-header">
-        <%- partial('post/title', {class_name: 'article-title'}) %>
-        <% if (!post.noDate){ %>
-        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
-        <% } %>
-      </header>
-    <% } %>
-    <div class="article-entry" itemprop="articleBody">
-      <% if (post.excerpt && index){ %>
-        <%- post.excerpt %>
-        <% if (theme.excerpt_link) { %>
-          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
-        <% } %>
-      <% } else { %>
-        <%- post.content %>
-      <% } %>
-
-      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    <% if(theme.alipay) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.alipay%>">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    <% } %>
-                    <% if(theme.weixin) {%>
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="<%= theme.weixin%>">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    <% } %>
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-      <% } %>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Qt-Process-Demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/21/Qt-Process-Demo/">Qt Process Demo</a>
+    </h1>
+  
+
+        
+        
+<a href="/2019/12/21/Qt-Process-Demo/" class="archive-article-date">
+  	<time datetime="2019-12-21T08:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
+</a>
+
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Qt上进程的使用"><a href="#Qt上进程的使用" class="headerlink" title="Qt上进程的使用"></a>Qt上进程的使用</h2><hr>
+        
+          <a class="article-more-a" href="/2019/12/21/Qt-Process-Demo/#more">more >></a>
+        
+      
+
+      
     </div>
     <div class="article-info article-info-index">
-      <%if(post.top){%>
+      
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      <% } %>
-      <%- partial('post/tag') %>
-      <%- partial('post/category') %>
-      <% if (index && theme.show_all_link){ %>
-        <p class="article-more-link">
-          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
-        </p>
-      <% } %>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">QT</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-      <% if (!index && theme.share_jia){ %>
-        <%- partial('post/share') %>
-      <% } %>
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/21/Qt-Process-Demo/">展开全文 >></a>
+        </p>
+      
+
+      
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-<% if (!index){ %>
-  <%- partial('post/nav') %>
-<% } %>
-<%- partial('_partial/aside') %>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
 
 
-<% if (!index && post.comments){ %>
-  <% if (theme.duoshuo){ %>
-  <%- partial('post/duoshuo', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-  
-  <% if (theme.wangyiyun){ %>
-  <%- partial('post/wangyiyun', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
 
-  <% if (theme.changyan_appid && theme.changyan_conf){ %>
-  <%- partial('post/changyan', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-
-  <% if (theme.disqus || config.disqus_shortname){ %>
-    <section id="comments">
-      <div id="disqus_thread"></div>
-        <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function() {
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
-    </section>
-  <% } %>
-
-  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
-  <%- partial('post/gitment', {
-      key: post.slug,
-      title: post.title,
-      url: config.url+url_for(post.path)
-    }) %>
-  <% } %>
-<% } %>
 
   
   
@@ -1522,7 +1070,7 @@
         <span id="busuanzi_container_site_uv" style='display:none'>
                 本站访客数<span id="busuanzi_value_site_uv"></span>人
         </span>
-        <script async src="/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <script async src="/busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
   
 </footer>
 <!--页面点击小红心-->
