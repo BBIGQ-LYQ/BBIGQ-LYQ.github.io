@@ -176,197 +176,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-WebAPI-User" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
+    <% if (post.link || post.title){ %>
       <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      WebAPI-User
-    </h1>
-  
-
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2020/01/22/WebAPI-User/" class="archive-article-date">
-  	<time datetime="2020-01-22T05:05:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
-</a>
-
+        <%- partial('post/title', {class_name: 'article-title'}) %>
+        <% if (!post.noDate){ %>
+        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
         <!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">773字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">2分</span>
-      </span>
-    </span>
-</div>
-
-          
+        <% if(theme.word_count && !post.no_word_count){%>
+          <%- partial('post/word') %>
+          <% } %>
         <!-- 添加完成 -->
-        
+        <% } %>
       </header>
-    
+    <% } %>
     <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Web-API-协议"><a href="#Web-API-协议" class="headerlink" title="Web API 协议"></a>Web API 协议</h1><hr>
-<a id="more"></a>
-<hr>
-<h2 id="Web-API一般采用HTTP作为底层协议"><a href="#Web-API一般采用HTTP作为底层协议" class="headerlink" title="Web API一般采用HTTP作为底层协议"></a>Web API一般采用HTTP作为底层协议</h2><blockquote>
-<p>HTTP 请求机制如下：</p>
-</blockquote>
-<ul>
-<li>1:客户端向服务器发送一个请求；</li>
-<li>2：服务器给客户端一个响应，告诉客户端是否可以完成它请求的工作；</li>
-</ul>
-<hr>
-<h3 id="HTTP协议包含的内容："><a href="#HTTP协议包含的内容：" class="headerlink" title="HTTP协议包含的内容："></a>HTTP协议包含的内容：</h3><ul>
-<li>1：URL(API调用地址)       —&gt; <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a></li>
-<li>2：Method(请求方式)       —&gt; POST/GET/PUT/…</li>
-<li>3：Header(请求头)         —&gt; User-Agent/认证信息等等</li>
-<li>4：Body(请求体)           —&gt; Data</li>
-</ul>
-<hr>
-<h4 id="请求方式Method："><a href="#请求方式Method：" class="headerlink" title="请求方式Method："></a>请求方式Method：</h4><ul>
-<li>GET：请求服务器获取一个资源</li>
-<li>POST：请求雾浮起创建要给新的资源</li>
-<li>PUT：请求服务器编辑或者更新一个已经存在的资源</li>
-<li>DELETE：请求服务器删除一个资源</li>
-</ul>
-<hr>
-<h4 id="请求头-Header"><a href="#请求头-Header" class="headerlink" title="请求头(Header)"></a>请求头(Header)</h4><ul>
-<li>提供了请求的元信息，是一个简单的项目列表，其中有客户端发送请求的时间和请求大小、身份认证等信息</li>
-</ul>
-<hr>
-<h4 id="请求体-Body"><a href="#请求体-Body" class="headerlink" title="请求体(Body)"></a>请求体(Body)</h4><ul>
-<li>包含了客户端希望发送给服务器的数据</li>
-</ul>
-<hr>
-<h2 id="服务端向客户端返回内容"><a href="#服务端向客户端返回内容" class="headerlink" title="服务端向客户端返回内容"></a>服务端向客户端返回内容</h2><blockquote>
-<ul>
-<li>当成功调用API后，除了返回数据外，还会包含一个状态码，处理成功返回的2xx：</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="center">HTTP状态码</th>
-<th align="center">语义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">200 OK-[GET]</td>
-<td align="center">服务器成功返回用户请求数据</td>
-</tr>
-<tr>
-<td align="center">201 CREATED-[POST/PUT/PATCH]</td>
-<td align="center">用户新建或修改数据成功</td>
-</tr>
-<tr>
-<td align="center">202 Accepted-[*]</td>
-<td align="center">表示一个请求已经进入后台排队(异步任务)</td>
-</tr>
-<tr>
-<td align="center">204 NO CONTENT-[DELETE]</td>
-<td align="center">用户删除数据成功</td>
-</tr>
-</tbody></table>
-<hr>
-<blockquote>
-<ul>
-<li>API未调用成功，则返回错误码。服务器错误码是5xx，表示服务不可用（此时一般建议使用重试或者联系商品页面的API服务商）</li>
-</ul>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="center">错误代码</th>
-<th align="center">HTTP状态码</th>
-<th align="center">语义</th>
-<th align="center">解决方案</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Internal</td>
-<td align="center">500</td>
-<td align="center">API网关内部错误</td>
-<td align="center">建议重试</td>
-</tr>
-<tr>
-<td align="center">Failed To Invoke Backend Service</td>
-<td align="center">500</td>
-<td align="center">底层服务错误</td>
-<td align="center">API提供者底层服务错误，建议重试</td>
-</tr>
-<tr>
-<td align="center">Service Unavailable</td>
-<td align="center">503</td>
-<td align="center">服务不可用</td>
-<td align="center">建议稍后重试</td>
-</tr>
-<tr>
-<td align="center">Async Service</td>
-<td align="center">504</td>
-<td align="center">后端服务超市</td>
-<td align="center">建议稍后重试</td>
-</tr>
-</tbody></table>
-<blockquote>
-<ul>
-<li>客户端错误码一般为4xx类型，种类最多，其中主要是参数错误、签名错误、请求方式有误或者被流控限制等，这里就不一一阐述了</li>
-</ul>
-</blockquote>
-<p>需要查错误码表，可以看这里<a href="https://help.aliyun.com/document_detail/43906.html" target="_blank" rel="noopener" title="aliyun错误码表">aliyun错误码表</a>。</p>
-<p><strong><em>注意：有些API错误码是用户自己添加的，根据不同的提供商，有不同的错误码</em></strong></p>
-<h2 id="返回数据格式"><a href="#返回数据格式" class="headerlink" title="返回数据格式"></a>返回数据格式</h2><blockquote>
-<p>一般返回的数据格式为JSON，部分为XML格式的</p>
-</blockquote>
-<hr>
-<h2 id="API简单身份认证-APPCODE方式"><a href="#API简单身份认证-APPCODE方式" class="headerlink" title="API简单身份认证(APPCODE方式)"></a>API简单身份认证(APPCODE方式)</h2><p>认证方式主要根据前面所说的Header中包含的信息<br>可以通过APPCODE的方式，实现到被调用接口的身份认证，获取访问相关API的调用权限</p>
-<blockquote>
-<p>使用方法：</p>
-</blockquote>
-<ul>
-<li>请求Header中添加的Authorization字段</li>
-<li>配置Authorization字段的值为”APPCODE + 半角空格 + APPCODE值”</li>
-</ul>
-<blockquote>
-<p>格式：</p>
-</blockquote>
-<ul>
-<li>Authorization:APPCODE AppCode值</li>
-</ul>
-<blockquote>
-<p>事例：</p>
-</blockquote>
-<ul>
-<li>Authorization:APPCODE xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</li>
-</ul>
-<h2 id="API签名认证-AppKey-amp-AppSecret"><a href="#API签名认证-AppKey-amp-AppSecret" class="headerlink" title="API签名认证(AppKey &amp; AppSecret)"></a>API签名认证(AppKey &amp; AppSecret)</h2><p>AppKey和AppSecret相当于当前账户的另外一套账号和密码机制，在云市场购买API之后，就可以在控制台找到对应的AppKey和AppSecret。</p>
-<hr>
-<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+      <% if (post.excerpt && index){ %>
+        <%- post.excerpt %>
+        <% if (theme.excerpt_link) { %>
+          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
+        <% } %>
+      <% } else { %>
+        <%- post.content %>
+      <% } %>
 
-      
-
-      
+      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -376,20 +212,20 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
-                    
+                    <% if(theme.alipay) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/aliyun.png">
+                      <img class="reward-img" src="<%= theme.alipay%>">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    
-                    
+                    <% } %>
+                    <% if(theme.weixin) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/weixin.png">
+                      <img class="reward-img" src="<%= theme.weixin%>">
                       <span class="reward-type">微信</span>
                     </div>
-                    
+                    <% } %>
                   </div>
                 </span>
               </span>
@@ -397,141 +233,87 @@
           </div>
           </a>
         </div>
-      
+      <% } %>
     </div>
     <div class="article-info article-info-index">
-      
+      <%if(post.top){%>
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">API</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      <% } %>
+      <%- partial('post/tag') %>
+      <%- partial('post/category') %>
+      <% if (index && theme.show_all_link){ %>
+        <p class="article-more-link">
+          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
+        </p>
+      <% } %>
 
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/22/WebAPI-User/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
+      <% if (!index && theme.share_jia){ %>
+        <%- partial('post/share') %>
+      <% } %>
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/02/08/Ubuntu-Install-SourceInsight/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Ubuntu-Install-SourceInsight
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/01/17/InterviewQuestionYNT/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">InterviewQuestionYNT</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
+<% if (!index){ %>
+  <%- partial('post/nav') %>
+<% } %>
+<%- partial('_partial/aside') %>
 
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+<% if (!index && post.comments){ %>
+  <% if (theme.duoshuo){ %>
+  <%- partial('post/duoshuo', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
   
-  
-  
+  <% if (theme.wangyiyun){ %>
+  <%- partial('post/wangyiyun', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
 
-  
+  <% if (theme.changyan_appid && theme.changyan_conf){ %>
+  <%- partial('post/changyan', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
 
-  
+  <% if (theme.disqus || config.disqus_shortname){ %>
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
 
-  
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+    </section>
+  <% } %>
 
+  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
+  <%- partial('post/gitment', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
+<% } %>
 
           </div>
         </div>
@@ -656,11 +438,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">API</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">API</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -724,7 +506,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+              <a href="https://lokiwin.github.io/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄海润</a>
             </li>
           
             <li class="search-li">
