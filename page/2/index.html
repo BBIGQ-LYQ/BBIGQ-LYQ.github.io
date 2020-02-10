@@ -39,64 +39,42 @@
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      
-<div class="overlay" style="background: #4d4d4d"></div>
+      <% var defaultBg = '#4d4d4d'; %>
+<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			<img src="/assets/head.jpg" class="js-avatar">
+		<a href="<%=theme.root%>" class="profilepic">
+			<img src="<%=theme.avatar%>" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">LYQ</a></h1>
+		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
 		</hgroup>
-		
-		<p class="header-subtitle">STEP BY STEP</p>
-		
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
 
 		<nav class="header-menu">
 			<ul>
-			
-				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
-	        
-				<li><a href="/tags/study/">STUDY</a></li>
-	        
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 20
+                    总文章数 <%=site.posts.length%>
                 </nav>
 		<nav class="header-smart-menu">
-    		
-    			
-    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
-    			
-            
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+    			<% } %>
+            <%}%>
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
-				
-					<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
-		        
-					<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
-		        
-					<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
-		        
-					<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
-		        
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
+		        <%}%>
 			</div>
 		</nav>
 	</header>		
@@ -185,6 +163,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/21/QtThreadDemo/" class="archive-article-date">
   	<time datetime="2019-12-21T08:18:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
@@ -192,9 +173,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Qt中使用线程小demo"><a href="#Qt中使用线程小demo" class="headerlink" title="Qt中使用线程小demo"></a>Qt中使用线程小demo</h2><hr>
@@ -273,6 +251,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/21/QT-ADD-Third-party-libraries/" class="archive-article-date">
   	<time datetime="2019-12-21T07:22:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
@@ -280,9 +261,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="QT上使用第三方库的教程，附带demo"><a href="#QT上使用第三方库的教程，附带demo" class="headerlink" title="QT上使用第三方库的教程，附带demo"></a>QT上使用第三方库的教程，附带demo</h2><hr>
@@ -361,6 +339,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/21/BAT-API-DEMO/" class="archive-article-date">
   	<time datetime="2019-12-21T06:43:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
@@ -368,9 +349,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="百度API接口的使用小demo"><a href="#百度API接口的使用小demo" class="headerlink" title="百度API接口的使用小demo"></a>百度API接口的使用小demo</h2><hr>
@@ -449,6 +427,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/21/Qt-HTTP-Get-Weather-Msg/" class="archive-article-date">
   	<time datetime="2019-12-21T02:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
@@ -456,9 +437,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="使用QT的接口实现HTTP请求获取天气信息"><a href="#使用QT的接口实现HTTP请求获取天气信息" class="headerlink" title="使用QT的接口实现HTTP请求获取天气信息"></a>使用QT的接口实现HTTP请求获取天气信息</h2><hr>
@@ -537,6 +515,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/19/hello-world/" class="archive-article-date">
   	<time datetime="2019-12-19T09:28:23.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
@@ -544,9 +525,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
@@ -616,6 +594,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/19/Qt-JSON/" class="archive-article-date">
   	<time datetime="2019-12-19T09:09:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
@@ -623,9 +604,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Qt-中的JSON-运用与解析"><a href="#Qt-中的JSON-运用与解析" class="headerlink" title="Qt 中的JSON 运用与解析"></a>Qt 中的JSON 运用与解析</h2><hr>
@@ -704,6 +682,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/19/Qt-HTTP-demo/" class="archive-article-date">
   	<time datetime="2019-12-19T08:17:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
@@ -711,9 +692,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="基于-Qt-的-HTTP-demo"><a href="#基于-Qt-的-HTTP-demo" class="headerlink" title="基于 Qt 的 HTTP demo"></a>基于 Qt 的 HTTP demo</h2><hr>
@@ -792,6 +770,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/19/QTcpserver/" class="archive-article-date">
   	<time datetime="2019-12-19T06:30:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
@@ -799,9 +780,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="基于-QTcpserver-的-demo"><a href="#基于-QTcpserver-的-demo" class="headerlink" title="基于 QTcpserver 的 demo"></a>基于 QTcpserver 的 demo</h2><hr>
@@ -880,6 +858,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/19/QtNetworkdemo/" class="archive-article-date">
   	<time datetime="2019-12-19T05:15:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
@@ -887,9 +868,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="网络编程"><a href="#网络编程" class="headerlink" title="网络编程"></a>网络编程</h2><hr>
@@ -968,6 +946,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/18/Qt%E5%B0%8F%E7%9B%B8%E5%86%8C/" class="archive-article-date">
   	<time datetime="2019-12-18T12:20:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-18</time>
@@ -975,9 +956,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="QT自带的窗体使用"><a href="#QT自带的窗体使用" class="headerlink" title="QT自带的窗体使用"></a>QT自带的窗体使用</h2><hr>
@@ -1153,11 +1131,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">interview</a>
+                <a href="javascript:void(0)" class="js-tag color3">QT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">QT</a>
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1173,11 +1151,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
             
             <div class="clearfix"></div>

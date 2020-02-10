@@ -39,64 +39,42 @@
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      
-<div class="overlay" style="background: #4d4d4d"></div>
+      <% var defaultBg = '#4d4d4d'; %>
+<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			<img src="/assets/head.jpg" class="js-avatar">
+		<a href="<%=theme.root%>" class="profilepic">
+			<img src="<%=theme.avatar%>" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">LYQ</a></h1>
+		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
 		</hgroup>
-		
-		<p class="header-subtitle">STEP BY STEP</p>
-		
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
 
 		<nav class="header-menu">
 			<ul>
-			
-				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
-	        
-				<li><a href="/tags/study/">STUDY</a></li>
-	        
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 20
+                    总文章数 <%=site.posts.length%>
                 </nav>
 		<nav class="header-smart-menu">
-    		
-    			
-    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
-    			
-            
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+    			<% } %>
+            <%}%>
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
-				
-					<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
-		        
-					<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
-		        
-					<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
-		        
-					<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
-		        
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
+		        <%}%>
 			</div>
 		</nav>
 	</header>		
@@ -185,6 +163,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/02/09/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8/" class="archive-article-date">
   	<time datetime="2020-02-09T10:15:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-09</time>
@@ -192,9 +173,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Linux内核——字符设备与应用程序的数据交换"><a href="#Linux内核——字符设备与应用程序的数据交换" class="headerlink" title="Linux内核——字符设备与应用程序的数据交换"></a>Linux内核——字符设备与应用程序的数据交换</h1><hr>
@@ -273,6 +251,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/" class="archive-article-date">
   	<time datetime="2020-02-09T07:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-09</time>
@@ -280,9 +261,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Linux内核——字符设备"><a href="#Linux内核——字符设备" class="headerlink" title="Linux内核——字符设备"></a>Linux内核——字符设备</h1><hr>
@@ -361,6 +339,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/" class="archive-article-date">
   	<time datetime="2020-02-08T03:15:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
@@ -368,9 +349,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="编写Linux内核模块的demo及注意事项"><a href="#编写Linux内核模块的demo及注意事项" class="headerlink" title="编写Linux内核模块的demo及注意事项"></a>编写Linux内核模块的demo及注意事项</h1><hr>
@@ -449,6 +427,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/02/08/Ubuntu-Install-SourceInsight/" class="archive-article-date">
   	<time datetime="2020-02-08T01:34:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
@@ -456,9 +437,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Ubuntu16-04下安装内核源码阅读神器Source-Insight步骤"><a href="#Ubuntu16-04下安装内核源码阅读神器Source-Insight步骤" class="headerlink" title="Ubuntu16.04下安装内核源码阅读神器Source Insight步骤"></a>Ubuntu16.04下安装内核源码阅读神器Source Insight步骤</h1><hr>
@@ -533,6 +511,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/01/22/WebAPI-User/" class="archive-article-date">
   	<time datetime="2020-01-22T05:05:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-22</time>
@@ -540,9 +521,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Web-API-协议"><a href="#Web-API-协议" class="headerlink" title="Web API 协议"></a>Web API 协议</h1><hr>
@@ -621,6 +599,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/01/17/InterviewQuestionYNT/" class="archive-article-date">
   	<time datetime="2020-01-17T10:41:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-17</time>
@@ -628,9 +609,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="Summary-of-minor-interview-problems"><a href="#Summary-of-minor-interview-problems" class="headerlink" title="Summary of minor interview problems"></a>Summary of minor interview problems</h1><hr>
@@ -709,6 +687,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2020/01/01/%E4%B8%B2%E5%8F%A3%E7%BC%96%E7%A8%8BDemo/" class="archive-article-date">
   	<time datetime="2020-01-01T08:35:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-01</time>
@@ -716,9 +697,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="在Linux上学习串口编程"><a href="#在Linux上学习串口编程" class="headerlink" title="在Linux上学习串口编程"></a>在Linux上学习串口编程</h2><hr>
@@ -797,6 +775,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/" class="archive-article-date">
   	<time datetime="2019-12-27T06:20:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-27</time>
@@ -804,9 +785,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="SQLite-初探"><a href="#SQLite-初探" class="headerlink" title="SQLite 初探"></a>SQLite 初探</h2><hr>
@@ -885,6 +863,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/26/Qt%E5%A4%9A%E5%AA%92%E4%BD%93%E6%92%AD%E6%94%BE%E5%99%A8/" class="archive-article-date">
   	<time datetime="2019-12-26T06:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
@@ -892,9 +873,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="基于mplayer的多媒体播放器"><a href="#基于mplayer的多媒体播放器" class="headerlink" title="基于mplayer的多媒体播放器"></a>基于mplayer的多媒体播放器</h2><hr>
@@ -973,6 +951,9 @@
     </h1>
   
 
+        <!--显示阅读次数-->
+        
+        <!--显示阅读次数完毕-->
         
         <a href="/2019/12/21/Qt-Process-Demo/" class="archive-article-date">
   	<time datetime="2019-12-21T08:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
@@ -980,9 +961,6 @@
         
       </header>
     
-        <!--显示阅读次数-->
-        
-        <!--显示阅读次数完毕-->
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Qt上进程的使用"><a href="#Qt上进程的使用" class="headerlink" title="Qt上进程的使用"></a>Qt上进程的使用</h2><hr>
@@ -1158,11 +1136,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">interview</a>
+                <a href="javascript:void(0)" class="js-tag color3">QT</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">QT</a>
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1178,11 +1156,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
             
             <div class="clearfix"></div>
