@@ -2,37 +2,44 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
+  <%
+  var title = page.title;
+
+  if (is_archive()){
+    title = 'Archives';
+
+    if (is_month()){
+      title += ': ' + page.year + '/' + page.month;
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = 'Category: ' + page.category;
+  } else if (is_tag()){
+    title = 'Tag: ' + page.tag;
+  }
+  %>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/12 | BBIGQ PERSONAL BLOG</title>
+  <link rel="dns-prefetch" href="<%= config.url %>">
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="大大棋的学习历程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="BBIGQ PERSONAL BLOG">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2019&#x2F;12&#x2F;index.html">
-<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
-<meta property="og:description" content="大大棋的学习历程">
-<meta property="article:author" content="LYQ">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
+  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
+  <% if (theme.rss){ %>
+    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+  <% } %>
+  <% if (theme.favicon){ %>
+    <link rel="icon" href="/img/icon.ico">
+  <% } %>
+  <%- partial('css') %>
   <style type="text/css">
-  
+  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
     #container.show {
-      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
     }
   </style>
-  
-
-  
-
+  <%- partial('google-analytics') %>
+  <%- partial('baidu-analytics') %>
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body>
@@ -189,14 +196,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/27/SQL%E5%88%9D%E6%8E%A2/" class="archive-article-date">
+  	<time datetime="2019-12-27T06:20:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-27</time>
 </a>
 
         </div>
@@ -238,14 +240,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/26/Qt%E5%A4%9A%E5%AA%92%E4%BD%93%E6%92%AD%E6%94%BE%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2019-12-26T06:53:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-26</time>
 </a>
 
         </div>
@@ -287,14 +284,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/21/Qt-Process-Demo/" class="archive-article-date">
+  	<time datetime="2019-12-21T08:59:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
 </a>
 
         </div>
@@ -336,14 +328,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/21/QtThreadDemo/" class="archive-article-date">
+  	<time datetime="2019-12-21T08:18:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
 </a>
 
         </div>
@@ -385,14 +372,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/21/QT-ADD-Third-party-libraries/" class="archive-article-date">
+  	<time datetime="2019-12-21T07:22:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
 </a>
 
         </div>
@@ -434,14 +416,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/21/BAT-API-DEMO/" class="archive-article-date">
+  	<time datetime="2019-12-21T06:43:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
 </a>
 
         </div>
@@ -483,14 +460,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/21/Qt-HTTP-Get-Weather-Msg/" class="archive-article-date">
+  	<time datetime="2019-12-21T02:13:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-21</time>
 </a>
 
         </div>
@@ -532,14 +504,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/19/hello-world/" class="archive-article-date">
+  	<time datetime="2019-12-19T09:28:23.460Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
 
         </div>
@@ -577,14 +544,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/19/Qt-JSON/" class="archive-article-date">
+  	<time datetime="2019-12-19T09:09:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
 
         </div>
@@ -626,14 +588,9 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-<% } %>
-<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
-  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+	      	
+<a href="/2019/12/19/Qt-HTTP-demo/" class="archive-article-date">
+  	<time datetime="2019-12-19T08:17:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-12-19</time>
 </a>
 
         </div>
@@ -687,14 +644,14 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+    		&copy; 2020 LYQ
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
-  <% if (theme.busuanzi && theme.busuanzi.enable){ %>
+  
         <!-- 不蒜子统计 -->
         <span id="busuanzi_container_site_pv">
                 本站总访问量<span id="busuanzi_value_site_pv"></span>次
@@ -704,7 +661,7 @@
                 本站访客数<span id="busuanzi_value_site_uv"></span>人
         </span>
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <% } %>
+  
 </footer>
 <!--页面点击小红心-->
 <script type="text/javascript" src="/love.js"></script>
@@ -807,11 +764,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
               <li class="article-tag-list-item">

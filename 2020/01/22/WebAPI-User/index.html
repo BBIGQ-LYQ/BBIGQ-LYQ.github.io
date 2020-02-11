@@ -2,41 +2,44 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
+  <%
+  var title = page.title;
+
+  if (is_archive()){
+    title = 'Archives';
+
+    if (is_month()){
+      title += ': ' + page.year + '/' + page.month;
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = 'Category: ' + page.category;
+  } else if (is_tag()){
+    title = 'Tag: ' + page.tag;
+  }
+  %>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>WebAPI-User | BBIGQ PERSONAL BLOG</title>
+  <link rel="dns-prefetch" href="<%= config.url %>">
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Web API 协议">
-<meta property="og:type" content="article">
-<meta property="og:title" content="WebAPI-User">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;22&#x2F;WebAPI-User&#x2F;index.html">
-<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
-<meta property="og:description" content="Web API 协议">
-<meta property="article:published_time" content="2020-01-22T05:05:52.000Z">
-<meta property="article:modified_time" content="2020-02-09T07:12:15.830Z">
-<meta property="article:author" content="LYQ">
-<meta property="article:tag" content="study">
-<meta property="article:tag" content="API">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
+  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
+  <% if (theme.rss){ %>
+    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+  <% } %>
+  <% if (theme.favicon){ %>
+    <link rel="icon" href="/img/icon.ico">
+  <% } %>
+  <%- partial('css') %>
   <style type="text/css">
-  
+  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
     #container.show {
-      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
     }
   </style>
-  
-
-  
-
+  <%- partial('google-analytics') %>
+  <%- partial('baidu-analytics') %>
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body>
@@ -322,14 +325,14 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+    		&copy; 2020 LYQ
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
-  <% if (theme.busuanzi && theme.busuanzi.enable){ %>
+  
         <!-- 不蒜子统计 -->
         <span id="busuanzi_container_site_pv">
                 本站总访问量<span id="busuanzi_value_site_pv"></span>次
@@ -339,7 +342,7 @@
                 本站访客数<span id="busuanzi_value_site_uv"></span>人
         </span>
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  <% } %>
+  
 </footer>
 <!--页面点击小红心-->
 <script type="text/javascript" src="/love.js"></script>
@@ -442,11 +445,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
               </li>
              
               <li class="article-tag-list-item">
