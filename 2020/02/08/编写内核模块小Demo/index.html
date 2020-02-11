@@ -180,176 +180,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-编写内核模块小Demo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
+    <% if (post.link || post.title){ %>
       <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      编写内核模块小Demo
-    </h1>
-  
-
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/" class="archive-article-date">
-  	<time datetime="2020-02-08T03:15:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
-</a>
-
+        <%- partial('post/title', {class_name: 'article-title'}) %>
+        <% if (!post.noDate){ %>
+        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
         <!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.6k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">11分</span>
-      </span>
-    </span>
-</div>
-
-          
+        <% if(theme.word_count && !post.no_word_count){%>
+          <%- partial('post/word') %>
+          <% } %>
         <!-- 添加完成 -->
-        
+        <% } %>
       </header>
-    
+    <% } %>
     <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="编写Linux内核模块的demo及注意事项"><a href="#编写Linux内核模块的demo及注意事项" class="headerlink" title="编写Linux内核模块的demo及注意事项"></a>编写Linux内核模块的demo及注意事项</h1><hr>
-<a id="more"></a>
-<hr>
-<blockquote>
-<p>什么是内核模块呢？</p>
-</blockquote>
-<p>首先内核是一个操作系统的最基础部分，它是一个向所有外部程序和硬件驱动提供一个插口的这么一个存在，然后内核模块就是对接这个抽口的模块。<br>内核又分了微内核和宏内核，宏内核又分为单内核和双内核。而<strong>Linux内核属于宏内核中的单内核，它汲取了微内核的思想和精华，故而提供了模块化机制，不仅实现了效率高，同时因为模块化的存在让其更加的便于维护和扩展。</strong></p>
-<blockquote>
-<p><strong><em>更多的内核相关信息可自行上网了解</em></strong></p>
-</blockquote>
-<p>驱动程序在内核中，都是独立的模块，例如LED驱动、蜂鸣器驱动，它们驱动之间没有相互的联系，可以通过应用程序将两个驱动联系在一起,例如以下的代码，LED驱动和蜂鸣器驱动各自都是一个独立的模块（module）。<br>内核模块编译成功后会生成一个 <strong>(*.ko)</strong>（kernel object）文件。</p>
-<blockquote>
-<p>当内核编写完成后，使用以下两个命令：</p>
-</blockquote>
-<p>加载内核模块</p>
-<pre><code>insmod *.ko</code></pre><p>卸载内核模块</p>
-<pre><code>rmmod *.ko</code></pre><p><strong>注意：驱动是安装在内存中正在运行的内核上。</strong></p>
-<p>应用程序代码结构和内核模块代码结构区别：<br>运行方法|C语言应用程序|内核模块<br>–|:–:|–<br>运行空间|用户空间|内核空间<br>出口|main|module_init函数指定<br>入口|-|module_exit函数指定<br>编译|gcc|Makefile<br>运行|./直接运行|insmod<br>退出|exit|rmmod</p>
-<hr>
-<h2 id="设计一个简单的内核demo"><a href="#设计一个简单的内核demo" class="headerlink" title="设计一个简单的内核demo"></a>设计一个简单的内核demo</h2><p><strong>默认已经下载好了Linux内核源码并且解压好。</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//入口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">myled_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"myled drvier init !\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//出口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function"><span class="built_in">exit</span> <span class="title">myled_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"myled drvier exit !\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(myled_init);    <span class="comment">//驱动程序的入口：insmod myled.ko调用module_init，module_init又会去调用myled_init函数。</span></span><br><span class="line">module_exit(myled_exit);    <span class="comment">//驱动程序的出口：rmmod myled调用module_exit，module_exit又会去调用myled_exit函数。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//模块描述</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"LYQ"</span>);               <span class="comment">//作者信息</span></span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"myled driver"</span>); <span class="comment">//模块功能说明</span></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);              <span class="comment">//许可证：驱动遵循GPL协议</span></span><br></pre></td></tr></table></figure>
-<hr>
-<blockquote>
-<p><strong>关键字详解</strong></p>
-</blockquote>
-<p>至此一个简单的内核模块的代码就完成了，当然这只是冰山一角。<br>代码中<code>__init</code>用在初始化函数，加上这个关键字代表往往是只调用一次，往后就不会再被调用了，那它的资源将会被释放。<br><code>__exit</code>关键字也一样，修饰清除退出函数，在退出函数被调用过后，立马释放资源。</p>
-<hr>
-<blockquote>
-<p><strong>相关函数详解</strong></p>
-</blockquote>
-<ul>
-<li>printk函数<ul>
-<li>在驱动开发当中，我们不能使用printf函数，只能使用printk函数，使用方法会跟printf函数相像，但是也有点不同。</li>
-<li>具体源码看<code>#include &lt;linux/kernel.h&gt;</code></li>
-<li>在源码中可见，printk函数存在优先级打印，可以查看<code>printk</code>优先级：<br><img src="/blogmat/printk01.png" alt=" "></li>
-<li>我们可以通过修改<code>printk</code>文件来获得需要的默认优先级输出<code>echo x x 1 7 &gt; /proc/sys/kernel/printk</code>,也可以在<code>printk</code>函数中添加优先级;  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printk(<span class="string">"&lt;3&gt;"</span><span class="string">"led drvier init\n"</span>);</span><br></pre></td></tr></table></figure>
-  也可以写为  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">printk(KERN_ERR<span class="string">"led drvier init\n"</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li>printk函数打印优先级的相关宏定义，在&lt;linux/printk.h&gt;当中能够找到<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_EMERG	<span class="meta-string">"&lt;0&gt;"</span>		<span class="comment">/* system is unusable			*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_ALERT	<span class="meta-string">"&lt;1&gt;"</span>		<span class="comment">/* action must be taken immediately	*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_CRIT	<span class="meta-string">"&lt;2&gt;"</span>		<span class="comment">/* critical conditions			*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_ERR	<span class="meta-string">"&lt;3&gt;"</span>		<span class="comment">/* error conditions			*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_WARNING	<span class="meta-string">"&lt;4&gt;"</span>		<span class="comment">/* warning conditions			*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_NOTICE	<span class="meta-string">"&lt;5&gt;"</span>		<span class="comment">/* normal but significant condition	*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_INFO	<span class="meta-string">"&lt;6&gt;"</span>		<span class="comment">/* informational			*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>	KERN_DEBUG	<span class="meta-string">"&lt;7&gt;"</span>		<span class="comment">/* debug-level messages			*/</span></span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<p><strong><em>注意：printk有一个缺点：<code>不支持浮点数打印</code></em></strong></p>
-<p>由此可见，应用程序和内核模块的源码的区别;</p>
-<hr>
-<h3 id="内核模块代码的编译"><a href="#内核模块代码的编译" class="headerlink" title="内核模块代码的编译"></a>内核模块代码的编译</h3><p>和应用程序不同，内核模块一般由Makefile来进行编译，关于Makefile的编写，可以阅读Documentation/kbuild/modules.txt，包含很多编译内核模块的操作步骤;具体如下：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">obj-m += myled.o</span><br><span class="line">KERNEL_DIR := /home/bbigq/6818GEC/kernel</span><br><span class="line">CROSS_COMPILE := /home/bbigq/6818GEC/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-</span><br><span class="line">PWD := <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"></span><br><span class="line"><span class="section">default:</span></span><br><span class="line">	<span class="variable">$(MAKE)</span> ARCH=arm CROSS_COMPILE=<span class="variable">$(CROSS_COMPILE)</span> -C <span class="variable">$(KERNEL_DIR)</span> M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm  *.o *.order .*.cmd  *.mod.c *.symvers .tmp_versions -rf</span><br></pre></td></tr></table></figure>
-<hr>
-<blockquote>
-<p><strong>Makefile详解：</strong></p>
-</blockquote>
-<p><code>obj-m+=myled.o</code><br>make的第一阶段将源程序编译为目标文件myled.o<br>make的第二阶段将myled.ko编译成一个模块，即myled.ko。</p>
-<p><code>KERNEL_DIR :=/home/bbigq/6818GEC/kernel</code><br>内核源码路径：查找编译所需的头文件、函数原型、Makefile…..</p>
-<p><code>CROSS_COMPILE:=/home/bbigq/6818GEC/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-</code><br>交叉编译工具，内核使用4.8版本进行编译，内核模块最好也是跟内核使用相同的编译工具</p>
-<p><code>PWD:=$(shell pwd)</code><br>当前内核模块源码路径</p>
-<p><code>$(MAKE) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) -C $(KERNEL_DIR) M=$(PWD) modules</code><br>使用make命令的时候，传递多个参数，并调用内核源码下的Makefie文件，使用该Makefile文件中的工具，将myled.o文件编译为一个内核模块myled.ko。</p>
-<p><code>rm  *.o *.order .*.cmd  *.mod.c *.symvers .tmp_versions -rf</code><br>删除过程文件及其他文件。</p>
-<p>编译完成之后，可以通过<code>modinfo</code>命令来查看驱动信息。<br><img src="/blogmat/modinfo.png" alt="modinfo命令"></p>
-<hr>
-<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><h3 id="内核模块的参数"><a href="#内核模块的参数" class="headerlink" title="内核模块的参数"></a>内核模块的参数</h3><p><code>内核支持:bool、charp（字符串指针）、short、int、long、ushort、uint、ulong类型，这些类型可以对应于整型、数组、字符串</code></p>
-<p>情景：当你需要编写一个串口驱动时，要求波特率等信息通过命令行输入;<br><code>led.c</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> baud = <span class="number">9600</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> port[<span class="number">4</span>]=&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> port_cnt=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">char</span> *name=<span class="string">"vcom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//通过以下宏定义来接收命令行的参数</span></span><br><span class="line">module_param(baud,<span class="keyword">int</span>,<span class="number">0644</span>); 			<span class="comment">//rw- r-- r--</span></span><br><span class="line">module_param_array(port,<span class="keyword">int</span>,&amp;port_cnt,<span class="number">0644</span>);	<span class="comment">//rw- r-- r--</span></span><br><span class="line">module_param(name,charp,<span class="number">0644</span>);			<span class="comment">//rw- r-- r--</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//入口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">led_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	printk(<span class="string">"led init\n"</span>);</span><br><span class="line">	</span><br><span class="line">	printk(<span class="string">"baud=%d\n"</span>,baud);</span><br><span class="line">	printk(<span class="string">"port=%d %d %d %d ,port_cnt=%d\n"</span>,port[<span class="number">0</span>],port[<span class="number">1</span>],port[<span class="number">2</span>],port[<span class="number">3</span>],port_cnt);</span><br><span class="line">	printk(<span class="string">"name=%s\n"</span>,name);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//出口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">led_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	printk(<span class="string">"led exit\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(led_init);</span><br><span class="line">module_exit(led_exit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//模块描述</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"LYQ"</span>);		        <span class="comment">//作者信息</span></span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"led driver"</span>);	<span class="comment">//模块功能说明</span></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);                  <span class="comment">//许可证：驱动遵循GPL协议</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><strong>关键函数详解</strong></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">module_param(name,type,perm)</span><br><span class="line">module_param_array(name,type,nump,perm)</span><br></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th align="center">函数名</th>
-<th align="center">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">name</td>
-<td align="center">变量的名字</td>
-</tr>
-<tr>
-<td align="center">type</td>
-<td align="center">变量或数组元素的类型</td>
-</tr>
-<tr>
-<td align="center">nump</td>
-<td align="center">保存数组元素个数的指针，可选。默认写NULL。</td>
-</tr>
-<tr>
-<td align="center">perm</td>
-<td align="center">在sysfs文件系统中对应的文件的权限属性，决定哪些用户能够传递哪些参数，如果该用户权限过低，则无法通过命令行传递参数给该内核模块。</td>
-</tr>
-</tbody></table>
-<p>在编译成功后，加载模块时，可以填写相应的参数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insmod led.ko baud&#x3D;115200 port&#x3D;1,2,3,4 name&#x3D;&quot;tcom&quot;</span><br></pre></td></tr></table></figure>
-<p>执行后返回信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">led init</span><br><span class="line">baud&#x3D;115200</span><br><span class="line">port&#x3D;1 2 3 4 ,port_cnt&#x3D;4</span><br><span class="line">name&#x3D;tcom</span><br></pre></td></tr></table></figure>
+      <% if (post.excerpt && index){ %>
+        <%- post.excerpt %>
+        <% if (theme.excerpt_link) { %>
+          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
+        <% } %>
+      <% } else { %>
+        <%- post.content %>
+      <% } %>
 
-<p>加载内核模块后，能够在/sys/module/led_drv/parameters/目录下看到对参数的访问权限。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#ls -l &#x2F;sys&#x2F;module&#x2F;led_drv&#x2F;parameters&#x2F;</span><br><span class="line">total 0</span><br><span class="line">-rw-r--r--    1 root     root          4096 Jan  1 02:06 baud</span><br><span class="line">-rw-r--r--    1 root     root          4096 Jan  1 02:06 name</span><br><span class="line">-rw-r--r--    1 root     root          4096 Jan  1 02:06 port</span><br></pre></td></tr></table></figure>
-
-<h3 id="编译多个内核模块"><a href="#编译多个内核模块" class="headerlink" title="编译多个内核模块"></a>编译多个内核模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">obj-m +&#x3D; led.o</span><br><span class="line">obj-m +&#x3D; sum.o</span><br><span class="line">KERNEL_DIR :&#x3D; &#x2F;home&#x2F;bbigq&#x2F;6818GEC&#x2F;kernel</span><br><span class="line">CROSS_COMPILE :&#x3D; &#x2F;home&#x2F;bbigq&#x2F;6818GEC&#x2F;prebuilts&#x2F;gcc&#x2F;linux-x86&#x2F;arm&#x2F;arm-eabi-4.8&#x2F;bin&#x2F;arm-eabi-</span><br><span class="line">PWD :&#x3D; $(shell pwd)</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">	$(MAKE) ARCH&#x3D;arm CROSS_COMPILE&#x3D;$(CROSS_COMPILE) -C $(KERNEL_DIR) M&#x3D;$(PWD) modules</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm  *.o *.order .*.cmd  *.mod.c *.symvers .tmp_versions -rf</span><br></pre></td></tr></table></figure>
-
-<h3 id="内核符号表——全局共享函数接口与变量"><a href="#内核符号表——全局共享函数接口与变量" class="headerlink" title="内核符号表——全局共享函数接口与变量"></a>内核符号表——全局共享函数接口与变量</h3><p><img src="/blogmat/kernelsymbol.png" alt="内核符号表"><br>内核符号表是记录了内核中所有的符号（函数、全局变量）的地址及名字，这个符号表被嵌入到内核镜像中，使得内核可以在运行过程中随时获得一个符号地址对应的符号名。<br>故而每加载一个内核模块后，该内核模块中的所有的函数、全局变量等信息都会保存到内核符号表中，比如A内核模块调用了B内核模块中声明的函数时，A内核模块就会到内核符号表中查找，这个时候会用到以下两个<code>宏定义</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EXPORT_SYMBOL（符号名）：导出的符号可以给其他模块使用。</span><br><span class="line">EXPORT_SYMBOL_GPL（符号名）：导出的符号只能让符合GPL协议的模块才能使用。</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>示例代码<br>1：A模块lcd.c</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> share;                       <span class="comment">//申明B模块中的全局变量</span></span><br><span class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">add_return_sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span>;<span class="comment">//申明B模块中的函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//入口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">gec6818_led_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	printk(<span class="string">"&lt;3&gt;"</span><span class="string">"gec6818 led init\n"</span>);</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"add_return_sum(10,11) = %d\n"</span>, add_return_sum(<span class="number">10</span>, <span class="number">11</span>));</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//出口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">gec6818_led_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	printk(<span class="string">"&lt;4&gt;"</span><span class="string">"gec6818 led exit\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//驱动程序的出入口</span></span><br><span class="line">module_init(gec6818_led_init);</span><br><span class="line">module_exit(gec6818_led_exit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//模块描述</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"LYQ"</span>);			<span class="comment">//作者信息</span></span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"study kernal first code test"</span>);<span class="comment">//模块功能说明</span></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);			<span class="comment">//许可证：驱动遵循GPL协议</span></span><br></pre></td></tr></table></figure>
-<p>2：B模块sum.c文件</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> share = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">add_return_sum</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = a + b;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//导出的符号只能让符合GPL协议的模块才能使用。</span></span><br><span class="line">EXPORT_SYMBOL_GPL(share);       </span><br><span class="line">EXPORT_SYMBOL_GPL(add_return_sum);</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块描述</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"LYQ"</span>);			<span class="comment">//作者信息</span></span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"study kernal first code test"</span>);		<span class="comment">//模块功能说明</span></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);							<span class="comment">//许可证：驱动遵循GPL协议</span></span><br></pre></td></tr></table></figure>
-<p>3：对应的Makefile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">obj-m +&#x3D; led.o</span><br><span class="line">led-objs &#x3D; led.o sum.o</span><br><span class="line">KERNEL_DIR :&#x3D; &#x2F;home&#x2F;bbigq&#x2F;6818GEC&#x2F;kernel</span><br><span class="line">CROSS_COMPILE :&#x3D; &#x2F;home&#x2F;bbigq&#x2F;6818GEC&#x2F;prebuilts&#x2F;gcc&#x2F;linux-x86&#x2F;arm&#x2F;arm-eabi-4.8&#x2F;bin&#x2F;arm-eabi-</span><br><span class="line">PWD :&#x3D; $(shell pwd)</span><br><span class="line"></span><br><span class="line">default:</span><br><span class="line">	$(MAKE) ARCH&#x3D;arm CROSS_COMPILE&#x3D;$(CROSS_COMPILE) -C $(KERNEL_DIR) M&#x3D;$(PWD) modules</span><br><span class="line"></span><br><span class="line">clean:</span><br><span class="line">	rm  *.o *.order .*.cmd  *.mod.c *.symvers .tmp_versions -rf</span><br></pre></td></tr></table></figure>
-<p>此处<code>Makefile</code>要点详解：<br><code>obj-m += led.o</code> obj-m代表着最终生成的驱动文件为led.ko<br><code>led-objs = led.o sum.o</code>并且led.ko必须依赖两个.o文件就是<code>led.o和sum.o</code>文件，因此通过模块名加-objs的形式可以定义整个模块所包含的文件。</p>
-<p><strong><em>坑警告！！！</em></strong><br>1：类似于以上情况，A模块依赖B模块的调用，在加载模块时，应先加载B模块，再加载A模块，否则会出现错误，类似以下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">led: Unknown symbol add_return_sum (err 0)</span><br><span class="line">insmod: can&#39;t insert &#39;led.ko&#39;: unknown symbol in module or invalid parameter</span><br></pre></td></tr></table></figure>
-<p>2：如果当前模块没有添加许可，也会在编译或者加载的时候出现报错现象。</p>
-<hr>
-<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
-
-      
-
-      
+      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -359,20 +216,20 @@
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
-                    
+                    <% if(theme.alipay) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/aliyun.png">
+                      <img class="reward-img" src="<%= theme.alipay%>">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    
-                    
+                    <% } %>
+                    <% if(theme.weixin) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/weixin.png">
+                      <img class="reward-img" src="<%= theme.weixin%>">
                       <span class="reward-type">微信</span>
                     </div>
-                    
+                    <% } %>
                   </div>
                 </span>
               </span>
@@ -380,141 +237,87 @@
           </div>
           </a>
         </div>
-      
+      <% } %>
     </div>
     <div class="article-info article-info-index">
-      
+      <%if(post.top){%>
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      <% } %>
+      <%- partial('post/tag') %>
+      <%- partial('post/category') %>
+      <% if (index && theme.show_all_link){ %>
+        <p class="article-more-link">
+          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
+        </p>
+      <% } %>
 
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
+      <% if (!index && theme.share_jia){ %>
+        <%- partial('post/share') %>
+      <% } %>
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          编写字符设备小Demo
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/02/08/Ubuntu-Install-SourceInsight/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Ubuntu-Install-SourceInsight</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
+<% if (!index){ %>
+  <%- partial('post/nav') %>
+<% } %>
+<%- partial('_partial/aside') %>
 
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+<% if (!index && post.comments){ %>
+  <% if (theme.duoshuo){ %>
+  <%- partial('post/duoshuo', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
   
-  
-  
+  <% if (theme.wangyiyun){ %>
+  <%- partial('post/wangyiyun', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
 
-  
+  <% if (theme.changyan_appid && theme.changyan_conf){ %>
+  <%- partial('post/changyan', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
 
-  
+  <% if (theme.disqus || config.disqus_shortname){ %>
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
 
-  
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+    </section>
+  <% } %>
 
+  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
+  <%- partial('post/gitment', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
+<% } %>
 
           </div>
         </div>
@@ -523,14 +326,14 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2020 LYQ
+    		&copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
       	</div>
     </div>
   </div>
-  
+  <% if (theme.busuanzi && theme.busuanzi.enable){ %>
         <!-- 不蒜子统计 -->
         <span id="busuanzi_container_site_pv">
                 本站总访问量<span id="busuanzi_value_site_pv"></span>次
@@ -540,7 +343,7 @@
                 本站访客数<span id="busuanzi_value_site_uv"></span>人
         </span>
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-  
+  <% } %>
 </footer>
 <!--页面点击小红心-->
 <script type="text/javascript" src="/love.js"></script>
@@ -635,19 +438,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">API</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color4">API</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
