@@ -16,7 +16,7 @@
 <meta property="og:description" content="Linux内核——字符设备">
 <meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;devzifu.png">
 <meta property="article:published_time" content="2020-02-09T07:21:08.000Z">
-<meta property="article:modified_time" content="2020-02-10T06:39:55.471Z">
+<meta property="article:modified_time" content="2020-02-11T13:09:42.434Z">
 <meta property="article:author" content="LYQ">
 <meta property="article:tag" content="study">
 <meta property="article:tag" content="Linux Kernel">
@@ -45,64 +45,42 @@
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      
-<div class="overlay" style="background: #4d4d4d"></div>
+      <% var defaultBg = '#4d4d4d'; %>
+<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			<img src="/assets/head.jpg" class="js-avatar">
+		<a href="<%=theme.root%>" class="profilepic">
+			<img src="<%=theme.avatar%>" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">LYQ</a></h1>
+		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
 		</hgroup>
-		
-		<p class="header-subtitle">STEP BY STEP</p>
-		
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
 
 		<nav class="header-menu">
 			<ul>
-			
-				<li><a href="/">主页</a></li>
-	        
-				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
-	        
-				<li><a href="/tags/study/">STUDY</a></li>
-	        
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 20
+                    总文章数 <%=site.posts.length%>
                 </nav>
 		<nav class="header-smart-menu">
-    		
-    			
-    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
-    			
-            
-    			
-    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
-    			
-            
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+    			<% } %>
+            <%}%>
 		</nav>
 		<nav class="header-nav">
 			<div class="social">
-				
-					<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
-		        
-					<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
-		        
-					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
-		        
-					<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
-		        
-					<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
-		        
-					<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
-		        
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
+		        <%}%>
 			</div>
 		</nav>
 	</header>		
@@ -135,6 +113,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -159,11 +139,13 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 33.333333333333336%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/study/">STUDY</a></li>
+					<li style="width: 25%"><a href="/tags/study/">STUDY</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -178,211 +160,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-编写字符设备小Demo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="<%= post.layout %>-<%= post.slug %>" class="article article-type-<%= post.layout %> <%if(index){%> article-index<%}%>" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
+    <% if (post.link || post.title){ %>
       <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      编写字符设备小Demo
-    </h1>
-  
-
-        
-        
-        <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/" class="archive-article-date">
-  	<time datetime="2020-02-09T07:21:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-09</time>
-</a>
-
+        <%- partial('post/title', {class_name: 'article-title'}) %>
+        <% if (!post.noDate){ %>
+        <%- partial('post/date', {class_name: 'archive-article-date', date_format: null}) %>
         <!-- 需要添加的位置 -->
         <!-- 开始添加字数统计-->
-        
-          <div style="margin-top:10px;">
-    <span class="post-time">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-keyboard-o"></i>
-        <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">2.1k字</span>
-      </span>
-    </span>
-
-    <span class="post-time">
-      &nbsp; | &nbsp;
-      <span class="post-meta-item-icon">
-        <i class="fa fa-hourglass-half"></i>
-        <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">9分</span>
-      </span>
-    </span>
-</div>
-
-          
+        <% if(theme.word_count && !post.no_word_count){%>
+          <%- partial('post/word') %>
+          <% } %>
         <!-- 添加完成 -->
-        
+        <% } %>
       </header>
-    
+    <% } %>
     <div class="article-entry" itemprop="articleBody">
-      
-        <h1><span id="linux-nei-he-zi-fu-she-bei">Linux内核——字符设备</span><a href="#linux-nei-he-zi-fu-she-bei" class="header-anchor">.</a></h1><hr>
-<a id="more"></a>
-<hr>
-<h2><span id="she-bei-xiang-guan-dian-jie">设备相关点解</span><a href="#she-bei-xiang-guan-dian-jie" class="header-anchor">.</a></h2><p>Linux驱动设备一共分为三种：<code>字符设备</code>、<code>块设备</code>、<code>网络设备</code>，其中只有网络设备比较特殊，其在<code>/dev</code>目录下是没有设备文件的。</p>
-<p>区分文件类型：</p>
-<table>
-<thead>
-<tr>
-<th align="center">符号</th>
-<th align="center">文件类型</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">c</td>
-<td align="center">字符设备</td>
-</tr>
-<tr>
-<td align="center">b</td>
-<td align="center">块设备</td>
-</tr>
-<tr>
-<td align="center">d</td>
-<td align="center">目录</td>
-</tr>
-<tr>
-<td align="center">l</td>
-<td align="center">符号链接</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>字符设备</p>
-</blockquote>
-<p>&#160; &#160; &#160; &#160;该设备对数据的处理按照<code>字节流</code>的形式进行的，支持顺序访问（是有时间的概念），也可以支持随机访问。<br><code>典型</code>的字符设备：串口、键盘、触摸屏、摄像头、I2C、SPI、声卡、帧缓冲设备….<br><code>顺序</code>访问的设备：串口、键盘、触摸屏<br><code>随机</code>访问的设备：帧缓冲设备</p>
-<p>&#160; &#160; &#160; &#160;应用程序，能够使用系统IO函数来就行访问：open、write、read、lseek、close…..</p>
-<p>比如在根目录的<code>/dev</code>下我们能看到<br><img src="/blogmat/devzifu.png" alt="/dev"></p>
-<p>&#160; &#160; &#160; &#160;其中第五第六列分别是<code>主设备号</code>和<code>次设备号</code><br>如：fb0的主设备号为29,次设备号为0</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crw-rw----  <span class="number">1</span> root video    <span class="number">29</span>,   <span class="number">0</span> Feb  <span class="number">6</span> <span class="number">11</span>:<span class="number">52</span> fb0</span><br></pre></td></tr></table></figure>
+      <% if (post.excerpt && index){ %>
+        <%- post.excerpt %>
+        <% if (theme.excerpt_link) { %>
+          <a class="article-more-a" href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %> >></a>
+        <% } %>
+      <% } else { %>
+        <%- post.content %>
+      <% } %>
 
-<blockquote>
-<p>主设备号</p>
-</blockquote>
-<p>主设备号主要用于区分某一类型的设备，比如显示器、鼠标、键盘、硬盘等</p>
-<blockquote>
-<p>次设备号</p>
-</blockquote>
-<p>&#160; &#160; &#160; &#160;次设备号用来区分同一类型设备的不同个体或者不同分区，比如显示器A.a、显示器A.b 或者硬盘的分区1～分区7;</p>
-<hr>
-<h2><span id="jian-shu-zi-fu-she-bei-qu-dong-de-she-ji-liu-cheng">简述字符设备驱动的设计流程</span><a href="#jian-shu-zi-fu-she-bei-qu-dong-de-she-ji-liu-cheng" class="header-anchor">.</a></h2><ol>
-<li>首先定义一个字符设备 <code>struct cdev</code></li>
-<li>申请设备号<br> a. 静态注册<pre><code>MKDEV
-register_chrdev_region</code></pre> b. 动态注册<pre><code>alloc_chrdev_region</code></pre></li>
-<li>定义<code>file_operations</code>，<strong>初始化打开、关闭、读、写等函数接口。</strong></li>
-<li>cdev初始化<br> .cdev_init</li>
-<li>将cdev加入到内核<br> .cdev_add</li>
-<li>创建设备文件<br> .手动创建，去/dev目录进行创建<br> .自动创建<br> 1)class_create<br> 2)device_create</li>
-</ol>
-<hr>
-<p><strong><em>此处默认都能使用Source Insight来阅读内核源码了</em></strong></p>
-<h3><span id="ding-yi-yi-ge-zi-fu-she-bei">定义一个字符设备</span><a href="#ding-yi-yi-ge-zi-fu-she-bei" class="header-anchor">.</a></h3><p>使用到一个结构体，见include/linux/cdev.h  –&gt; <code>cdev</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/cdev.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cdev</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">kobject</span> <span class="title">kobj</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">module</span> *<span class="title">owner</span>;</span></span><br><span class="line">	<span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> *<span class="title">ops</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">list_head</span> <span class="title">list</span>;</span></span><br><span class="line">	<span class="keyword">dev_t</span> dev;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> count;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>kobj</code>：内核管理驱动的时候，自动管理的对象，自动链接调用(不需要我们管);<br><code>*owner</code>：属于哪一个内核模块，初始化一般默认编写值为THIS_MODULE，指向当前模块;<strong>(重点)</strong><br><code>*ops</code>：字符设备文件操作集;<strong>(重点)</strong><br><code>list</code>：内核自动管理字符设备的链表，内核自动调用;<br><code>dev</code>：设备号;<br><code>count</code>：对当前设备申请次设备号的数目;<strong>(重点)</strong></p>
-<h3><span id="ding-yi-bing-chu-shi-hua-yi-ge-wen-jian-cao-zuo-ji">定义并初始化一个文件操作集</span><a href="#ding-yi-bing-chu-shi-hua-yi-ge-wen-jian-cao-zuo-ji" class="header-anchor">.</a></h3><p>定义一个<code>file_operations</code>结构体，见/include/linux/fs.h –&gt; file_operations</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">module</span> *<span class="title">owner</span>;</span></span><br><span class="line">	<span class="keyword">loff_t</span> (*llseek) (struct file *, <span class="keyword">loff_t</span>, <span class="keyword">int</span>);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*<span class="built_in">read</span>) (struct file *, <span class="keyword">char</span> __user *, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> *);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*<span class="built_in">write</span>) (struct file *, <span class="keyword">const</span> <span class="keyword">char</span> __user *, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> *);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*aio_read) (struct kiocb *, <span class="keyword">const</span> struct iovec *, <span class="keyword">unsigned</span> <span class="keyword">long</span>, <span class="keyword">loff_t</span>);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*aio_write) (struct kiocb *, <span class="keyword">const</span> struct iovec *, <span class="keyword">unsigned</span> <span class="keyword">long</span>, <span class="keyword">loff_t</span>);</span><br><span class="line">	<span class="keyword">int</span> (*readdir) (struct file *, <span class="keyword">void</span> *, <span class="keyword">filldir_t</span>);</span><br><span class="line">	<span class="function"><span class="keyword">unsigned</span> <span class="title">int</span> <span class="params">(*poll)</span> <span class="params">(struct file *, struct poll_table_struct *)</span></span>;</span><br><span class="line">	<span class="keyword">long</span> (*unlocked_ioctl) (struct file *, <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>);</span><br><span class="line">	<span class="keyword">long</span> (*compat_ioctl) (struct file *, <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>);</span><br><span class="line">	<span class="keyword">int</span> (*mmap) (struct file *, struct vm_area_struct *);</span><br><span class="line">	<span class="keyword">int</span> (*<span class="built_in">open</span>) (struct inode *, struct file *);</span><br><span class="line">	<span class="keyword">int</span> (*<span class="built_in">flush</span>) (struct file *, <span class="keyword">fl_owner_t</span> id);</span><br><span class="line">	<span class="keyword">int</span> (*<span class="built_in">release</span>) (struct inode *, struct file *);</span><br><span class="line">	<span class="keyword">int</span> (*fsync) (struct file *, <span class="keyword">loff_t</span>, <span class="keyword">loff_t</span>, <span class="keyword">int</span> datasync);</span><br><span class="line">	<span class="keyword">int</span> (*aio_fsync) (struct kiocb *, <span class="keyword">int</span> datasync);</span><br><span class="line">	<span class="keyword">int</span> (*fasync) (<span class="keyword">int</span>, struct file *, <span class="keyword">int</span>);</span><br><span class="line">	<span class="keyword">int</span> (*lock) (struct file *, <span class="keyword">int</span>, struct file_lock *);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*sendpage) (struct file *, struct page *, <span class="keyword">int</span>, <span class="keyword">size_t</span>, <span class="keyword">loff_t</span> *, <span class="keyword">int</span>);</span><br><span class="line">	<span class="function"><span class="keyword">unsigned</span> <span class="title">long</span> <span class="params">(*get_unmapped_area)</span><span class="params">(struct file *, <span class="keyword">unsigned</span> <span class="keyword">long</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>)</span></span>;</span><br><span class="line">	<span class="keyword">int</span> (*check_flags)(<span class="keyword">int</span>);</span><br><span class="line">	<span class="keyword">int</span> (*flock) (struct file *, <span class="keyword">int</span>, struct file_lock *);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*splice_write)(struct pipe_inode_info *, struct file *, <span class="keyword">loff_t</span> *, <span class="keyword">size_t</span>, <span class="keyword">unsigned</span> <span class="keyword">int</span>);</span><br><span class="line">	<span class="keyword">ssize_t</span> (*splice_read)(struct file *, <span class="keyword">loff_t</span> *, struct pipe_inode_info *, <span class="keyword">size_t</span>, <span class="keyword">unsigned</span> <span class="keyword">int</span>);</span><br><span class="line">	<span class="keyword">int</span> (*setlease)(struct file *, <span class="keyword">long</span>, struct file_lock **);</span><br><span class="line">	<span class="keyword">long</span> (*fallocate)(struct file *file, <span class="keyword">int</span> mode, <span class="keyword">loff_t</span> offset,</span><br><span class="line">			  <span class="keyword">loff_t</span> len);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>&#160; &#160; &#160; &#160;当然很多时候我们用不到它结构体定义的这么多函数接口，只需保留最常用的即可;</p>
-<p>&#160; &#160; &#160; &#160;每个字符设备都必须有一个文件操作集，文件操作集是<code>驱动程序给应用程序访问硬件的一个接口</code>，应用层与驱动程序函数接口的对应关系如下：</p>
-<table>
-<thead>
-<tr>
-<th align="center">应用层</th>
-<th align="center">驱动层</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">open</td>
-<td align="center">open</td>
-</tr>
-<tr>
-<td align="center">close</td>
-<td align="center">release</td>
-</tr>
-<tr>
-<td align="center">write</td>
-<td align="center">write</td>
-</tr>
-<tr>
-<td align="center">read</td>
-<td align="center">read</td>
-</tr>
-<tr>
-<td align="center">lseek</td>
-<td align="center">llseek</td>
-</tr>
-<tr>
-<td align="center">ioctl</td>
-<td align="center">unlocked_ioctl</td>
-</tr>
-</tbody></table>
-<p>用法例子：（摘自源码bsg.c）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">bsg_fops</span> = &#123;</span></span><br><span class="line">	.<span class="built_in">read</span>		=	bsg_read,</span><br><span class="line">	.<span class="built_in">write</span>		=	bsg_write,</span><br><span class="line">	.poll		=	bsg_poll,</span><br><span class="line">	.<span class="built_in">open</span>		=	bsg_open,</span><br><span class="line">	.<span class="built_in">release</span>	=	bsg_release,</span><br><span class="line">	.unlocked_ioctl	=	bsg_ioctl,</span><br><span class="line">	.owner		=	THIS_MODULE,</span><br><span class="line">	.llseek		=	default_llseek,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>对应的：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">ssize_t</span></span><br><span class="line">bsg_read(struct file *file, <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *ppos)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">bsg_device</span> *<span class="title">bd</span> = <span class="title">file</span>-&gt;<span class="title">private_data</span>;</span></span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">	<span class="keyword">return</span> bytes_read;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">ssize_t</span></span><br><span class="line">bsg_write(struct file *file, <span class="keyword">const</span> <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *ppos)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">bsg_device</span> *<span class="title">bd</span> = <span class="title">file</span>-&gt;<span class="title">private_data</span>;</span></span><br><span class="line">	<span class="keyword">ssize_t</span> bytes_written;</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">        ...</span><br><span class="line">	<span class="keyword">return</span> bytes_written;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>即我们需要定义一个<code>file_operations</code>的结构体把自己编写的接口配置进去，以便后续<code>cdev_init</code>的初始化。</p>
-<hr>
-<h4><span id="yuan-ma-ji-xiang-jie">源码及详解</span><a href="#yuan-ma-ji-xiang-jie" class="header-anchor">.</a></h4><p>led_dev.c</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/kernel.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/cdev.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/fs.h&gt;</span></span></span><br><span class="line"><span class="comment">//1.定义字符设备</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">cdev</span> <span class="title">led_cdev</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//2.声明设备号</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">dev_t</span> led_dev_num;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">led_read</span><span class="params">(struct file *file, <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *offset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"led_read\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">led_write</span><span class="params">(struct file *file, <span class="keyword">const</span> <span class="keyword">char</span> __user *buf, <span class="keyword">size_t</span> count, <span class="keyword">loff_t</span> *offset)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"led_write\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">led_open</span><span class="params">(struct inode *inode, struct file *file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"led_open\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">led_release</span><span class="params">(struct inode *inode, struct file *file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"led_release\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//3.定义file_operations</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">file_operations</span> <span class="title">led_fops</span> = &#123;</span></span><br><span class="line">	.<span class="built_in">read</span>		=	led_read,</span><br><span class="line">	.<span class="built_in">write</span>		=	led_write,</span><br><span class="line">	.<span class="built_in">open</span>		=	led_open,</span><br><span class="line">	.<span class="built_in">release</span>	=	led_release,</span><br><span class="line">	.owner		=	THIS_MODULE</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//入口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">gec6818_led_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    led_dev_num = MKDEV(<span class="number">239</span>,<span class="number">0</span>);     <span class="comment">//2.1静态申请设备号  主设备号为239,次设备号为0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//2.2注册设备号  int register_chrdev_region(dev_t from, unsigned count, const char *name)</span></span><br><span class="line">    ret = register_chrdev_region(led_dev_num, <span class="number">1</span>, <span class="string">"myled"</span>);</span><br><span class="line">    <span class="keyword">if</span> (ret &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        printk(<span class="string">"&lt;3&gt;"</span><span class="string">"register chrdev region error\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4.字符设备的初始化 void cdev_init(struct cdev *cdev, const struct file_operations *fops)</span></span><br><span class="line">    cdev_init(&amp;led_cdev, &amp;led_fops);</span><br><span class="line">    <span class="comment">//5.将设备加入到内核 int cdev_add(struct cdev *p, dev_t dev, unsigned count)</span></span><br><span class="line">    ret = cdev_add(&amp;led_cdev, led_dev_num, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(ret &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        printk(<span class="string">"&lt;3&gt;"</span><span class="string">"cdev_add error\n"</span>);</span><br><span class="line">        <span class="keyword">goto</span> err_cdev_add;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"gec6818 led init success\n"</span>);</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"device num: %d\n"</span>, MAJOR(led_dev_num));</span><br><span class="line">    printk(<span class="string">"&lt;3&gt;"</span><span class="string">"device last num: %d\n"</span>, MANOR(led_dev_num));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">err_cdev_add:</span><br><span class="line">    unregister_chrdev_region(led_dev_num, <span class="number">1</span>);       <span class="comment">//注销设备号</span></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">//出口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">void</span> __<span class="function"><span class="built_in">exit</span> <span class="title">gec6818_led_exit</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    cdev_del(&amp;led_cdev);                            <span class="comment">//从系统中删除字符设备                                     </span></span><br><span class="line"></span><br><span class="line">    unregister_chrdev_region(led_dev_num, <span class="number">1</span>);       <span class="comment">//注销设备号</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	printk(<span class="string">"&lt;4&gt;"</span><span class="string">"gec6818 led exit\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//驱动程序的入口：insmod led_drv.ko调用module_init，module_init又会去调用gec6818_led_init。</span></span><br><span class="line">module_init(gec6818_led_init);</span><br><span class="line"></span><br><span class="line"><span class="comment">//驱动程序的出口：rmmod led_drv调用module_exit，module_exit又会去调用gec6818_led_exit。</span></span><br><span class="line">module_exit(gec6818_led_exit)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//模块描述</span></span><br><span class="line">MODULE_AUTHOR(<span class="string">"LYQ"</span>);			                <span class="comment">//作者信息</span></span><br><span class="line">MODULE_DESCRIPTION(<span class="string">"study kernal first code test"</span>);	<span class="comment">//模块功能说明</span></span><br><span class="line">MODULE_LICENSE(<span class="string">"GPL"</span>);				        <span class="comment">//许可证：驱动遵循GPL协议</span></span><br></pre></td></tr></table></figure>
-<p><strong>要点详解</strong></p>
-<blockquote>
-<p>申请设备号 MKDEV</p>
-</blockquote>
-<p><code>MKDEV</code> 原型  参数1：主设备号，参数2：次设备号</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MKDEV(ma,mi)	(((ma) &lt;&lt; MINORBITS) | (mi))</span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注册设备号 </p>
-</blockquote>
-<p><code>register_chrdev_region</code> 原型 参数1：声明的设备号，参数2：注册的数量，参数3：注册的名字 返回值：成功为0，失败返回负数的错误码</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> `register_chrdev_region(<span class="keyword">dev_t</span> from, <span class="keyword">unsigned</span> count, <span class="keyword">const</span> <span class="keyword">char</span> *name)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>字符设备的初始化 </p>
-</blockquote>
-<p><code>cdev_init</code> 原型 参数1：定义的字符设备，参数2：file_operations</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_init</span><span class="params">(struct cdev *cdev, <span class="keyword">const</span> struct file_operations *fops)</span></span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将设备加入内核</p>
-</blockquote>
-<p><code>cdev_add</code> 原型 参数1：定义的字符设备地址，参数2：声明的设备号，参数3：加入的数量，返回值：成功为0,失败为负数错误值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cdev_add</span><span class="params">(struct cdev *p, <span class="keyword">dev_t</span> dev, <span class="keyword">unsigned</span> count)</span></span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>设备号注销</p>
-</blockquote>
-<p><code>unregister_chrdev_region</code> 原型 参数1：声明的设备号，参数2：数量</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">unregister_chrdev_region</span><span class="params">(<span class="keyword">dev_t</span> from, <span class="keyword">unsigned</span> count)</span></span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>将字符设备从内核删除</p>
-</blockquote>
-<p><code>cdev_del</code> 原型 参数1：定义的字符设备地址</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cdev_del</span><span class="params">(struct cdev *p)</span></span></span><br></pre></td></tr></table></figure>
-<hr>
-<h4><span id="bian-xie-dui-ying-makefile">编写对应Makefile</span><a href="#bian-xie-dui-ying-makefile" class="header-anchor">.</a></h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">obj-m += led_dev.o</span><br><span class="line">KERNEL_DIR := /home/bbigq/6818GEC/kernel</span><br><span class="line">CROSS_COMPILE := /home/bbigq/6818GEC/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin/arm-eabi-</span><br><span class="line">PWD := <span class="variable">$(<span class="built_in">shell</span> pwd)</span></span><br><span class="line"></span><br><span class="line"><span class="section">default:</span></span><br><span class="line">	<span class="variable">$(MAKE)</span> ARCH=arm CROSS_COMPILE=<span class="variable">$(CROSS_COMPILE)</span> -C <span class="variable">$(KERNEL_DIR)</span> M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm  *.o *.order .*.cmd  *.mod.c *.symvers .tmp_versions -rf</span><br></pre></td></tr></table></figure>
-<hr>
-<p>编译完成后，<code>insmod</code>到Linux系统中后，可以通过<code>lsmod</code>查看相关信息，也可以使用cat命令查看<code>/proc/devices</code>，能够找到注册成功的设备名字。</p>
-<p>如果配合应用程序使用时，需要为该设备在/dev目录下创建设备文件;<br>使用：</p>
-<p><code>mknod /dev/led c 239 0</code><br><code>mknod 设备文件 设备类型 主设备号 次设备号</code></p>
-<p><strong>注意</strong><br>1.手动创建设备文件的时候，主设备号和次设备号不能写错;<br>2.若此前的设备文件已经存在，再次创建相同名字的设备文件，会出现错误;（<code>解决方法：先使用rm命令删除原来的设备文件，再使用mknod命令重新创建。</code>）</p>
-<p>最后用<code>ls -l /dev/xxx</code>检查是否创建成功！</p>
-<hr>
-<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
-
-      
-
-      
+      <% if ((theme.reward_type === 2 || (theme.reward_type === 1 && post.reward)) && !index){ %>
         <div class="page-reward">
           <a href="javascript:;" class="page-reward-btn tooltip-top">
             <div class="tooltip tooltip-east">
@@ -392,20 +196,20 @@ register_chrdev_region</code></pre> b. 动态注册<pre><code>alloc_chrdev_regio
             <span class="tooltip-content">
               <span class="tooltip-text">
                 <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <p class="reward-p"><i class="icon icon-quo-left"></i><%= theme.reward_wording%><i class="icon icon-quo-right"></i></p>
                   <div class="reward-box">
-                    
+                    <% if(theme.alipay) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/aliyun.png">
+                      <img class="reward-img" src="<%= theme.alipay%>">
                       <span class="reward-type">支付宝</span>
                     </div>
-                    
-                    
+                    <% } %>
+                    <% if(theme.weixin) {%>
                     <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/weixin.png">
+                      <img class="reward-img" src="<%= theme.weixin%>">
                       <span class="reward-type">微信</span>
                     </div>
-                    
+                    <% } %>
                   </div>
                 </span>
               </span>
@@ -413,154 +217,87 @@ register_chrdev_region</code></pre> b. 动态注册<pre><code>alloc_chrdev_regio
           </div>
           </a>
         </div>
-      
+      <% } %>
     </div>
     <div class="article-info article-info-index">
-      
+      <%if(post.top){%>
         <div class="article-pop-out tagcloud">
           <i class="icon-tuding"></i>
           <a class="article-tag-list-link color3">置顶</a>
         </div>
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      <% } %>
+      <%- partial('post/tag') %>
+      <%- partial('post/category') %>
+      <% if (index && theme.show_all_link){ %>
+        <p class="article-more-link">
+          <a class="article-more-a" href="<%- url_for(post.path) %>"><%= theme.show_all_link %> >></a>
+        </p>
+      <% } %>
 
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/09/%E7%BC%96%E5%86%99%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%B0%8FDemo/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
+      <% if (!index && theme.share_jia){ %>
+        <%- partial('post/share') %>
+      <% } %>
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2020/02/09/%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E5%8F%8A%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E9%85%8D%E5%90%88%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          字符设备及应用程序配合使用
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">编写内核模块小Demo</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
+<% if (!index){ %>
+  <%- partial('post/nav') %>
+<% } %>
+<%- partial('_partial/aside') %>
 
 
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">Linux内核——字符设备.</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.1.</span> <span class="toc-text">设备相关点解.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">简述字符设备驱动的设计流程.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.2.1.</span> <span class="toc-text">定义一个字符设备.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.2.2.</span> <span class="toc-text">定义并初始化一个文件操作集.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">源码及详解.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">编写对应Makefile.</span></a></li></ol></li></ol></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
+<% if (!index && post.comments){ %>
+  <% if (theme.duoshuo){ %>
+  <%- partial('post/duoshuo', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
   
-  
-  
+  <% if (theme.wangyiyun){ %>
+  <%- partial('post/wangyiyun', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
 
-  
+  <% if (theme.changyan_appid && theme.changyan_conf){ %>
+  <%- partial('post/changyan', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
 
-  
+  <% if (theme.disqus || config.disqus_shortname){ %>
+    <section id="comments">
+      <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = '<%= theme.disqus || config.disqus_shortname %>'; // required: replace example with your forum shortname
 
-  
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+    </section>
+  <% } %>
 
+  <% if (theme.gitment_owner && theme.gitment_repo &&theme.gitment_oauth && theme.gitment_oauth.client_id && theme.gitment_oauth.client_secret){ %>
+  <%- partial('post/gitment', {
+      key: post.slug,
+      title: post.title,
+      url: config.url+url_for(post.path)
+    }) %>
+  <% } %>
+<% } %>
 
           </div>
         </div>
