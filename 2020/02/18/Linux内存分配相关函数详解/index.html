@@ -1,27 +1,829 @@
-<%- partial('_partial/head') %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Linux内存分配相关函数详解 | BBIGQ PERSONAL BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Linux内存分配相关函数详解 kmalloc()、kzalloc()、vmalloc()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内存分配相关函数详解">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3&#x2F;index.html">
+<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="Linux内存分配相关函数详解 kmalloc()、kzalloc()、vmalloc()">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;yeshimem.jpeg">
+<meta property="article:published_time" content="2020-02-18T10:42:32.000Z">
+<meta property="article:modified_time" content="2020-02-18T11:56:24.338Z">
+<meta property="article:author" content="LYQ">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Linux Kernel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;yeshimem.jpeg">
+  
+    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/icon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      <%- partial('_partial/left-col', null, {cache: !config.relative_link}) %>
+      <% var defaultBg = '#4d4d4d'; %>
+<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="<%=theme.root%>" class="profilepic">
+			<img src="<%=theme.avatar%>" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
+		</hgroup>
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
+
+		<nav class="header-menu">
+			<ul>
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
+			</ul>
+		</nav>
+		<nav>
+                    总文章数 <%=site.posts.length%>
+                </nav>
+		<nav class="header-smart-menu">
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+    			<% } %>
+            <%}%>
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
+		        <%}%>
+			</div>
+		</nav>
+	</header>		
+</div>
+
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
-      <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">LYQ</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>STEP BY STEP<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/study/">STUDY</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div class="canvas-wrap">
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <%- body %>
+            <article id="post-Linux内存分配相关函数详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Linux内存分配相关函数详解
+    </h1>
+  
+
+        
+        <% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+</a>
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.7k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="linux-nei-cun-fen-pei-xiang-guan-han-shu-xiang-jie-kmalloc-kzalloc-vmalloc">Linux内存分配相关函数详解 kmalloc()、kzalloc()、vmalloc()</span><a href="#linux-nei-cun-fen-pei-xiang-guan-han-shu-xiang-jie-kmalloc-kzalloc-vmalloc" class="header-anchor">.</a></h1><a id="more"></a>
+<hr>
+<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#dong-tai-shen-qing-nei-cun">动态申请内存</a><ul>
+<li><a href="#mmu">MMU</a><ul>
+<li><a href="#cao-zuo-xi-tong-zhong-de-nei-cun-guan-li">操作系统中的内存管理</a></li>
+<li><a href="#xu-ni-nei-cun-ji-zhi">虚拟内存机制</a></li>
+<li><a href="#ye-shi-nei-cun-guan-li">页式内存管理</a></li>
+</ul>
+</li>
+<li><a href="#nei-he-xu-ni-nei-cun-bu-ju">内核虚拟内存布局</a></li>
+<li><a href="#kmalloc-yu-kfree">kmalloc()与kfree()</a></li>
+<li><a href="#kzalloc">kzalloc()</a></li>
+<li><a href="#vmalloc-vfree">vmalloc()、vfree()</a></li>
+<li><a href="#zong-jie">总结</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<h1><span id="dong-tai-shen-qing-nei-cun">动态申请内存</span><a href="#dong-tai-shen-qing-nei-cun" class="header-anchor">.</a></h1><p>在应用层中，用户空间动态申请内存空间的函数有不少，如 <code>malloc()</code>、<code>calloc()</code>、<code>realloc()</code>等函数，众所周知，动态分配的内存使用完后必须要释放，否者将会造成内存泄漏，所以与其对应的用户空间内存释放函数 <code>free()</code>。</p>
+<h2><span id="mmu">MMU</span><a href="#mmu" class="header-anchor">.</a></h2><p>MMU是Memory Management Unit的缩写，中文名是内存管理单元，有时称作分页内存管理单元（英语：paged memory management unit，缩写为PMMU）。它是一种负责处理中央处理器（CPU）的内存访问请求的计算机硬件。它的功能包括虚拟地址到物理地址的转换（即虚拟内存管理）、内存保护、中央处理器高速缓存的控制，在较为简单的计算机体系结构中，负责总线的仲裁以及存储体切换（bank switching，尤其是在8位的系统上）。<br>——————来自百度百科的介绍</p>
+<p><strong><em>简单来说，MMU就是内存管理单元，负责虚拟地址和物理地址之间的转换、内存保护。</em></strong></p>
+<blockquote>
+<p>场景介绍：</p>
+</blockquote>
+<ul>
+<li>ARM Cortex-M系列是没有MMU，只能跑ucos、freertos、rt-thread等实时操作系统。</li>
+<li>ARM Cortex-A系列是往往具有MMU，可以跑Linux、WinCE。</li>
+</ul>
+<h3><span id="cao-zuo-xi-tong-zhong-de-nei-cun-guan-li">操作系统中的内存管理</span><a href="#cao-zuo-xi-tong-zhong-de-nei-cun-guan-li" class="header-anchor">.</a></h3><ul>
+<li>应用程序开发的时候，面对的内存都是虚拟内存。</li>
+<li>每个进程拥有独立私有的虚拟地址空间</li>
+<li>虚拟内存与实际物理内存是无关的，是一个假想的足够大的内存（4GB = 128MB（物理内存）+硬盘空间）</li>
+</ul>
+<h3><span id="xu-ni-nei-cun-ji-zhi">虚拟内存机制</span><a href="#xu-ni-nei-cun-ji-zhi" class="header-anchor">.</a></h3><ul>
+<li>虚拟内存需要重新映射到物理内存</li>
+<li>虚拟地址映射到物理内存中的真实地址</li>
+<li>每次进程的少量代码在物理内存中执行</li>
+<li>大部分的进程代码存在存储器中</li>
+</ul>
+<h3><span id="ye-shi-nei-cun-guan-li">页式内存管理</span><a href="#ye-shi-nei-cun-guan-li" class="header-anchor">.</a></h3><ul>
+<li><code>页</code> 是单位名称，Linux大小为4KB</li>
+<li>虚拟内存和物理内存以页为单位进行管理</li>
+<li>进程的活动页被载入内存时候，记录页的映射地址</li>
+<li>页式管理将内存地址分为两个部分：<ul>
+<li>地址高位，页面号</li>
+<li>地址低位，业内偏移量</li>
+</ul>
+</li>
+</ul>
+<p><img src="/blogmat/yeshimem.jpeg" alt="页式内存"></p>
+<hr>
+<h2><span id="nei-he-xu-ni-nei-cun-bu-ju">内核虚拟内存布局</span><a href="#nei-he-xu-ni-nei-cun-bu-ju" class="header-anchor">.</a></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[    <span class="number">0.000000</span>] Memory: <span class="number">1024</span>MB = <span class="number">1024</span>MB total   ----&gt;内存的大小是<span class="number">1</span>GB</span><br><span class="line">[    <span class="number">0.000000</span>] Memory: <span class="number">810820</span>k/<span class="number">810820</span>k <span class="built_in">available</span>, <span class="number">237756</span>k reserved, <span class="number">272384</span>K highmem</span><br><span class="line">[    <span class="number">0.000000</span>] Virtual kernel memory layout:</span><br><span class="line">[    <span class="number">0.000000</span>]     <span class="built_in">vector</span>  : <span class="number">0xffff0000</span> - <span class="number">0xffff1000</span>   (   <span class="number">4</span> kB)    ----&gt;存放中断向量表</span><br><span class="line">[    <span class="number">0.000000</span>]     fixmap  : <span class="number">0xfff00000</span> - <span class="number">0xfffe0000</span>   ( <span class="number">896</span> kB)    ----&gt;固定映射区，留作特定用途</span><br><span class="line">[    <span class="number">0.000000</span>]     vmalloc : <span class="number">0xef800000</span> - <span class="number">0xfee00000</span>   ( <span class="number">246</span> MB)    ----&gt;vmalloc()分配内存的区</span><br><span class="line">[    <span class="number">0.000000</span>]     lowmem  : <span class="number">0xc0000000</span> - <span class="number">0xef600000</span>   ( <span class="number">758</span> MB)    ----&gt;低端内存区，属于GFP_KERNEL标志</span><br><span class="line">[    <span class="number">0.000000</span>]     pkmap   : <span class="number">0xbfe00000</span> - <span class="number">0xc0000000</span>   (   <span class="number">2</span> MB)    ----&gt;永久映射，高端内存页框到内核地址空间的长期映射</span><br><span class="line">[    <span class="number">0.000000</span>]     modules : <span class="number">0xbf000000</span> - <span class="number">0xbfe00000</span>   (  <span class="number">14</span> MB)    ----&gt;#insmod *.ko <span class="keyword">module</span>存放段</span><br><span class="line">[    <span class="number">0.000000</span>]       .<span class="built_in">text</span> : <span class="number">0xc0008000</span> - <span class="number">0xc0a51018</span>   (<span class="number">10533</span> kB)   ----&gt;代码段和只读的数据段</span><br><span class="line">[    <span class="number">0.000000</span>]       .init : <span class="number">0xc0a52000</span> - <span class="number">0xc0a8f100</span>   ( <span class="number">245</span> kB)    ----&gt;初始化段，使用__init修饰初始化函数</span><br><span class="line">[    <span class="number">0.000000</span>]       .data : <span class="number">0xc0a90000</span> - <span class="number">0xc0b297d8</span>   ( <span class="number">614</span> kB)    ----&gt;可读写的数据段</span><br><span class="line">[    <span class="number">0.000000</span>]        .bss : <span class="number">0xc0b297fc</span> - <span class="number">0xc0d09488</span>   (<span class="number">1920</span> kB)    ----&gt;未初始化的数据段</span><br><span class="line">[    <span class="number">0.000000</span>] SLUB: Genslabs=<span class="number">11</span>, HWalign=<span class="number">64</span>, Order=<span class="number">0</span><span class="number">-3</span>, MinObjects=<span class="number">0</span>, CPUs=<span class="number">8</span>, Nodes=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>由上可知，当使用 <code>kmalloc、kzalloc函数</code> ，会在 <code>lowmem  : 0xc0000000 - 0xef600000</code> 地址空间里申请内存。<br>当使用 <code>vmalloc函数</code> ，会在 <code>vmalloc : 0xef800000 - 0xfee00000</code> 地址空间里申请内存。</p>
+<hr>
+<h2><span id="kmalloc-yu-kfree">kmalloc()与kfree()</span><a href="#kmalloc-yu-kfree" class="header-anchor">.</a></h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/slab.h&gt;</span></span></span><br><span class="line">void *kmalloc(size_t size, gfp_t flags)；</span><br></pre></td></tr></table></figure>
+<p><strong><code>kmalloc()</code></strong> 申请的内存位于物理内存映射区域，而且在物理上也是<strong>连续的</strong>，它们与真实的物理地址只有一个固定的偏移，因为存在较简单的转换关系，所以对申请的内存大小有限制，<strong>不能超过128KB</strong>。</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">size</td>
+<td align="center">申请的内存大小(字节)</td>
+</tr>
+<tr>
+<td align="center">flags</td>
+<td align="center">分配内存的方法</td>
+</tr>
+<tr>
+<td align="center">—-</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">falgs</td>
+<td align="center">具体方法</td>
+</tr>
+<tr>
+<td align="center">:–:</td>
+<td align="center">:–:</td>
+</tr>
+<tr>
+<td align="center">GFP_ATOMIC</td>
+<td align="center">分配内存的过程是一个原子过程，分配内存的过程不会被（高优先级进程或中断）打断</td>
+</tr>
+<tr>
+<td align="center">GFP_KERNEL</td>
+<td align="center">正常分配内存</td>
+</tr>
+<tr>
+<td align="center">GFP_DMA</td>
+<td align="center">给 DMA 控制器分配内存，需要使用该标志（DMA要求分配虚拟地址和物理地址连续</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>对应的内存释放函数为：</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kfree</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span> *objp)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2><span id="kzalloc">kzalloc()</span><a href="#kzalloc" class="header-anchor">.</a></h2><p>kzalloc() 函数与 kmalloc() 非常相似，参数及返回值是一样的，可以说是前者是后者的一个变种，因为 kzalloc() 实际上只是额外附加了 __GFP_ZERO 标志。所以它除了申请内核内存外，还会对申请到的内存内容清零。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * kzalloc - allocate memory. The memory is set to zero.</span></span><br><span class="line"><span class="comment"> * @size: how many bytes of memory are required.</span></span><br><span class="line"><span class="comment"> * @flags: the type of memory to allocate (see kmalloc).</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> *<span class="title">kzalloc</span><span class="params">(<span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">gfp_t</span> flags)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> kmalloc(<span class="built_in">size</span>, flags | __GFP_ZERO);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>kzalloc() 对应的内存释放函数也是 kfree()。</em></strong></p>
+<hr>
+<h2><span id="vmalloc-vfree">vmalloc()、vfree()</span><a href="#vmalloc-vfree" class="header-anchor">.</a></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;linux/vmalloc.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">vmalloc</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="built_in">size</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>vmalloc() 函数则会在虚拟内存空间给出一块连续的内存区，但这片连续的虚拟内存在物理内存中并不一定连续。由于 vmalloc() 没有保证申请到的是连续的物理内存，因此对申请的内存大小可以比较大，关于申请内存的大小要根据/proc/meminfo文件中的“VmallocChunk”剩余多少空间可以申请，示例如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#cat /proc/meminfo</span></span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">VmallocTotal:   <span class="number">34359738367</span> kB</span><br><span class="line">VmallocUsed:           <span class="number">0</span> kB</span><br><span class="line">VmallocChunk:          <span class="number">0</span> kB</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>上述输出信息 <strong><code>VmallocChunk:     34359738367 kB</code></strong> ，最多申请34359738367 kB内存。</p>
+<p><strong>注意：</strong><br>vmalloc() 和 vfree() 可以睡眠，因此不能从中断上下文调用。</p>
+<h2><span id="zong-jie">总结</span><a href="#zong-jie" class="header-anchor">.</a></h2><p>kmalloc()、kzalloc()、vmalloc() 的共同特点是：</p>
+<ul>
+<li>用于申请内核空间的内存；</li>
+<li>内存以字节为单位进行分配；</li>
+<li>所分配的内存虚拟地址上连续；</li>
+</ul>
+<p>kmalloc()、kzalloc()、vmalloc() 的区别是：</p>
+<ul>
+<li>kzalloc 是强制清零的 kmalloc 操作；（以下描述不区分 kmalloc 和 kzalloc）</li>
+<li>kmalloc 分配的内存大小有<strong>限制（128KB）</strong>，而 vmalloc 限制只与剩余空间大小有关；</li>
+<li><strong>kmalloc 可以保证分配的内存物理地址是连续的，但是 vmalloc 不能保证</strong>；</li>
+<li>kmalloc 分配内存的过程可以是原子过程（使用 GFP_ATOMIC），而 vmalloc 分配内存时则可能产生阻塞；</li>
+<li>kmalloc 分配内存的开销小，因此 kmalloc 比 vmalloc 要快；</li>
+</ul>
+<p>一般情况下，内存只有在要被 <strong>DMA 访问</strong> 的时候才需要物理上连续，但<strong>为了性能上的考虑，内核中一般使用 kmalloc()</strong>，而只有在<strong>需要获得大块内存时才使用 vmalloc()</strong>。<br>例如，当模块被动态加载到内核当中时，就把模块装载到由 vmalloc() 分配的内存上。</p>
+<hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/aliyun.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/18/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/02/21/Ubuntu%E5%AE%89%E8%A3%85EMQ%E5%8F%8A%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ubuntu安装EMQ及出现的问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/17/addr2line%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">addr2line命令使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">Linux内存分配相关函数详解 kmalloc()、kzalloc()、vmalloc().</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">动态申请内存.</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.1.</span> <span class="toc-text">MMU.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">2.1.1.</span> <span class="toc-text">操作系统中的内存管理.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">2.1.2.</span> <span class="toc-text">虚拟内存机制.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">2.1.3.</span> <span class="toc-text">页式内存管理.</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.2.</span> <span class="toc-text">内核虚拟内存布局.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.3.</span> <span class="toc-text">kmalloc()与kfree().</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.4.</span> <span class="toc-text">kzalloc().</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.5.</span> <span class="toc-text">vmalloc()、vfree().</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.6.</span> <span class="toc-text">总结.</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+
           </div>
         </div>
       </div>
-      <%- partial('_partial/footer') %>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2020 LYQ
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
-    <%- partial('_partial/after-footer') %>
-    <%- partial('_partial/tools') %>
-    <%- partial('_partial/viewer') %>
+  </div>
+  
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
+
+
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: <%=theme.mathjax%>,
+		isHome: <%=is_home()%>,
+		isPost: <%=is_post()%>,
+		isArchive: <%=is_archive()%>,
+		isTag: <%=is_tag()%>,
+		isCategory: <%=is_category()%>,
+		open_in_new: <%=theme.open_in_new%>,
+		toc_hide_index: <%=theme.toc_hide_index%>,
+		root: "<%=config.root%>",
+		innerArchive: <%=theme.smart_menu.innerArchive ? true : false%>,
+		showTags: <%=(theme.slider && theme.slider.showTags) ? true : false%>
+	}
+</script>
+<%- partial('script') %>
+
+<% if (theme.mathjax){ %>
+<%- partial('mathjax') %>
+<% } %>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">study</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">QT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">API</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            3、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://github.com/yhuan416" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>GITHUB-FRIEND</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://lokiwin.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄海润</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">每天都努力向上&lt;br&gt;&lt;br&gt;每天都进步一点点&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
   </div>
 </body>
 </html>

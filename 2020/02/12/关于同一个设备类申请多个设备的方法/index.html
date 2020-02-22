@@ -1,27 +1,761 @@
-<%- partial('_partial/head') %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>关于同一个设备类申请多个设备的方法及container_of()解析 | BBIGQ PERSONAL BLOG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当一个设备类拥有多个子设备时，如何在一个驱动模块中申请多个设备？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于同一个设备类申请多个设备的方法及container_of()解析">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;12&#x2F;%E5%85%B3%E4%BA%8E%E5%90%8C%E4%B8%80%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%B1%BB%E7%94%B3%E8%AF%B7%E5%A4%9A%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%9A%84%E6%96%B9%E6%B3%95&#x2F;index.html">
+<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="当一个设备类拥有多个子设备时，如何在一个驱动模块中申请多个设备？">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;toooodev.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;container_of.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;container_of_01.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;0%E6%8C%87%E9%92%88.png">
+<meta property="article:published_time" content="2020-02-12T03:23:33.000Z">
+<meta property="article:modified_time" content="2020-02-12T08:39:03.979Z">
+<meta property="article:author" content="LYQ">
+<meta property="article:tag" content="study">
+<meta property="article:tag" content="Linux Kernel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;toooodev.png">
+  
+    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/icon.ico">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
-      <%- partial('_partial/left-col', null, {cache: !config.relative_link}) %>
+      <% var defaultBg = '#4d4d4d'; %>
+<div class="overlay" style="background: <%= theme.style && theme.style.header ? theme.style.header : defaultBg %>"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="<%=theme.root%>" class="profilepic">
+			<img src="<%=theme.avatar%>" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="<%=theme.root%>"><%=theme.author%></a></h1>
+		</hgroup>
+		<% if (theme.subtitle){ %>
+		<p class="header-subtitle"><%=theme.subtitle%></p>
+		<%}%>
+
+		<nav class="header-menu">
+			<ul>
+			<% for (var i in theme.menu){ %>
+				<li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+	        <%}%>
+			</ul>
+		</nav>
+		<nav>
+                    总文章数 <%=site.posts.length%>
+                </nav>
+		<nav class="header-smart-menu">
+    		<% for (var i in theme.smart_menu){ %>
+    			<% if(theme.smart_menu[i]){ %>
+    			<a q-on="click: openSlider(e, '<%-i%>')" href="javascript:void(0)"><%= theme.smart_menu[i] %></a>
+    			<% } %>
+            <%}%>
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				<% for (var i in theme.subnav){ %>
+					<a class="<%= i %>" target="_blank" href="<%- url_for(theme.subnav[i]) %>" title="<%= i %>"><i class="icon-<%= i %>"></i></a>
+		        <%}%>
+			</div>
+		</nav>
+	</header>		
+</div>
+
     </div>
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
-      <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">LYQ</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>STEP BY STEP<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/study/">STUDY</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div class="canvas-wrap">
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <%- body %>
+            <article id="post-关于同一个设备类申请多个设备的方法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于同一个设备类申请多个设备的方法及container_of()解析
+    </h1>
+  
+
+        
+        <% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+</a>
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.5k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="dang-yi-ge-she-bei-lei-yong-you-duo-ge-zi-she-bei-shi-ru-he-zai-yi-ge-qu-dong-mo-kuai-zhong-shen-qing-duo-ge-she-bei">当一个设备类拥有多个子设备时，如何在一个驱动模块中申请多个设备？</span><a href="#dang-yi-ge-she-bei-lei-yong-you-duo-ge-zi-she-bei-shi-ru-he-zai-yi-ge-qu-dong-mo-kuai-zhong-shen-qing-duo-ge-she-bei" class="header-anchor">.</a></h1><a id="more"></a>
+<hr>
+<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#guan-jian-han-shu-jie-xi">关键函数解析</a></li>
+<li><a href="#yuan-ma-bian-xie-si-lu">源码编写思路</a><ul>
+<li><a href="#zhu-yi-shi-xiang">注意事项</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<p>关于一个设备类下有多个设备，在Linux系统中并不少见<br><img src="/blogmat/toooodev.png" alt="toooodev"><br>当我们编写的驱动模块需要达到这样的效果时，有些关键的函数和思想不容错过！</p>
+<h1><span id="guan-jian-han-shu-jie-xi">关键函数解析</span><a href="#guan-jian-han-shu-jie-xi" class="header-anchor">.</a></h1><blockquote>
+<p><strong><em>container_of() 头文件： #include &lt;linux/kernel.h&gt;</em></strong></p>
+</blockquote>
+<p>根据结构体中的某个成员的地址，从而得到整个结构体的地址</p>
+<p>代码原型：<br><img src="/blogmat/container_of.png" alt="container_of()"></p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ptr</td>
+<td align="center">已知结构体成员的地址</td>
+</tr>
+<tr>
+<td align="center">type</td>
+<td align="center">要获取整个结构体的类型</td>
+</tr>
+<tr>
+<td align="center">member</td>
+<td align="center">已知结构体成员的名字</td>
+</tr>
+</tbody></table>
+<p><img src="/blogmat/container_of_01.png" alt="图解"><br>其实就是一个很简单的数学算数问题，我们已知一个 <code>type结构体类型</code> 及type结构体成员名 <code>member</code> 和成员的地址 <code>ptr</code>;</p>
+<p>如果我们要计算在结构体type中member的偏移量大小size，我们直接用 size = (&amp;type) - ptr(即 &amp;member);</p>
+<p>同理，为了求出type的首地址，我们只需要 &amp;type = ptr - size 即可;</p>
+<p>那么关键的 <code>size</code> 怎么求呢？<br>我们看到了代码原型中有 <strong><em><code>offsetof</code></em></strong> 这个函数 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> offsetof(TYPE, MEMBER) ((size_t) &amp;((TYPE *)0)-&gt;MEMBER)</span></span><br></pre></td></tr></table></figure>
+<p>这里就涉及到 <code>0指针</code> 的使用了</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">char</span> i ;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">char</span> k;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">type</span> <span class="title">temp</span>;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;temp = %p\n"</span>,&amp;temp);   </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;temp.k = %p\n"</span>,&amp;temp.k);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"&amp;((struct type *)0)-&gt;k = %d\n"</span>,((<span class="keyword">int</span>)&amp;((struct type *)<span class="number">0</span>)-&gt;k));</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br><img src="/blogmat/0%E6%8C%87%E9%92%88.png" alt="0指针"></p>
+<p><code>&amp;((struct type *)0)-&gt;k</code> 的意思是：这里的0被强行转化为 <code>struct type *</code> 类型，相当于有一个虚拟的首地址为0的struct type 结构体，并用一个指针指向成员k，而 <code>&amp;((struct type *)0)-&gt;k</code> 就是成员k到该结构体首地址的相对距离，也就是求出了结构体成员距离结构体首地址的距离size！</p>
+<p><code>(type *)( (char *)__mptr - offsetof(type,member) )</code>：然后我们只需要用 <code>ptr</code> 已知成员函数的地址减去求出来的 <code>size</code> ，结构体 <code>type</code> 的首地址不就出来了吗！</p>
+<p>contianer_of源码中的第一句： <code>const typeof( ((type *)0)-&gt;member ) *__mptr = (ptr);</code> ，查阅了一些大佬的博客才突然醒悟，这是内核工程师的一个小手段，就一句话就避免传递的 <code>ptr</code> 与   <code>member</code> 类型不匹配的问题。</p>
+<hr>
+<h1><span id="yuan-ma-bian-xie-si-lu">源码编写思路</span><a href="#yuan-ma-bian-xie-si-lu" class="header-anchor">.</a></h1><p>由于不同的设备需要不同字符设备结构体、设备号以及 <code>对应的设备编号</code>;<br>那么我们可以定义一个结构体数组，在结构体中包含了字符设备结构体、设备号以及对应的设备编号; </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">led_dev</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">cdev</span> <span class="title">cdev</span>;</span>			<span class="comment">//字符设备结构体，每个led灯对应字符设备结构体</span></span><br><span class="line">	<span class="keyword">dev_t</span>	dev_num;			<span class="comment">//设备号</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> n;				<span class="comment">//对应哪一个led灯</span></span><br><span class="line">	</span><br><span class="line">&#125;led_dev_tbl[<span class="number">4</span>];				<span class="comment">//记录4个LED的相关信息</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口函数</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> __<span class="function">init <span class="title">gec6818_led_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> rt=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">gpioc_res</span>=<span class="title">NULL</span>;</span>	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">resource</span> *<span class="title">gpioe_res</span>=<span class="title">NULL</span>;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//动态申请设备号</span></span><br><span class="line">	<span class="comment">//申请次设备的数量为4</span></span><br><span class="line">	<span class="comment">//显示在/proc/devices文件</span></span><br><span class="line">	rt=alloc_chrdev_region(&amp;led_num,<span class="number">0</span>,<span class="number">4</span>,<span class="string">"myled"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(rt &lt; <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		printk(<span class="string">"alloc_chrdev_region fail\n"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> rt;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//获取设备号</span></span><br><span class="line">		led_dev_tbl[i].dev_num = led_num+i;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//指定对应的led灯编号</span></span><br><span class="line">		led_dev_tbl[i].n = i+<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//字符设备初始化</span></span><br><span class="line">		cdev_init(&amp;led_dev_tbl[i].cdev,&amp;gec6818_led_fops);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//字符设备添加到内核</span></span><br><span class="line">		rt = cdev_add(&amp;led_dev_tbl[i].cdev,led_dev_tbl[i].dev_num,<span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span>(rt &lt; <span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			printk(<span class="string">"cdev_add fail\n"</span>);</span><br><span class="line">			<span class="keyword">goto</span> fail_cdev_add;</span><br><span class="line">			</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//创建类，类只需一个</span></span><br><span class="line">	leds_class=class_create(THIS_MODULE, <span class="string">"myled"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (IS_ERR(leds_class))</span><br><span class="line">	&#123;</span><br><span class="line">		rt = PTR_ERR(leds_class);</span><br><span class="line">		</span><br><span class="line">		printk(<span class="string">"class_create  fail\n"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">goto</span> fail_class_create;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//创建设备有四个</span></span><br><span class="line">	<span class="comment">//myled1,myled2,myled3,myled4</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//在/dev/目录看到对应的设备文件名</span></span><br><span class="line">		leds_device=device_create(leds_class, <span class="literal">NULL</span>, led_dev_tbl[i].dev_num, <span class="literal">NULL</span>, <span class="string">"%s%d"</span>,<span class="string">"myled"</span>,i+<span class="number">1</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">if</span> (IS_ERR(leds_device))</span><br><span class="line">		&#123;</span><br><span class="line">			rt = PTR_ERR(leds_device);</span><br><span class="line">			</span><br><span class="line">			printk(<span class="string">"device_create  fail\n"</span>);</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">goto</span> fail_device_create;</span><br><span class="line">			</span><br><span class="line">		&#125;			</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	...</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">fail_class_create:</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">		cdev_del(&amp;led_dev_tbl[i].cdev);	</span><br><span class="line">	</span><br><span class="line">fail_cdev_add:</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">		unregister_chrdev_region(led_dev_tbl[i].dev_num,<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> rt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2><span id="zhu-yi-shi-xiang">注意事项</span><a href="#zhu-yi-shi-xiang" class="header-anchor">.</a></h2><p>由于不同的次设备使用的都是同一套 <code>file_operations</code> 文件操作集，所以要在对应的文件操作函数中，区分是什么设备调用的，这个时候就涉及到 <code>struct file *file</code> 这个结构体了，通过它进行函数之间的私有数据传递，具体见以下源码！</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span>  <span class="title">gec6818_led_open</span> <span class="params">(struct inode * inode, struct file *file)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//如何判断当前是打开/dev/myled1、/dev/myled2、/dev/myled3、/dev/myled4</span></span><br><span class="line">	<span class="comment">//获取用户打开的设备对应的字符设备结构体</span></span><br><span class="line">	<span class="comment">//container_of:根据结构体中的某个成员的地址，从而得到整个结构体的地址</span></span><br><span class="line">	<span class="comment">//现在必须得到led_dev_tbl[0]或led_dev_tbl[1]的首地址</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">led_dev</span> *<span class="title">dev</span> = <span class="title">container_of</span>(<span class="title">inode</span>-&gt;<span class="title">i_cdev</span>,<span class="title">struct</span> <span class="title">led_dev</span>,<span class="title">cdev</span>);</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(dev-&gt;n ==<span class="number">1</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//配置GPIOE13为输出模式</span></span><br><span class="line">		iowrite32(ioread32(gpioe_altfn0_va)&amp;(~(<span class="number">3</span>&lt;&lt;<span class="number">26</span>)),gpioe_altfn0_va);</span><br><span class="line">		iowrite32(ioread32(gpioe_outenb_va)|(<span class="number">1</span>&lt;&lt;<span class="number">13</span>),gpioe_outenb_va);			</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(dev-&gt;n ==<span class="number">2</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//配置GPIOC17为输出模式</span></span><br><span class="line">		iowrite32((ioread32(gpioc_altfn1_va)&amp;(~(<span class="number">3</span>&lt;&lt;<span class="number">2</span>)))|(<span class="number">1</span>&lt;&lt;<span class="number">2</span>),gpioc_altfn1_va);</span><br><span class="line">		iowrite32(ioread32(gpioc_outenb_va)|(<span class="number">1</span>&lt;&lt;<span class="number">17</span>),gpioc_outenb_va);	</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(dev-&gt;n ==<span class="number">3</span> )</span><br><span class="line">	&#123;	</span><br><span class="line">		<span class="comment">//GPIOC8</span></span><br><span class="line">		iowrite32((ioread32(gpioc_altfn0_va)&amp;(~(<span class="number">3</span>&lt;&lt;<span class="number">16</span>)))|(<span class="number">1</span>&lt;&lt;<span class="number">16</span>), gpioc_altfn0_va);</span><br><span class="line">    	iowrite32((ioread32(gpioc_outenb_va)|(<span class="number">1</span>&lt;&lt;<span class="number">8</span>)), gpioc_outenb_va);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(dev-&gt;n ==<span class="number">4</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//GPIOC7</span></span><br><span class="line">		iowrite32((ioread32(gpioc_altfn0_va)&amp;(~(<span class="number">3</span>&lt;&lt;<span class="number">14</span>)))|(<span class="number">1</span>&lt;&lt;<span class="number">14</span>), gpioc_altfn0_va);</span><br><span class="line">    	iowrite32((ioread32(gpioc_outenb_va)|(<span class="number">1</span>&lt;&lt;<span class="number">7</span>)), gpioc_outenb_va);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	file -&gt;private_data = dev;		<span class="comment">//通过struct file *file进行函数之间的私有数据传递，这里意思是假如打开了/dev/myledx ，</span></span><br><span class="line">									<span class="comment">//那么gec6818_led_write函数通过struct file *file 就可以知道操作哪个led了</span></span><br><span class="line">	</span><br><span class="line">	printk(<span class="string">"gec6818_led_open \n"</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> ssize_t <span class="title">gec6818_led_write</span> <span class="params">(struct file * file, <span class="keyword">const</span> <span class="keyword">char</span> __user * buf, <span class="keyword">size_t</span> len, <span class="keyword">loff_t</span> * off)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">char</span> led_sta=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">led_dev</span> *<span class="title">dev</span> = <span class="title">file</span>-&gt;<span class="title">private_data</span>;</span>   <span class="comment">//在前面的open函数中file -&gt;private_data = dev后，此处可以取出file -&gt;private_data的值，便可次设备的具体信息</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//判断当前len是否合法</span></span><br><span class="line">	<span class="keyword">if</span>(len &gt; <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">return</span> -EINVAL;		<span class="comment">//返回参数无效错误码</span></span><br><span class="line">		</span><br><span class="line">	<span class="comment">//从用户空间拷贝数据</span></span><br><span class="line">	</span><br><span class="line">	ret = copy_from_user(&amp;led_sta,buf,<span class="number">1</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(ret !=<span class="number">0</span> )</span><br><span class="line">		<span class="keyword">return</span> -EFAULT;</span><br><span class="line">            ...</span><br><span class="line">            ...</span><br><span class="line">            ...</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//获取成功复制的字节数</span></span><br><span class="line">	len = len - ret;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/aliyun.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/12/%E5%85%B3%E4%BA%8E%E5%90%8C%E4%B8%80%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%B1%BB%E7%94%B3%E8%AF%B7%E5%A4%9A%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%9A%84%E6%96%B9%E6%B3%95/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/02/12/%E5%86%85%E6%A0%B8GPIO%E6%A0%87%E5%87%86%E5%87%BD%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          内核GPIO标准函数
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/12/%E5%85%B3%E4%BA%8EIO%E5%86%85%E5%AD%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于IO内存</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">当一个设备类拥有多个子设备时，如何在一个驱动模块中申请多个设备？.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">关键函数解析.</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">源码编写思路.</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">3.1.</span> <span class="toc-text">注意事项.</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+
           </div>
         </div>
       </div>
-      <%- partial('_partial/footer') %>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2020 LYQ
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
-    <%- partial('_partial/after-footer') %>
-    <%- partial('_partial/tools') %>
-    <%- partial('_partial/viewer') %>
+  </div>
+  
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+</footer>
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
+
+
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: <%=theme.mathjax%>,
+		isHome: <%=is_home()%>,
+		isPost: <%=is_post()%>,
+		isArchive: <%=is_archive()%>,
+		isTag: <%=is_tag()%>,
+		isCategory: <%=is_category()%>,
+		open_in_new: <%=theme.open_in_new%>,
+		toc_hide_index: <%=theme.toc_hide_index%>,
+		root: "<%=config.root%>",
+		innerArchive: <%=theme.smart_menu.innerArchive ? true : false%>,
+		showTags: <%=(theme.slider && theme.slider.showTags) ? true : false%>
+	}
+</script>
+<%- partial('script') %>
+
+<% if (theme.mathjax){ %>
+<%- partial('mathjax') %>
+<% } %>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">study</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">QT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">API</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            3、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://github.com/yhuan416" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>GITHUB-FRIEND</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://lokiwin.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄海润</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">每天都努力向上&lt;br&gt;&lt;br&gt;每天都进步一点点&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
   </div>
 </body>
 </html>
