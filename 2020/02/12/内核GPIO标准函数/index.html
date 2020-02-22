@@ -17,8 +17,8 @@
 <meta property="article:published_time" content="2020-02-12T08:26:13.000Z">
 <meta property="article:modified_time" content="2020-02-12T09:58:19.905Z">
 <meta property="article:author" content="LYQ">
-<meta property="article:tag" content="study">
 <meta property="article:tag" content="Linux Kernel">
+<meta property="article:tag" content="study">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
@@ -71,7 +71,7 @@
 			</ul>
 		</nav>
 		<nav>
-                    总文章数 24
+                    总文章数 27
                 </nav>
 		<nav class="header-smart-menu">
     		
@@ -212,7 +212,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count">205字</span>
+        <span class="post-count"><%= wordcount(post.content) %>字</span>
       </span>
     </span>
 
@@ -221,7 +221,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count">1分</span>
+        <span class="post-count"><%= min2read(post.content) %>分</span>
       </span>
     </span>
 </div>
@@ -302,11 +302,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Linux Kernel</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
         		</li>
       		
 		</ul>
@@ -375,6 +375,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/02/17/addr2line%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          addr2line命令使用
+        
+      </div>
+    </a>
   
   
     <a href="/2020/02/12/%E5%85%B3%E4%BA%8E%E5%90%8C%E4%B8%80%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%B1%BB%E7%94%B3%E8%AF%B7%E5%A4%9A%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%9A%84%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
@@ -534,6 +543,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">study</a>
               </li>
              
@@ -559,10 +576,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">UART</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
               </li>
             
             <div class="clearfix"></div>
