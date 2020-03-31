@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(1)%E2%80%94%E2%80%94GPIO%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2020-03-31</lastmod>
+  </url>  <url>
     <loc>http://yoursite.com/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(5)%E2%80%94%E2%80%94IIC/</loc>
     <lastmod>2020-03-31</lastmod>
   </url>  <url>
@@ -11,9 +14,6 @@
     <lastmod>2020-03-31</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(2)%E2%80%94%E2%80%94hw_timer%E7%A1%AC%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8/</loc>
-    <lastmod>2020-03-31</lastmod>
-  </url>  <url>
-    <loc>http://yoursite.com/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(1)%E2%80%94%E2%80%94GPIO%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2020-03-31</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2020/03/31/%E5%9F%BA%E4%BA%8ELinux%E7%9A%84ESP8266%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc>
