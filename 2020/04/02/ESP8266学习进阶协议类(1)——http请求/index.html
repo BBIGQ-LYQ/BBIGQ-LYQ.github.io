@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <%
+  var title = page.title;
+
+  if (is_archive()){
+    title = 'Archives';
+
+    if (is_month()){
+      title += ': ' + page.year + '/' + page.month;
+    } else if (is_year()){
+      title += ': ' + page.year;
+    }
+  } else if (is_category()){
+    title = 'Category: ' + page.category;
+  } else if (is_tag()){
+    title = 'Tag: ' + page.tag;
+  }
+  %>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="<%= config.url %>">
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
+  <% if (theme.rss){ %>
+    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+  <% } %>
+  <% if (theme.favicon){ %>
+    <link rel="icon" href="/img/icon.ico">
+  <% } %>
+  <%- partial('css') %>
+  <style type="text/css">
+  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
+    #container.show {
+      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
+    }
+  </style>
+  <%- partial('google-analytics') %>
+  <%- partial('baidu-analytics') %>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/head.jpg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">LYQ</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">STEP BY STEP</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+	        
+				<li><a href="/tags/study/">STUDY</a></li>
+	        
+				<li><a href="/archives/index.html">归档</a></li>
+	        
+			</ul>
+		</nav>
+		<nav>
+                    总文章数 35
+                </nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/head.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">LYQ</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>STEP BY STEP<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/BBIGQ-LYQ" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="https://weibo.com/u/6090703206/home?wvr=5&sudaref=login.sina.com.cn" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/da-da-qi-1-28/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="qq" target="_blank" href="/1045042619" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="weixin" target="_blank" href="/LINYUQI1995" title="weixin"><i class="icon-weixin"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:1045042619@qq.com" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/study/">STUDY</a></li>
+		        
+					<li style="width: 25%"><a href="/archives/index.html">归档</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-ESP8266学习进阶协议类(1)——http请求" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ESP8266学习进阶协议类(1)——http请求
+    </h1>
+  
+
+        
+        
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2020/04/02/ESP8266%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6%E5%8D%8F%E8%AE%AE%E7%B1%BB(1)%E2%80%94%E2%80%94http%E8%AF%B7%E6%B1%82/" class="archive-article-date">
+  	<time datetime="2020-04-02T11:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
+</a>
+
+        <!-- 需要添加的位置 -->
+        <!-- 开始添加字数统计-->
+        
+          <div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.6k字</span>
+      </span>
+    </span>
+
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">6分</span>
+      </span>
+    </span>
+</div>
+
+          
+        <!-- 添加完成 -->
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1><span id="esp8266-xue-xi-jin-jie-xie-yi-lei-1-http-qing-qiu">ESP8266学习进阶协议类(1)——http请求</span><a href="#esp8266-xue-xi-jin-jie-xie-yi-lei-1-http-qing-qiu" class="header-anchor">.</a></h1><a id="more"></a>
+<hr>
+<div class="toc">
+
+<!-- toc -->
+
+<ul>
+<li><a href="#http-gong-zuo-yuan-li">HTTP工作原理</a></li>
+<li><a href="#ju-ti-shi-xian-guo-cheng">具体实现过程</a><ul>
+<li><a href="#lian-jie-wifi">连接wifi：</a></li>
+<li><a href="#fa-chu-http-qing-qiu">发出http请求</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+</div>
+
+<p>HTTP协议（HyperText Transfer Protocol，超文本传输协议）是因特网上应用最为广泛的一种网络传输协议，所有的WWW文件都必须遵守这个标准。</p>
+<p>HTTP是一个基于TCP/IP通信协议来传递数据（HTML 文件, 图片文件, 查询结果等）。</p>
+<h2><span id="http-gong-zuo-yuan-li">HTTP工作原理</span><a href="#http-gong-zuo-yuan-li" class="header-anchor">.</a></h2><p>HTTP协议工作于客户端-服务端架构上。浏览器作为HTTP客户端通过URL向HTTP服务端即WEB服务器发送所有请求。</p>
+<p>Web服务器有：Apache服务器，IIS服务器（Internet Information Services）等。</p>
+<p>Web服务器根据接收到的请求后，向客户端发送响应信息。</p>
+<p>HTTP默认端口号为80，但是你也可以改为8080或者其他端口。</p>
+<p><strong>HTTP三点注意事项：</strong></p>
+<ul>
+<li><strong>HTTP是无连接：</strong>无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</li>
+<li><strong>HTTP是媒体独立的：</strong>这意味着，只要客户端和服务器知道如何处理的数据内容，任何类型的数据都可以通过HTTP发送。客户端以及服务器指定使用适合的MIME-type内容类型。</li>
+<li><strong>HTTP是无状态：</strong>HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</li>
+</ul>
+<h2><span id="ju-ti-shi-xian-guo-cheng">具体实现过程</span><a href="#ju-ti-shi-xian-guo-cheng" class="header-anchor">.</a></h2><ul>
+<li>通常要使用HTTP请求都是先建立起TCP/IP的连接，与服务器建立TCP通信；</li>
+<li>发送具体的HTTP请求</li>
+<li>接收服务器返回的数据</li>
+<li>关闭连接</li>
+</ul>
+<p>当然在ESP8266上实现还需要先让设备能够联网上网，ESP8266-RTOS-SDK提供了对应的wifi连接接口，见   <strong>esp_wifi.h</strong> 所有的wifi相关接口都在这里，包括切换STA和AP，在ESP8266-RTOS-SDK中，提供了一个适配器的概念，目的是在TCPIP堆栈上提供一个抽象层，据官方文档介绍是为了实现切换到其他TCPIP栈而设计的，具体的我也没研究透，根据文档，只需要在连接wifi前对适配器进行初始化就行;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpip_adapter_init();</span><br></pre></td></tr></table></figure>
+
+
+
+<h3><span id="lian-jie-wifi">连接wifi：</span><a href="#lian-jie-wifi" class="header-anchor">.</a></h3><blockquote>
+<p>*<em>WiFi初始化：esp_err_t esp_wifi_init(const wifi_init_config_t *config) *</em></p>
+<p>例如WiFi控制结构，RX / TX缓冲区，WiFi NVS结构等，此WiFi也会启动WiFi任务。</p>
+</blockquote>
+<p>相关参数结构体：<strong>wifi_init_config_t 针对wifi配置的相关结构体</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">system_event_handler_t</span> event_handler;          <span class="comment">/**&lt; WiFi event handler */</span></span><br><span class="line">    <span class="keyword">void</span>*                  osi_funcs;              <span class="comment">/**&lt; WiFi OS functions */</span></span><br><span class="line">    <span class="keyword">int</span>                    static_rx_buf_num;      <span class="comment">/**&lt; WiFi static RX buffer number */</span></span><br><span class="line">    <span class="keyword">int</span>                    dynamic_rx_buf_num;     <span class="comment">/**&lt; WiFi dynamic RX buffer number */</span></span><br><span class="line">    <span class="keyword">int</span>                    tx_buf_type;            <span class="comment">/**&lt; WiFi TX buffer type */</span></span><br><span class="line">    <span class="keyword">int</span>                    static_tx_buf_num;      <span class="comment">/**&lt; WiFi static TX buffer number */</span></span><br><span class="line">    <span class="keyword">int</span>                    dynamic_tx_buf_num;     <span class="comment">/**&lt; WiFi dynamic TX buffer number */</span></span><br><span class="line">    <span class="keyword">int</span>                    csi_enable;             <span class="comment">/**&lt; WiFi channel state information enable flag */</span></span><br><span class="line">    <span class="keyword">int</span>                    ampdu_rx_enable;        <span class="comment">/**&lt; WiFi AMPDU RX feature enable flag */</span></span><br><span class="line">    <span class="keyword">int</span>                    ampdu_tx_enable;        <span class="comment">/**&lt; WiFi AMPDU TX feature enable flag */</span></span><br><span class="line">    <span class="keyword">int</span>                    nvs_enable;             <span class="comment">/**&lt; WiFi NVS flash enable flag */</span></span><br><span class="line">    <span class="keyword">int</span>                    nano_enable;            <span class="comment">/**&lt; Nano option for printf/scan family enable flag */</span></span><br><span class="line">    <span class="keyword">int</span>                    tx_ba_win;              <span class="comment">/**&lt; WiFi Block Ack TX window size */</span></span><br><span class="line">    <span class="keyword">int</span>                    rx_ba_win;              <span class="comment">/**&lt; WiFi Block Ack RX window size */</span></span><br><span class="line">    <span class="keyword">int</span>                    magic;                  <span class="comment">/**&lt; WiFi init magic number, it should be the last field */</span></span><br><span class="line">&#125; <span class="keyword">wifi_init_config_t</span>;</span><br></pre></td></tr></table></figure>
+
+<p>第一次看到这个头都大，所幸官方提供了一个默认的宏配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WIFI_INIT_CONFIG_DEFAULT() &#123; \</span></span><br><span class="line">    .event_handler = &amp;esp_event_send, \</span><br><span class="line">    .osi_funcs = <span class="literal">NULL</span>, \</span><br><span class="line">    .static_rx_buf_num = <span class="number">5</span>,\</span><br><span class="line">    .dynamic_rx_buf_num = <span class="number">0</span>,\</span><br><span class="line">    .tx_buf_type = <span class="number">0</span>,\</span><br><span class="line">    .static_tx_buf_num = <span class="number">6</span>,\</span><br><span class="line">    .dynamic_tx_buf_num = <span class="number">0</span>,\</span><br><span class="line">    .csi_enable = <span class="number">0</span>,\</span><br><span class="line">    .ampdu_rx_enable = <span class="number">0</span>,\</span><br><span class="line">    .ampdu_tx_enable = <span class="number">0</span>,\</span><br><span class="line">    .nvs_enable = <span class="number">1</span>,\</span><br><span class="line">    .nano_enable = <span class="number">0</span>,\</span><br><span class="line">    .tx_ba_win = <span class="number">0</span>,\</span><br><span class="line">    .rx_ba_win = <span class="number">0</span>,\</span><br><span class="line">    .magic = WIFI_INIT_CONFIG_MAGIC\</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<blockquote>
+<p><strong>esp_err_t  esp_wifi_deinit（ void ）</strong></p>
+<p>与WiFi初始化相对于的一个函数，用于释放esp_wifi_init中分配的所有资源并停止WiFi任务。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>esp_err_t  esp_wifi_set_storage（wifi_storage_t storage ）</strong></p>
+<p>设置WiFi API配置存储类型</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef enum &#123;</span><br><span class="line">    WIFI_STORAGE_FLASH,  &#x2F;**&lt; 所有配置信息都保存在memory和flash中 *&#x2F;</span><br><span class="line">    WIFI_STORAGE_RAM,    &#x2F;**&lt; 所有配置信息只保存在memory中 *&#x2F;</span><br><span class="line">&#125; wifi_storage_t;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<blockquote>
+<p><strong>esp_err_t esp_wifi_set_mode(wifi_mode_t mode);</strong></p>
+<p>设置wifi工作模式；</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> &#123;</span><br><span class="line">    WIFI_MODE_NULL = <span class="number">0</span>,  <span class="comment">/**&lt; null mode */</span></span><br><span class="line">    WIFI_MODE_STA,       <span class="comment">/**&lt; WiFi station mode */</span></span><br><span class="line">    WIFI_MODE_AP,        <span class="comment">/**&lt; WiFi soft-AP mode */</span></span><br><span class="line">    WIFI_MODE_APSTA,     <span class="comment">/**&lt; WiFi station + soft-AP mode */</span></span><br><span class="line">    WIFI_MODE_MAX</span><br><span class="line">&#125; <span class="keyword">wifi_mode_t</span>;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>esp_err_t esp_wifi_set_config(wifi_interface_t , wifi_config_t *conf);</strong></p>
+<p>设置ESP8266 STA或AP的配置</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数类型</th>
+<th>解析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wifi_interface_t</td>
+<td>typedef enum {<br>    ESP_IF_WIFI_STA = 0,     /<strong>&lt; ESP8266 station interface */<br>    ESP_IF_WIFI_AP,          /</strong>&lt; ESP8266 soft-AP interface */<br>    ESP_IF_MAX<br>} esp_interface_t;</td>
+</tr>
+<tr>
+<td>wifi_config_t</td>
+<td>typedef union {<br>    wifi_ap_config_t  ap;  /<strong>&lt; configuration of AP */<br>    wifi_sta_config_t sta; /</strong>&lt; configuration of STA */<br>} wifi_config_t;</td>
+</tr>
+</tbody></table>
+<p>由于wifi_config_t是一个联合体，在使用的时候我们可以这样，例如使用STA模式：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">wifi_config_t</span> wifi_config = &#123;           	<span class="comment">//填入wifi信息</span></span><br><span class="line">        .sta = &#123;                            <span class="comment">//sta模式</span></span><br><span class="line">            .ssid = EXAMPLE_WIFI_SSID,		<span class="comment">//作为STA需要接入的AP（路由器/WIFI）的ID</span></span><br><span class="line">            .password = EXAMPLE_WIFI_PASS,	<span class="comment">//（路由器/WIFI）密码</span></span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p><strong>esp_err_t esp_wifi_start(void);</strong></p>
+<p>当所有的配置都做好后，调用该函数会根据当前配置启动WiFi如果模式为WIFI_MODE_STA，则创建站点控制块并启动站点如果模式为WIFI_MODE_AP，则创建软AP控制块并启动soft-AP如果模式为WIFI_MODE_APSTA，则创建软AP和站点控制块并启动软AP和工作站。</p>
+</blockquote>
+<p>让8266在STA模式连接WIFI步骤总结如下：</p>
+<ul>
+<li>初始化适配器</li>
+<li>新建一个配置wifi的结构体，然后调用wifi初始化函数</li>
+<li>设置WiFi API配置存储类型</li>
+<li>设置WiFi工作模式</li>
+<li>设置ESP8266 STA或AP的配置</li>
+<li>启动WiFi</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">tcpip_adapter_init();</span><br><span class="line">   <span class="keyword">wifi_init_config_t</span> cfg = WIFI_INIT_CONFIG_DEFAULT();</span><br><span class="line">   esp_wifi_init(&amp;cfg);</span><br><span class="line">   esp_wifi_set_storage(WIFI_STORAGE_RAM);</span><br><span class="line">   <span class="keyword">wifi_config_t</span> wifi_config = &#123;           <span class="comment">//填入wifi信息</span></span><br><span class="line">       .sta = &#123;                            <span class="comment">//sta模式</span></span><br><span class="line">           .ssid = EXAMPLE_WIFI_SSID,	    <span class="comment">//wifi名称</span></span><br><span class="line">           .password = EXAMPLE_WIFI_PASS,  <span class="comment">//wifi密码</span></span><br><span class="line">       &#125;,</span><br><span class="line">   &#125;;</span><br><span class="line">   esp_wifi_set_mode(WIFI_MODE_STA);</span><br><span class="line">  	esp_wifi_set_config(ESP_IF_WIFI_STA, &amp;wifi_config);</span><br><span class="line">   esp_wifi_start();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3><span id="fa-chu-http-qing-qiu">发出http请求</span><a href="#fa-chu-http-qing-qiu" class="header-anchor">.</a></h3><p>完成前面的联网后，发出http请求就很简单了，</p>
+<ul>
+<li>创建一个TCP的客户端socket</li>
+<li>往socket写入具体的HTTP请求</li>
+<li>接收回发的数据</li>
+</ul>
+<p>本文使用的是我之前封装好的一个接口，<a href="https://github.com/BBIGQ-LYQ/COMMON-LIB" target="_blank" rel="noopener">点击获取</a></p>
+<blockquote>
+<p><strong>头文件：#include &lt;sys/socket.h&gt;</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> domain, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>; 		<span class="comment">//创建socket</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">connect</span><span class="params">(<span class="keyword">int</span> sockfd, <span class="keyword">const</span> struct sockaddr *addr, <span class="keyword">socklen_t</span> addrlen)</span></span>; <span class="comment">//连接服务器</span></span><br></pre></td></tr></table></figure>
+
+<p>完了之后就是往socket写入封装好的URL即可</p>
+<blockquote>
+<p><strong>头文件：#include &lt;unistd.h&gt;</strong></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ssize_t</span> <span class="built_in">write</span>(<span class="keyword">int</span> fd, <span class="keyword">const</span> <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);	 <span class="comment">//写</span></span><br><span class="line"><span class="keyword">ssize_t</span> <span class="built_in">read</span>(<span class="keyword">int</span> fd, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> count);			<span class="comment">//读</span></span><br></pre></td></tr></table></figure>
+
+<p>本次测试使用的是<a href="http://api.qingyunke.com/" target="_blank" rel="noopener">青云客智能聊天机器人API</a>免费的API，本来是测试获取天气的，但是不知道为什么获取的天气数据中文没法输出，就换成了翻译功能；</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HEAD_FORMAT <span class="meta-string">"GET /api.php?key=free&amp;appid=0&amp;msg=翻译武汉加油 HTTP/1.1\r\nHost:api.qingyunke.com\r\n\r\n"</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>效果如图：（天气左边是8266串口输出的，只能显示数字和英文，右边是纯代码测试的输出）</strong></p>
+<p><img src="/blogmat/8-weather.png" alt="天气"></p>
+<p><img src="/blogmat/fanyi.png" alt="翻译"></p>
+<p><a href="https://github.com/BBIGQ-LYQ/ESP8266_Test_Storage" target="_blank" rel="noopener">工程源码</a>见我的Github</p>
+<hr>
+<p><a href="https://github.com/BBIGQ-LYQ" target="_blank" rel="noopener">我的GITHUB</a></p>
+<p><a href="http://blog.bigbigqi.club/" target="_blank" rel="noopener">我的个人博客</a></p>
+<p><a href="https://me.csdn.net/qq_41714908" target="_blank" rel="noopener">CSDN</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/aliyun.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+        <div class="article-pop-out tagcloud">
+          <i class="icon-tuding"></i>
+          <a class="article-tag-list-link color3">置顶</a>
+        </div>
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ESP8266</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/02/ESP8266%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6%E5%8D%8F%E8%AE%AE%E7%B1%BB(1)%E2%80%94%E2%80%94http%E8%AF%B7%E6%B1%82/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/04/02/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(6)%E2%80%94%E2%80%94UART/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          ESP8266学习历程(6)——UART
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(1)%E2%80%94%E2%80%94GPIO%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ESP8266学习历程(1)——GPIO配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">ESP8266学习进阶协议类(1)——http请求.</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP工作原理.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">具体实现过程.</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.2.1.</span> <span class="toc-text">连接wifi：.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.2.2.</span> <span class="toc-text">发出http请求.</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %>
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+  <% if (theme.busuanzi && theme.busuanzi.enable){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_site_pv">
+                本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv" style='display:none'>
+                本站访客数<span id="busuanzi_value_site_uv"></span>人
+        </span>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <% } %>
+</footer>
+<!--页面点击小红心-->
+<script type="text/javascript" src="/love.js"></script>
+
+<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+<a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">粤ICP备20012193号</a>
+
+
+
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: <%=theme.mathjax%>,
+		isHome: <%=is_home()%>,
+		isPost: <%=is_post()%>,
+		isArchive: <%=is_archive()%>,
+		isTag: <%=is_tag()%>,
+		isCategory: <%=is_category()%>,
+		open_in_new: <%=theme.open_in_new%>,
+		toc_hide_index: <%=theme.toc_hide_index%>,
+		root: "<%=config.root%>",
+		innerArchive: <%=theme.smart_menu.innerArchive ? true : false%>,
+		showTags: <%=(theme.slider && theme.slider.showTags) ? true : false%>
+	}
+</script>
+<%- partial('script') %>
+
+<% if (theme.mathjax){ %>
+<%- partial('mathjax') %>
+<% } %>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">study</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">ESP8266</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">QT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">API</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">UART</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            3、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://github.com/yhuan416" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>GITHUB-FRIEND</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://lokiwin.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>黄海润</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">每天都努力向上&lt;br&gt;&lt;br&gt;每天都进步一点点&lt;br&gt;谢谢大家</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
