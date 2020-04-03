@@ -2,44 +2,43 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <%
-  var title = page.title;
-
-  if (is_archive()){
-    title = 'Archives';
-
-    if (is_month()){
-      title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()){
-      title += ': ' + page.year;
-    }
-  } else if (is_category()){
-    title = 'Category: ' + page.category;
-  } else if (is_tag()){
-    title = 'Tag: ' + page.tag;
-  }
-  %>
+  
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="<%= config.url %>">
-  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Linux内存分配相关函数详解 | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
-  <% if (theme.rss){ %>
-    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
-  <% } %>
-  <% if (theme.favicon){ %>
+  <meta name="description" content="Linux内存分配相关函数详解 kmalloc()、kzalloc()、vmalloc()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux内存分配相关函数详解">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;18&#x2F;Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E8%AF%A6%E8%A7%A3&#x2F;index.html">
+<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="Linux内存分配相关函数详解 kmalloc()、kzalloc()、vmalloc()">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;yeshimem.jpeg">
+<meta property="article:published_time" content="2020-02-18T10:42:32.000Z">
+<meta property="article:modified_time" content="2020-02-18T11:56:24.338Z">
+<meta property="article:author" content="LYQ">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Linux Kernel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;yeshimem.jpeg">
+  
+    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
+  
+  
     <link rel="icon" href="/img/icon.ico">
-  <% } %>
-  <%- partial('css') %>
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
-  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
+  
     #container.show {
-      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
     }
   </style>
-  <%- partial('google-analytics') %>
-  <%- partial('baidu-analytics') %>
+  
+
+  
+
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body>

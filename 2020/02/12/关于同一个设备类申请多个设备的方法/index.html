@@ -2,44 +2,46 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <%
-  var title = page.title;
-
-  if (is_archive()){
-    title = 'Archives';
-
-    if (is_month()){
-      title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()){
-      title += ': ' + page.year;
-    }
-  } else if (is_category()){
-    title = 'Category: ' + page.category;
-  } else if (is_tag()){
-    title = 'Tag: ' + page.tag;
-  }
-  %>
+  
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="<%= config.url %>">
-  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>关于同一个设备类申请多个设备的方法及container_of()解析 | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
-  <% if (theme.rss){ %>
-    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
-  <% } %>
-  <% if (theme.favicon){ %>
+  <meta name="description" content="当一个设备类拥有多个子设备时，如何在一个驱动模块中申请多个设备？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于同一个设备类申请多个设备的方法及container_of()解析">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;12&#x2F;%E5%85%B3%E4%BA%8E%E5%90%8C%E4%B8%80%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%B1%BB%E7%94%B3%E8%AF%B7%E5%A4%9A%E4%B8%AA%E8%AE%BE%E5%A4%87%E7%9A%84%E6%96%B9%E6%B3%95&#x2F;index.html">
+<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="当一个设备类拥有多个子设备时，如何在一个驱动模块中申请多个设备？">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;toooodev.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;container_of.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;container_of_01.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;0%E6%8C%87%E9%92%88.png">
+<meta property="article:published_time" content="2020-02-12T03:23:33.000Z">
+<meta property="article:modified_time" content="2020-02-12T08:39:03.979Z">
+<meta property="article:author" content="LYQ">
+<meta property="article:tag" content="study">
+<meta property="article:tag" content="Linux Kernel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;toooodev.png">
+  
+    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
+  
+  
     <link rel="icon" href="/img/icon.ico">
-  <% } %>
-  <%- partial('css') %>
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
-  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
+  
     #container.show {
-      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
     }
   </style>
-  <%- partial('google-analytics') %>
-  <%- partial('baidu-analytics') %>
+  
+
+  
+
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body>
