@@ -2,44 +2,37 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <%
-  var title = page.title;
-
-  if (is_archive()){
-    title = 'Archives';
-
-    if (is_month()){
-      title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()){
-      title += ': ' + page.year;
-    }
-  } else if (is_category()){
-    title = 'Category: ' + page.category;
-  } else if (is_tag()){
-    title = 'Tag: ' + page.tag;
-  }
-  %>
+  
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="<%= config.url %>">
-  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Tag: ESP8266 | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
-  <% if (theme.rss){ %>
-    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
-  <% } %>
-  <% if (theme.favicon){ %>
+  <meta name="description" content="大大棋的学习历程">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BBIGQ PERSONAL BLOG">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;tags&#x2F;ESP8266&#x2F;index.html">
+<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="大大棋的学习历程">
+<meta property="article:author" content="LYQ">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
+  
+  
     <link rel="icon" href="/img/icon.ico">
-  <% } %>
-  <%- partial('css') %>
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
-  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
+  
     #container.show {
-      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
     }
   </style>
-  <%- partial('google-analytics') %>
-  <%- partial('baidu-analytics') %>
+  
+
+  
+
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body>
@@ -202,9 +195,14 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	
-<a href="/2020/04/02/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(6)%E2%80%94%E2%80%94UART/" class="archive-article-date">
-  	<time datetime="2020-04-02T11:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         </div>
@@ -246,9 +244,14 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	
-<a href="/2020/04/02/ESP8266%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6%E5%8D%8F%E8%AE%AE%E7%B1%BB(1)%E2%80%94%E2%80%94http%E8%AF%B7%E6%B1%82/" class="archive-article-date">
-  	<time datetime="2020-04-02T11:50:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         </div>
@@ -290,53 +293,14 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	
-<a href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(1)%E2%80%94%E2%80%94GPIO%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2020-03-31T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(1)%E2%80%94%E2%80%94GPIO%E9%85%8D%E7%BD%AE/">ESP8266学习历程(1)——GPIO配置</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ESP8266</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(2)%E2%80%94%E2%80%94hw_timer%E7%A1%AC%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-03-31T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         </div>
@@ -378,9 +342,63 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	
-<a href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(3)%E2%80%94%E2%80%94ADC/" class="archive-article-date">
-  	<time datetime="2020-03-31T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+</a>
+
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(1)%E2%80%94%E2%80%94GPIO%E9%85%8D%E7%BD%AE/">ESP8266学习历程(1)——GPIO配置</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ESP8266</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         </div>
@@ -422,53 +440,14 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	
-<a href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(5)%E2%80%94%E2%80%94IIC/" class="archive-article-date">
-  	<time datetime="2020-03-31T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(5)%E2%80%94%E2%80%94IIC/">ESP8266学习历程(5)——IIC</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ESP8266</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(4)%E2%80%94%E2%80%94PWM/" class="archive-article-date">
-  	<time datetime="2020-03-31T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         </div>
@@ -510,9 +489,63 @@
   <div class="archive-article-inner">
     <header class="archive-article-header">
       	<div class="article-meta">
-	      	
-<a href="/2020/03/31/%E5%9F%BA%E4%BA%8ELinux%E7%9A%84ESP8266%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2020-03-31T09:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
+</a>
+
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/03/31/ESP8266%E5%AD%A6%E4%B9%A0%E5%8E%86%E7%A8%8B(5)%E2%80%94%E2%80%94IIC/">ESP8266学习历程(5)——IIC</a>
+    </h1>
+  
+
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">study</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ESP8266</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
+        <!-- 不蒜子统计 -->
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         </div>
@@ -677,15 +710,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">interview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -2,44 +2,45 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <%
-  var title = page.title;
-
-  if (is_archive()){
-    title = 'Archives';
-
-    if (is_month()){
-      title += ': ' + page.year + '/' + page.month;
-    } else if (is_year()){
-      title += ': ' + page.year;
-    }
-  } else if (is_category()){
-    title = 'Category: ' + page.category;
-  } else if (is_tag()){
-    title = 'Tag: ' + page.tag;
-  }
-  %>
+  
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <link rel="dns-prefetch" href="<%= config.url %>">
-  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>编写内核模块小Demo | BBIGQ PERSONAL BLOG</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <%- open_graph({twitter_id: theme.twitter, google_plus: theme.google_plus, fb_admins: theme.fb_admins, fb_app_id: theme.fb_app_id}) %>
-  <% if (theme.rss){ %>
-    <link rel="alternative" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
-  <% } %>
-  <% if (theme.favicon){ %>
+  <meta name="description" content="基于Linux系统的内核编程小Demo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写内核模块小Demo">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;08&#x2F;%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo&#x2F;index.html">
+<meta property="og:site_name" content="BBIGQ PERSONAL BLOG">
+<meta property="og:description" content="基于Linux系统的内核编程小Demo">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;printk01.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;modinfo.png">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;kernelsymbol.png">
+<meta property="article:published_time" content="2020-02-08T03:15:47.000Z">
+<meta property="article:modified_time" content="2020-02-13T08:33:35.247Z">
+<meta property="article:author" content="LYQ">
+<meta property="article:tag" content="study">
+<meta property="article:tag" content="Linux Kernel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;blogmat&#x2F;printk01.png">
+  
+    <link rel="alternative" href="/atom.xml" title="BBIGQ PERSONAL BLOG" type="application/atom+xml">
+  
+  
     <link rel="icon" href="/img/icon.ico">
-  <% } %>
-  <%- partial('css') %>
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
   <style type="text/css">
-  <% var defaultCtnBg = 'linear-gradient(200deg,#a0cfe4,#e8c37e)' %>
+  
     #container.show {
-      background: <%= theme.style && theme.style.slider ? theme.style.slider : defaultCtnBg %>;
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
     }
   </style>
-  <%- partial('google-analytics') %>
-  <%- partial('baidu-analytics') %>
+  
+
+  
+
 <meta name="generator" content="Hexo 4.1.1"></head>
 
 <body>
@@ -197,14 +198,14 @@
   
 
         
-        
+        <% if (theme.busuanzi && theme.busuanzi.enable && !index){ %>
         <!-- 不蒜子统计 -->
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+        <span id="busuanzi_container_page_pv" style='display:none' class="<%= class_name %>">
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
-
-<a href="/2020/02/08/%E7%BC%96%E5%86%99%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97%E5%B0%8FDemo/" class="archive-article-date">
-  	<time datetime="2020-02-08T03:15:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
+<% } %>
+<a href="<%- url_for(post.path) %>" class="<%= class_name %>">
+  	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><i class="icon-calendar icon"></i><%= date(post.date, date_format) %></time>
 </a>
 
         <!-- 需要添加的位置 -->
@@ -215,7 +216,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-keyboard-o"></i>
         <span class="post-meta-item-text">  字数统计: </span>
-        <span class="post-count"><%= wordcount(post.content) %>字</span>
+        <span class="post-count">2.7k字</span>
       </span>
     </span>
 
@@ -224,7 +225,7 @@
       <span class="post-meta-item-icon">
         <i class="fa fa-hourglass-half"></i>
         <span class="post-meta-item-text">  阅读时长: </span>
-        <span class="post-count"><%= min2read(post.content) %>分</span>
+        <span class="post-count">11分</span>
       </span>
     </span>
 </div>
@@ -678,15 +679,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">interview</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Linux Kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">interview</a>
               </li>
              
               <li class="article-tag-list-item">
